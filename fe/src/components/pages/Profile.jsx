@@ -77,7 +77,7 @@ const Profile = () => {
         </Form>
       </Wrapper>
     </Container>
-  );;  GY
+  );
 };
 
 export default Profile;
