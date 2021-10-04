@@ -73,13 +73,11 @@ const Profile = () => {
           <Input placeholder="password" />
           <Input placeholder="umur" />
           <Input placeholder="gender" />
-          <Button><Link>SUBMIT</Link></Button>
-          <Link></Link>
-          <Link></Link>
+          <Button><Link>INPUT</Link></Button>
         </Form>
       </Wrapper>
     </Container>
-  );
+  );;  GY
 };
 
 export default Profile;
