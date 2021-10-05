@@ -12,13 +12,14 @@ module.exports = {
     });
   },
   registerUser: (req, res) => {
-    const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
+    // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
+    const { full_name, email, password } = req.body;
 
-    const insertQuery = `INSERT into karyawan values (null, ${db.escape(
-      nama
-    )}, ${db.escape(usia)}, ${db.escape(email)}, ${db.escape(
-      berat
-    )}, ${db.escape(kota)}, ${db.escape(tahun)}, ${db.escape(idposisi)})`;
+    const insertQuery = `INSERT into user values (null, ${db.escape(
+      full_name
+    )}, ${db.escape(email)}, ${db.escape(
+      password
+    )}, null, null, null, null, null, null, null, null, null, null)`;
 
     console.log(insertQuery);
 
@@ -29,7 +30,7 @@ module.exports = {
 
       // query tambahan sebagai custom response method
       db.query(
-        `SELECT * from karyawan where nama = ${db.escape(nama)}`,
+        `SELECT * from user where full_name = ${db.escape(full_name)}`,
         (err2, results2) => {
           if (err2) res.status(500).send(err2);
           res.status(200).send({
