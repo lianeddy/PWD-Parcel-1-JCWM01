@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
+  const [userData, setUserData] = useState({});
+
+  const register = () => {
+    console.log(userData);
+    Axios.post(`https://localhost:3302/user/registeruser`, {
+      userData,
+    })
+      .then((res) => {
+        this.getData();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const get = () => {
+    Axios.get("https://localhost:3302/user/getuser")
+      .then((res) => {
+        this.getData();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <div className="register">
@@ -27,6 +49,9 @@ function Register() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Name"
+                    onChange={(e) => {
+                      setUserData({ ...userData, full_name: e.target.value });
+                    }}
                   />
                 </label>
                 <label>
@@ -35,14 +60,20 @@ function Register() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="name@email.com"
+                    onChange={(e) => {
+                      setUserData({ ...userData, email: e.target.value });
+                    }}
                   />
                 </label>
                 <label>
                   <h2 className="reg-input-text">Password</h2>
                   <input
-                    type="text"
+                    type="password"
                     className="reg-input-bar"
                     placeholder="at least 8 character"
+                    onChange={(e) => {
+                      setUserData({ ...userData, password: e.target.value });
+                    }}
                   />
                 </label>
                 <label className="reg-privacy">
@@ -56,7 +87,16 @@ function Register() {
                     privary policy.
                   </p>
                 </label>
-                <button className="reg-button">
+                <button
+                  className="reg-button"
+                  type="button"
+                  onClick={() => {
+                    get();
+                  }}
+                  disabled={
+                    !userData.email && !userData.password && !userData.full_name
+                  }
+                >
                   <p className="reg-button-text">Create account</p>
                 </button>
                 <div className="reg-login">
