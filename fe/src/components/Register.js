@@ -8,22 +8,21 @@ function Register() {
 
   const register = () => {
     console.log(userData);
-    Axios.post(`https://localhost:3302/user/registeruser`, {
-      userData,
-    })
+    Axios.post(`http://localhost:3302/user/registeruser`, userData)
       .then((res) => {
-        this.getData();
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
 
-  const get = () => {
-    Axios.get("https://localhost:3302/user/getuser")
-      .then((res) => {
-        this.getData();
-      })
-      .catch((err) => console.log(err));
-  };
+  // FOR ADMIN CHECKING USER
+  // const get = () => {
+  //   Axios.get("http://localhost:3302/user/getuser")
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <>
@@ -91,7 +90,7 @@ function Register() {
                   className="reg-button"
                   type="button"
                   onClick={() => {
-                    get();
+                    register();
                   }}
                   disabled={
                     !userData.email && !userData.password && !userData.full_name
