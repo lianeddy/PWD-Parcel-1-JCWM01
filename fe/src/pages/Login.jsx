@@ -1,5 +1,8 @@
+import React from "react";
+import { Link, Redirect } from "react-router-dom";
+import { loginUser } from "../redux/actions/user";
+import { connect } from "react-redux";
 import styled from "styled-components";
-import {mobile} from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -11,67 +14,88 @@ const Container = styled.div`
     url("https://umroh.com/blog/wp-content/uploads/2020/03/5-macam-parcel-lebaran-source-pixabay1.png")
       center;
   background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
-const Wrapper = styled.div`
-  width: 25%;
-  padding: 20px;
-  background-color: white;
-  ${mobile({ width: "75%" })}
-`;
+class Login extends React.Component {
+  state = {
+    username: "",
+    password: "",
+  };
 
-const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 300;
-`;
+  inputHandler = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
+    this.setState({ [name]: value });
+  };
 
-const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 10px 0;
-  padding: 10px;
-`;
+  render() {
+    if (this.props.userGlobal.id) {
+      return <Redirect to="/" />;
+    }
 
-const Button = styled.button`
-  width: 40%;
-  border: none;
-  padding: 15px 20px;
-  background-color: teal;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 10px;
-`;
+    return (
+      <Container>
+        <div className="row">
+          <div className="col-12 text-center">
+            <h1>Login now !</h1>
+            <p className="lead">
+              Login now and start shopping in the most affordable ecommercer
+            </p>
+          </div>
+        </div>
+        <div className="row mt-5">
+          <div className="col-4 offset-4">
+            {this.props.userGlobal.errMsg ? (
+              <div className="alert alert-danger">
+                {this.props.userGlobal.errMsg}
+              </div>
+            ) : null}
+            <div className="card">
+              <div className="card-body">
+                <h5 className="font-weight-bold mb-3"></h5>
+                <input
+                  onChange={this.inputHandler}
+                  name="username"
+                  placeholder="Username"
+                  type="text"
+                  className="form-control my-2"
+                />
+                <input
+                  onChange={this.inputHandler}
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                  className="form-control my-2"
+                />
+                <div className="d-flex flex-row justify-content-between align-items-center">
+                  <button
+                    onClick={() => {
+                      this.props.loginUser(this.state);
+                    }}
+                    className="btn btn-primary mt-2"
+                  >
+                    Login
+                  </button>
+                  <Link>Forgot Password?</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    );
+  }
+}
 
-const Link = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
-
-const Login = () => {
-  return (
-    <Container>
-      <Wrapper>
-        <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="username/email" />
-          <Input placeholder="password" type="password" />
-          <Button>LOGIN</Button>
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
-        </Form>
-      </Wrapper>
-    </Container>
-  );
+const mapStateToProps = (state) => {
+  return {
+    userGlobal: state.user,
+  };
 };
 
-export default Login;
+const mapDispatchToProps = {
+  loginUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
