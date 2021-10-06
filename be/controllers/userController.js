@@ -1,4 +1,5 @@
 const { db } = require("../database/index");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   getUser: (req, res) => {
@@ -11,17 +12,19 @@ module.exports = {
       res.status(200).send(results);
     });
   },
-  registerUser: (req, res) => {
+  registerUser: async (req, res) => {
     // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
     const { full_name, email, password } = req.body;
+    const hash = await bcrypt.hash(password, 10);
 
     const insertQuery = `INSERT into user values (null, ${db.escape(
       full_name
     )}, ${db.escape(email)}, ${db.escape(
-      password
+      hash
     )}, "user", null, null, null, null, null, null, "no", null, null)`;
 
     console.log(insertQuery);
+    console.log(hash);
 
     db.query(insertQuery, (err, results) => {
       if (err) {
