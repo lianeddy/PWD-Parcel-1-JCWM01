@@ -28,11 +28,11 @@ app.get('/',(req,res) => {
     res.status(200).send('<h4>Integrated mysql with express</h4/>')
 }),
   app.get("/user", (req, res) => {
-    let scriptQuery = "Select * from user where id= 1";
-    if (req.query.id) {
+    let scriptQuery = "Select * from user ";
+    if (req.query.id) {  
       scriptQuery = `Select * from user where id=${db.escape(
         req.query.id
-      )}`;
+      )}`; 
     }
     db.query(scriptQuery, (err, results) => {
       if (err) res.status(500).send(err);
@@ -61,17 +61,17 @@ app.get('/',(req,res) => {
     })
 })
 
-app.patch('/edit-user', (req,res)=> {
-    let dataUpdate = []
+app.patch('/edit-user/:id', (req,res)=> {   
+    let dataUpdate = [] 
     for(let prop in req.body){
         dataUpdate.push(`${prop} = ${db.escape(req.body[prop])}`)
     }
 
-    let updateQuery = `UPDATE user set ${dataUpdate} where user  = ${req.params.id}`
+    let updateQuery = `UPDATE user set ${dataUpdate} where user = ${req.params.id}`
     console.log(updateQuery)
     db.query(updateQuery, (err,result) => {
         if(err) res.status(500).send(err)
-        res.status(200).send({ message: 'Edit user Berhasil', data : result })
+        res.status(200).send(result)
     })
 })
 
