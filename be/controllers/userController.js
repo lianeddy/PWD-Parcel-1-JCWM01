@@ -19,7 +19,7 @@ module.exports = {
       full_name
     )}, ${db.escape(email)}, ${db.escape(
       password
-    )}, null, null, null, null, null, null, null, null, null, null)`;
+    )}, "user", null, null, null, null, null, null, "no", null, null)`;
 
     console.log(insertQuery);
 
