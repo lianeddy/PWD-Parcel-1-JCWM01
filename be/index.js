@@ -67,11 +67,11 @@ app.patch('/edit-user', (req,res)=> {
         dataUpdate.push(`${prop} = ${db.escape(req.body[prop])}`)
     }
 
-    let updateQuery = `UPDATE user set ${dataUpdate} where user id = ${req.params.id}`
+    let updateQuery = `UPDATE user set ${dataUpdate} where user  = ${req.params.id}`
     console.log(updateQuery)
     db.query(updateQuery, (err,result) => {
         if(err) res.status(500).send(err)
-        res.status(200).send(result)
+        res.status(200).send({ message: 'Edit user Berhasil', data : result })
     })
 })
 
