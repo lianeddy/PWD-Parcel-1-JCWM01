@@ -2,21 +2,40 @@ import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
+import "./EditProfile";
+import {Button} from "react-bootstrap";
 
 
 function UserProfile() {
   const [userData, setUserData] = useState({});
-  const UserProfile = () => {
+  const [full_name, setFullname] = useState();
+  const [email, setEmail] = useState();
+  const [gender, setGender] = useState();
+  const [adress, setAdress] = useState();
+  const [age, setAge] = useState();
+  
+  let id = 1
+  const user = () => {
     console.log(userData);
-    Axios.post(`http://localhost:3302/user/profile`, userData)
+
+    // ngambil data dari database by id yang login
+    Axios.get(`http://localhost:3302/user?id=${id}`, userData)
       .then((res) => {
         console.log(res.data);
+        setFullname(res.data[0].full_name);
+        setEmail(res.data[0].email);
+        setGender(res.data[0].gender);
+        setAdress(res.data[0].addres);
+        setAge(res.data[0].age);
+        // console.log(userEdit);
       })
       .catch((err) => console.log(err));
   };
-
+  // const [userEdit, setUser] = useState({});
+  console.log(user)
   useEffect(() => {
     console.log("test")
+    user()
   });
 
   // FOR ADMIN CHECKING USER
@@ -48,74 +67,30 @@ function UserProfile() {
               <form className="reg-input-form">
                 <label>
                   <h2 className="reg-input-text">Full Name</h2>
-                  <input
-                    type="text"
-                    className="reg-input-bar"
-                    placeholder="Name"
-                    onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
-                    }}
-                  />
+                  <p>{full_name}</p>
                 </label>
                 <label>
                   <h2 className="reg-input-text">Email</h2>
-                  <input
-                    type="text"
-                    className="reg-input-bar"
-                    placeholder="name@email.com"
-                    onChange={(e) => {
-                      setUserData({ ...userData, email: e.target.value });
-                    }}
-                  />
+                  <p>{email}</p>
                 </label>
                 <label>
                   <h2 className="reg-input-text">Gender</h2>
-                  <input
-                    type="text"
-                    className="reg-input-bar"
-                    placeholder="Gender"
-                    onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
-                    }}
-                  />
+                  <p>{gender}</p>
+
                 </label>
                 <label>
                   <h2 className="reg-input-text">Address</h2>
-                  <input
-                    type="text"
-                    className="reg-input-bar"
-                    placeholder="Address"
-                    onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
-                    }}
-                  />
+                  <p>{adress}</p>
                 </label>
                 <label>
                   <h2 className="reg-input-text">Age</h2>
-                  <input
-                    type="text"
-                    className="reg-input-bar"
-                    placeholder="Age"
-                    onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
-                    }}
-                  />
+                  <p>{age}</p>
                 </label>
-                <button
-                  className="reg-button"
-                  type="button"
-                  onClick={() => {
-                    UserProfile();
-                  }}
-                  disabled={
-                    !userData.email && !userData.password && !userData.full_name
-                  }
-                >
-                  <p className="reg-button-text">Edit Profile</p>
-                </button>
-                <div className="reg-login">
-                  <Link className="reg-login-right">Update</Link>
-                </div>
+                <Link to={`/edit/${id}`}>
+                  <Button className="reg-button" type="button">
+                  Edit Profile
+                </Button>
+                 </Link>
               </form>
             </div>
           </div>

@@ -67,7 +67,7 @@ app.patch('/edit-user/:id', (req,res)=> {
         dataUpdate.push(`${prop} = ${db.escape(req.body[prop])}`)
     }
 
-    let updateQuery = `UPDATE user set ${dataUpdate} where user = ${req.params.id}`
+    let updateQuery = `UPDATE user set ${dataUpdate} where id = ${req.params.id}`
     console.log(updateQuery)
     db.query(updateQuery, (err,result) => {
         if(err) res.status(500).send(err)
@@ -75,14 +75,14 @@ app.patch('/edit-user/:id', (req,res)=> {
     })
 })
 
-app.delete('/delete-user/: iduser', (req, res) => {
-    let deleteQuery = `DELETE from user where id user = ${db.escape(req.params.iduser)};`
+// app.delete('/delete-user/: iduser', (req, res) => {
+//     let deleteQuery = `DELETE from user where id user = ${db.escape(req.params.iduser)};`
 
-    db.query(deleteQuery, (err, result) => {
-        if (err) res.status(500).send(err)
-        res.status(200).send(results)
-    })
-})
+//     db.query(deleteQuery, (err, result) => {
+//         if (err) res.status(500).send(err)
+//         res.status(200).send(results)
+//     })
+// })
 
 
 // Middleware
