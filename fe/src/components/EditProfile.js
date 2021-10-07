@@ -11,7 +11,7 @@ function EditProfile() {
   const [full_name, setFullname] = useState();
   const [email, setEmail] = useState();
   const [gender, setGender] = useState();
-  const [adress, setAdress] = useState();
+  const [addres, setAddres] = useState();
   const [age, setAge] = useState();
 
   let id = 1
@@ -19,14 +19,14 @@ function EditProfile() {
   const user = () => {
    
     console.log(userData);
-    Axios.patch(`http://localhost:3302/edit-user?id=${id}`, userData)
+    Axios.get(`http://localhost:3302/user?id=${id}`, userData)
       .then((res) => {
         console.log(res.data);
 
         setFullname(res.data[0].full_name);
         setEmail(res.data[0].email);
         setGender(res.data[0].gender);
-        setAdress(res.data[0].addres);
+        setAddres(res.data[0].addres);
         setAge(res.data[0].age);
       })
       .catch((err) => console.log(err));
@@ -98,7 +98,7 @@ function EditProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Address</h2>
-                  <p>{adress}</p>
+                  <p>{addres}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
@@ -121,8 +121,9 @@ function EditProfile() {
                   />
                 </label>
                 <Link to={`/profile/edit-user/${id}`}>
-                  <Button className="reg-button" type="button">
+                  <Button className="reg-button" type="button" onChange={(full_name,email,gender,addres,age)}>
                   Update Data
+                  
                 </Button>
                  </Link>
               </form>
