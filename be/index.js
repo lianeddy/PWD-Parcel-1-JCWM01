@@ -1,22 +1,22 @@
-const express = require('express')
-const cors = require('cors')
-const bearerToken = require('express-bearer-token')
+const express = require("express");
+const cors = require("cors");
+const bearerToken = require("express-bearer-token");
 
-const PORT = 3300
-const app = express()
+const PORT = 3300;
+const app = express();
 
-app.use(cors())
-app.use(express.json())
-app.use(bearerToken())
+app.use(cors());
+app.use(express.json());
+app.use(bearerToken());
 
-app.use(express.static('public'))
+app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-    res.status(200).send('<h4>Integrated mysql with express</h4>')
-})
+app.get("/", (req, res) => {
+  res.status(200).send("<h4>Integrated mysql with express</h4>");
+});
 
-const { userRouters } = require('./routers')
+const { userRouters } = require("./routers");
 
-app.use('/users', userRouters)
+app.use("/users", userRouters);
 
-app.listen(PORT, () => console.log('Api Running :', PORT));
+app.listen(PORT, () => console.log("Api Running :", PORT));

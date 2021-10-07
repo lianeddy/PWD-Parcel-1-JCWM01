@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { loginUser } from "../redux/actions/user";
+import { forgotUser } from "../redux/actions/user";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
@@ -16,10 +16,9 @@ const Container = styled.div`
   background-size: cover;
 `;
 
-class Login extends React.Component {
+class Forgot extends React.Component {
   state = {
     email: "",
-    password: "",
   };
 
   inputHandler = (event) => {
@@ -30,27 +29,15 @@ class Login extends React.Component {
   };
 
   render() {
-    if (this.props.userGlobal.id) {
-      return <Redirect to="/" />;
-    }
-
     return (
       <Container>
         <div className="row">
           <div className="col-12 text-center">
-            <h1>Login now !</h1>
-            <p className="lead">
-              Login now and start shopping in the most affordable ecommercer
-            </p>
+            <h1>Forgot password !</h1>
           </div>
         </div>
         <div className="row mt-5">
           <div className="col-4 offset-4">
-            {this.props.userGlobal.errMsg ? (
-              <div className="alert alert-danger">
-                {this.props.userGlobal.errMsg}
-              </div>
-            ) : null}
             <div className="card">
               <div className="card-body">
                 <h5 className="font-weight-bold mb-3"></h5>
@@ -61,23 +48,16 @@ class Login extends React.Component {
                   type="text"
                   className="form-control my-2"
                 />
-                <input
-                  onChange={this.inputHandler}
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                  className="form-control my-2"
-                />
+
                 <div className="d-flex flex-row justify-content-between align-items-center">
                   <button
                     onClick={() => {
-                      this.props.loginUser(this.state);
+                      this.props.forgotUser(this.state);
                     }}
                     className="btn btn-primary mt-2"
                   >
-                    Login
+                    Submit
                   </button>
-                  <Link to={"/forgot"}>Forgot Password?</Link>
                 </div>
               </div>
             </div>
@@ -95,7 +75,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  loginUser,
+  forgotUser,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Forgot);

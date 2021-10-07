@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 
 import Home from "./pages/Home";
+import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
 import MyNavbar from "./components/MyNavbar";
 
@@ -29,6 +30,7 @@ class App extends React.Component {
           <MyNavbar />
           <Switch>
             <Route component={Login} path="/login" />
+            <Route component={Forgot} path="/forgot" />
             <Route component={Home} path="/" />
           </Switch>
         </BrowserRouter>
