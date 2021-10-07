@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./UserProfile.css";
-import "./EditProfile";
+
 import {Button} from "react-bootstrap";
 
 
@@ -49,41 +49,38 @@ function UserProfile() {
 
   return (
     <>
-      <div className="UserProfile">
+      <div className="wrapper">
         <div className="reg-container">
           <div className="UserProfile-side">
             <div className="reg-icon">
-              <Link className="reg-icon-text" tabIndex="-1">
-                Profile <i className="fas fa-portrait" />
-              </Link>
             </div>
-            <div className="reg-desc">
-              <h1 className="reg-desc-h1">Profile</h1>
+            <div className="right">
+              <h1 className="info">Your Profile</h1>
               <p className="reg-desc-text">
                 Give us your information to access further page.
               </p>
             </div>
-            <div className="reg-input">
-              <form className="reg-input-form">
+            <div className="right">
+              <form className="right-form">
                 <label>
-                  <h2 className="reg-input-text">Full Name</h2>
+                  <h2 className="data">Full Name</h2>
                   <p>{full_name}</p>
                 </label>
                 <label>
-                  <h2 className="reg-input-text">Email</h2>
+                  <h2 className="data">Email</h2>
                   <p>{email}</p>
                 </label>
                 <label>
-                  <h2 className="reg-input-text">Gender</h2>
+                  <h2 className="data">Gender</h2>
                   <p>{gender}</p>
 
                 </label>
                 <label>
-                  <h2 className="reg-input-text">Address</h2>
+                  <h2 className="data">Address</h2>
                   <p>{adress}</p>
                 </label>
                 <label>
-                  <h2 className="reg-input-text">Age</h2>
+                  <h2 className="data">Age</h2>
                   <p>{age}</p>
                 </label>
                 <Link to={`/edit/${id}`}>

@@ -3,7 +3,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./EditProfile.css";
 import {Button} from "react-bootstrap";
-import "./UserProfile";
+
 
 
 function EditProfile() {
@@ -50,13 +50,8 @@ function EditProfile() {
   return (
     <>
       <div className="EditProfile">
-        <div className="reg-container">
+        <div className="r-container">
           <div className="UserProfile-side">
-            <div className="reg-icon">
-              <Link className="reg-icon-text" tabIndex="-1">
-                Picture <i className="fas fa-portrait" />
-              </Link>
-            </div>
             <div className="reg-desc">
               <h1 className="reg-desc-h1">Profile</h1>
               <p className="reg-desc-text">
