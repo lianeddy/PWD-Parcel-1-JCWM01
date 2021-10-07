@@ -1,5 +1,9 @@
 const { db } = require("../database/index");
 const bcrypt = require("bcryptjs");
+const Crypto = require("crypto");
+const { createToken } = require("../helper/createToken");
+const transporter = require("../helper/nodemailer");
+const { stringify } = require("querystring");
 
 module.exports = {
   getUser: (req, res) => {
@@ -16,6 +20,8 @@ module.exports = {
     // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
     const { full_name, email, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
+    // const hash = Crypto.createHmac("shal", "hash123");
+    console.log("hash : " + hash);
 
     const insertQuery = `INSERT into user values (null, ${db.escape(
       full_name
@@ -23,8 +29,7 @@ module.exports = {
       hash
     )}, "user", null, null, null, null, null, null, "no", null, null)`;
 
-    console.log(insertQuery);
-    console.log(hash);
+    console.log("insertQuery : " + insertQuery);
 
     db.query(insertQuery, (err, results) => {
       if (err) {
@@ -33,15 +38,66 @@ module.exports = {
 
       // query tambahan sebagai custom response method
       db.query(
-        `SELECT * from user where full_name = ${db.escape(full_name)}`,
+        `SELECT * from user where email = ${db.escape(
+          email
+        )} and password = ${db.escape(hash)}`,
         (err2, results2) => {
           if (err2) res.status(500).send(err2);
-          res.status(200).send({
-            message: "data berhasil di input",
-            result: results2,
+          console.log(insertQuery);
+          console.log("email setelah ISNET" + results2[0]);
+          // bahan untuk membuat token
+          let { full_name, email, role, verified } = results2[0];
+          console.log("stringfy : " + stringify(results2[0]));
+          console.log("full_name : " + full_name);
+          console.log("email : " + email);
+          // membuat token
+          let token = createToken({ full_name, email, role, verified });
+
+          console.log("token : " + token);
+
+          let mail = {
+            from: `admin <id.private.bootcamp@gmail.com>`,
+            to: `${email}`,
+            subject: `Account Verification`,
+            html: `<a href="http://localhost:3302/user/verification/${token}">Click here to verified your account.</a>`,
+          };
+
+          console.log("mail : " + mail.to);
+
+          transporter.sendMail(mail, (errMail, resMail) => {
+            console.log("transporter IN");
+            if (errMail) {
+              console.log(errMail);
+              res.status(500).send({
+                message: "Registration failed",
+                success: false,
+                err: errMail,
+              });
+            }
+            console.log("kirim email berhasil");
+            res.status(200).send({
+              message: "Registration success, check your email",
+              success: true,
+            });
           });
         }
       );
+    });
+  },
+  verification: (req, res) => {
+    let updateQuery = `UPDATE user set verified = 'yes' where email = ${db.escape(
+      req.user.email
+    )} and password = ${db.escape(req.user.password)}`;
+
+    db.query(updateQuery, (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("error");
+      }
+      res.status(200).send({
+        message: "berhasil verifikasi account",
+        success: true,
+      });
     });
   },
 };

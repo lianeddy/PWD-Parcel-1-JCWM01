@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import RegisterPage from "./pages/RegisterPage";
 import LandingPage from "./pages/LandingPage";
+import VerificationPage from "./pages/VerificationPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Switch>
           <LandingPage path="/" exact component={LandingPage} />
           <RegisterPage path="/register" exact component={RegisterPage} />
+          <VerificationPage path="/verify" exact component={VerificationPage} />
         </Switch>
       </Router>
     </>
