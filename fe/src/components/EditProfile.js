@@ -2,7 +2,8 @@ import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./EditProfile.css";
-import {Button} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
+import axios from "axios";
 
 
 
@@ -18,8 +19,8 @@ function EditProfile() {
   const [userData, setUserData] = useState({});
   const user = () => {
    
-    console.log(userData);
-    Axios.get(`http://localhost:3302/user?id=${id}`, userData)
+    // console.log(userData);
+    Axios.get(`http://localhost:3302/user?id=${id}`)
       .then((res) => {
         console.log(res.data);
 
@@ -29,8 +30,21 @@ function EditProfile() {
         setAddres(res.data[0].addres);
         setAge(res.data[0].age);
       })
-      .catch((err) => console.log(err));
+
   };
+  
+
+  function edituser (event) {
+  event.preventDefault();
+  console.log(event.target[0].value)
+    alert("Data Anda Telah Berubah")
+    Axios.patch(`http://localhost:3302/edit-user/${id}`, userData)
+    .then((res) => {
+      console.log(res.data);
+
+    })
+    .catch((err) => console.log(err));
+  }
 
  console.log(user)
   useEffect(() => {
@@ -59,26 +73,26 @@ function EditProfile() {
               </p>
             </div>
             <div className="reg-input">
-              <form className="reg-input-form">
+              <Form className="reg-input-form" onSubmit={edituser}>
                 <label>
                   <h2 className="reg-input-text">Full Name</h2>
-                  <p>{full_name}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
                     placeholder="Name"
+                    value = {full_name}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setUserData({userData, full_name: e.target.value });
                     }}
                   />
                 </label>
                 <label>
                   <h2 className="reg-input-text">Email</h2>
-                  <p>{email}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
                     placeholder="name@email.com"
+                    value = {email}
                     onChange={(e) => {
                       setUserData({ ...userData, email: e.target.value });
                     }}
@@ -86,11 +100,11 @@ function EditProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Gender</h2>
-                  <p>{gender}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
                     placeholder="Gender"
+                    value = {gender}
                     onChange={(e) => {
                       setUserData({ ...userData, full_name: e.target.value });
                     }}
@@ -98,11 +112,11 @@ function EditProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Address</h2>
-                  <p>{addres}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
                     placeholder="Address"
+                    value = {addres}
                     onChange={(e) => {
                       setUserData({ ...userData, full_name: e.target.value });
                     }}
@@ -110,23 +124,22 @@ function EditProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Age</h2>
-                  <p>{age}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
                     placeholder="Age"
+                    value = {age}
                     onChange={(e) => {
                       setUserData({ ...userData, full_name: e.target.value });
                     }}
                   />
                 </label>
-                <Link to={`/profile/edit-user/${id}`}>
-                  <Button className="reg-button" type="button" onChange={(full_name,email,gender,addres,age)}>
+    
+                  <Button className="reg-button" type="submit" >
                   Update Data
                   
                 </Button>
-                 </Link>
-              </form>
+              </Form>
             </div>
           </div>
           <div className="content-side"></div>
