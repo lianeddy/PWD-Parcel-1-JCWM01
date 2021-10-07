@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <Route path="/profile" component={UserProfile} />
-        <Route path="/Edit" component={EditProfile} />
+        <Route path="/edit" component={EditProfile} />
       </Router>
     </>
   );

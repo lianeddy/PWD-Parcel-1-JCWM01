@@ -1,22 +1,41 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import "./UserProfile.css";
+import "./EditProfile.css";
+import {Button} from "react-bootstrap";
+import "./UserProfile";
 
 
-function UserProfile() {
+function EditProfile() {
+  // const [userData, setUserData] = useState({});
+  const [full_name, setFullname] = useState();
+  const [email, setEmail] = useState();
+  const [gender, setGender] = useState();
+  const [adress, setAdress] = useState();
+  const [age, setAge] = useState();
+
+  let id = 1
   const [userData, setUserData] = useState({});
-  const UserProfile = () => {
+  const user = () => {
+   
     console.log(userData);
-    Axios.post(`http://localhost:3302/user/profile`, userData)
+    Axios.patch(`http://localhost:3302/edit-user?id=${id}`, userData)
       .then((res) => {
         console.log(res.data);
+
+        setFullname(res.data[0].full_name);
+        setEmail(res.data[0].email);
+        setGender(res.data[0].gender);
+        setAdress(res.data[0].addres);
+        setAge(res.data[0].age);
       })
       .catch((err) => console.log(err));
   };
 
+ console.log(user)
   useEffect(() => {
     console.log("test")
+    user()
   });
 
   // FOR ADMIN CHECKING USER
@@ -30,7 +49,7 @@ function UserProfile() {
 
   return (
     <>
-      <div className="UserProfile">
+      <div className="EditProfile">
         <div className="reg-container">
           <div className="UserProfile-side">
             <div className="reg-icon">
@@ -48,6 +67,7 @@ function UserProfile() {
               <form className="reg-input-form">
                 <label>
                   <h2 className="reg-input-text">Full Name</h2>
+                  <p>{full_name}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
@@ -59,6 +79,7 @@ function UserProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Email</h2>
+                  <p>{email}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
@@ -70,6 +91,7 @@ function UserProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Gender</h2>
+                  <p>{gender}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
@@ -81,6 +103,7 @@ function UserProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Address</h2>
+                  <p>{adress}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
@@ -92,6 +115,7 @@ function UserProfile() {
                 </label>
                 <label>
                   <h2 className="reg-input-text">Age</h2>
+                  <p>{age}</p>
                   <input
                     type="text"
                     className="reg-input-bar"
@@ -101,21 +125,11 @@ function UserProfile() {
                     }}
                   />
                 </label>
-                <button
-                  className="reg-button"
-                  type="button"
-                  onClick={() => {
-                    UserProfile();
-                  }}
-                  disabled={
-                    !userData.email && !userData.password && !userData.full_name
-                  }
-                >
-                  <p className="reg-button-text">Edit Profile</p>
-                </button>
-                <div className="reg-login">
-                  <Link className="reg-login-right">Update</Link>
-                </div>
+                <Link to={`/profile/edit-user/${id}`}>
+                  <Button className="reg-button" type="button">
+                  Update Data
+                </Button>
+                 </Link>
               </form>
             </div>
           </div>
@@ -126,4 +140,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default EditProfile;

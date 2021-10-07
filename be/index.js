@@ -11,7 +11,7 @@ app.use(express.json())
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    passsword: 'rya',
+    passsword: '',
     database : 'parcel_ecommerce',
     port : 3306,
     multipleStatements : true

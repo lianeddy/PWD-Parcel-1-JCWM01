@@ -54,7 +54,7 @@ function UserProfile() {
           <div className="UserProfile-side">
             <div className="reg-icon">
               <Link className="reg-icon-text" tabIndex="-1">
-                Picture <i className="fas fa-portrait" />
+                Profile <i className="fas fa-portrait" />
               </Link>
             </div>
             <div className="reg-desc">
