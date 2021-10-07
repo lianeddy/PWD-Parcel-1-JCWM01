@@ -5,14 +5,33 @@ import "./Register.css";
 
 function Register() {
   const [userData, setUserData] = useState({});
+  const [privacy, setPrivacy] = useState(false);
 
   const register = () => {
+    console.log(!userData.email);
+    console.log(!userData.password);
+    console.log(!userData.full_name);
+    console.log(!privacy);
+
     console.log(userData);
     Axios.post(`http://localhost:3302/user/registeruser`, userData)
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
+  };
+
+  const checkboxPrivacy = () => {
+    var checkbox = document.getElementById("myCheck");
+
+    console.log(checkbox);
+    console.log(checkbox.checked);
+
+    if (checkbox.checked) {
+      setPrivacy(true);
+    } else {
+      setPrivacy(false);
+    }
   };
 
   // FOR ADMIN CHECKING USER
@@ -80,6 +99,10 @@ function Register() {
                     type="checkbox"
                     className="reg-privacy-left"
                     tabIndex="-1"
+                    id="myCheck"
+                    onClick={() => {
+                      checkboxPrivacy();
+                    }}
                   />
                   <p className="reg-privacy-right">
                     By creating an account you agree to the term of use and our
@@ -89,12 +112,21 @@ function Register() {
                 <button
                   className="reg-button"
                   type="button"
+                  // disabled={
+                  //   !userData.email &&
+                  //   !userData.password &&
+                  //   !userData.full_name &&
+                  //   !privacy
+                  // }
+                  disabled={
+                    !userData.email ||
+                    !userData.password ||
+                    !userData.full_name ||
+                    !privacy
+                  }
                   onClick={() => {
                     register();
                   }}
-                  disabled={
-                    !userData.email && !userData.password && !userData.full_name
-                  }
                 >
                   <p className="reg-button-text">Create account</p>
                 </button>
