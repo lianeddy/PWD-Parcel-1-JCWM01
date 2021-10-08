@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // import RegisterPage from "./pages/RegisterPage";
 import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/UserProfile";
-
+// commect
 
 function App() {
   return (
