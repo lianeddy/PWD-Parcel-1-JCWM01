@@ -15,7 +15,7 @@ class App extends React.Component {
   componentDidMount() {
     const userLocalStorage = localStorage.getItem("userDataEmmerce");
     if (userLocalStorage) {
-      const userData = JSON.parse(userLocalStorage);
+      const userData = userLocalStorage;
       this.props.userKeepLogin(userData);
       this.props.getCartData(userData.id);
     } else {

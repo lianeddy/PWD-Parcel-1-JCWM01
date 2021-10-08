@@ -22,7 +22,7 @@ export const loginUser = ({ email, password }) => {
           console.log(res.data);
           if (res.password === res.data.password) {
             //delete res.data.password;
-            localStorage.setItem("userDataEmmerce", res.data.token);
+            localStorage.setItem("userDataEmmerce", res.data.dataLogin);
             // menjalankan fungsi action
             // this.authLogin(res.data.dataLogin);
             // this.setState({ redirect: true });
@@ -36,7 +36,7 @@ export const loginUser = ({ email, password }) => {
 
             dispatch({
               type: "USER_LOGIN",
-              payload: res.data,
+              payload: res.data.dataLogin,
             });
           } else {
             dispatch({
@@ -67,18 +67,16 @@ export const logoutUser = () => {
 
 export const userKeepLogin = (userData) => {
   return (dispatch) => {
-    Axios.get(`${URL_API}/users`, {
-      params: {
-        id: userData.id,
-      },
+    Axios.get(`${URL_API}/users/get`, {
+      id: userData.id,
     })
       .then((res) => {
-        delete res.data[0].password;
-        localStorage.setItem("userDataEmmerce", JSON.stringify(res.data[0]));
+        //delete res.data[0].password;
+        localStorage.setItem("userDataEmmerce", res.data.dataLogin);
 
         dispatch({
           type: "USER_LOGIN",
-          payload: res.data[0],
+          payload: res.data.dataLogin,
         });
       })
       .catch(() => {

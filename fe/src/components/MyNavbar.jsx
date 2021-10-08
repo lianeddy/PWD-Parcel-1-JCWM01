@@ -27,12 +27,10 @@ class MyNavbar extends React.Component {
             <ShoppingCartOutlined />
           </NavbarBrand>
           <Nav>
-            {this.props.userGlobal.username ? (
+            {this.props.userGlobal.email ? (
               <>
                 <NavItem>
-                  <NavbarText>
-                    Hello, {this.props.userGlobal.username}
-                  </NavbarText>
+                  <NavbarText>Hello, {this.props.userGlobal.email}</NavbarText>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
