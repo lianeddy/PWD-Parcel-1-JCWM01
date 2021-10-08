@@ -1,7 +1,7 @@
 <<<<<<< Updated upstream
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import RegisterPage from "./pages/RegisterPage";
+// import RegisterPage from "./pages/RegisterPage";
 import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/UserProfile";
 
@@ -11,7 +11,7 @@ function App() {
     <>
       <Router>
         <Route path="/profile" component={UserProfile} />
-        <Route path="/Edit" component={EditProfile} />
+        <Route path="/edit" component={EditProfile} />
       </Router>
     </>
   );

@@ -1,23 +1,67 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
-import "./UserProfile.css";
+// import { Link } from "react-router-dom";
+import "./EditProfile.css";
+import {Button, Form} from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 
-function UserProfile() {
-  const [userData, setUserData] = useState({});
-  const UserProfile = () => {
-    console.log(userData);
-    Axios.post(`http://localhost:3302/user/profile`, userData)
+
+function EditProfile() {
+  // const [userData, setUserData] = useState({});
+  const [full_name, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [addres, setAddres] = useState('');
+  const [age, setAge] = useState('');
+  // back to profile
+  let history = useHistory();
+
+  let id = 1
+  
+  const user = () => {
+   
+    // console.log(userData);
+    Axios.get(`http://localhost:3302/user?id=${id}`)
       .then((res) => {
         console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
 
+        setFullname(res.data[0].full_name);
+        setEmail(res.data[0].email);
+        setGender(res.data[0].gender);
+        setAddres(res.data[0].addres);
+        setAge(res.data[0].age);
+      })
+
+  };
+  
+  function edituser (event) {
+  event.preventDefault();
+
+  let  userData = {
+    'full_name': full_name,
+    'email': email,
+    'gender': gender,
+    'addres' : addres,
+    'age' : age,
+  }
+  console.log(event.target[0].value)
+    
+    Axios.patch(`http://localhost:3302/edit-user/${id}`, userData)
+    .then((res) => {
+      console.log(res.data);
+      alert("Data Anda Telah Berubah")
+      // back to profile
+      history.push("/profile");
+    })
+    .catch((err) => console.log(err));
+  }
+// use effect [] untuk perubahan data
+ console.log(user)
   useEffect(() => {
     console.log("test")
-  });
+    user()
+  }, []);
 
   // FOR ADMIN CHECKING USER
   // const get = () => {
@@ -30,14 +74,9 @@ function UserProfile() {
 
   return (
     <>
-      <div className="UserProfile">
-        <div className="reg-container">
+      <div className="EditProfile">
+        <div className="r-container">
           <div className="UserProfile-side">
-            <div className="reg-icon">
-              <Link className="reg-icon-text" tabIndex="-1">
-                Picture <i className="fas fa-portrait" />
-              </Link>
-            </div>
             <div className="reg-desc">
               <h1 className="reg-desc-h1">Profile</h1>
               <p className="reg-desc-text">
@@ -45,16 +84,15 @@ function UserProfile() {
               </p>
             </div>
             <div className="reg-input">
-              <form className="reg-input-form">
+              <Form className="reg-input-form" onSubmit={edituser}>
                 <label>
                   <h2 className="reg-input-text">Full Name</h2>
                   <input
                     type="text"
                     className="reg-input-bar"
                     placeholder="Name"
-                    onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
-                    }}
+                    value = {full_name}
+                    onChange={e =>setFullname(e.target.value)}
                   />
                 </label>
                 <label>
@@ -63,8 +101,9 @@ function UserProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="name@email.com"
+                    value = {email}
                     onChange={(e) => {
-                      setUserData({ ...userData, email: e.target.value });
+                      setEmail(e.target.value);
                     }}
                   />
                 </label>
@@ -74,8 +113,9 @@ function UserProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Gender"
+                    value = {gender}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setGender(e.target.value);
                     }}
                   />
                 </label>
@@ -85,8 +125,9 @@ function UserProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Address"
+                    value = {addres}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setAddres(e.target.value);
                     }}
                   />
                 </label>
@@ -96,27 +137,18 @@ function UserProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Age"
+                    value = {age}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setAge(e.target.value);
                     }}
                   />
                 </label>
-                <button
-                  className="reg-button"
-                  type="button"
-                  onClick={() => {
-                    UserProfile();
-                  }}
-                  disabled={
-                    !userData.email && !userData.password && !userData.full_name
-                  }
-                >
-                  <p className="reg-button-text">Edit Profile</p>
-                </button>
-                <div className="reg-login">
-                  <Link className="reg-login-right">Update</Link>
-                </div>
-              </form>
+    
+                  <Button className="reg-button" type="submit" >
+                  Update Data
+                  
+                </Button>
+              </Form>
             </div>
           </div>
           <div className="content-side"></div>
@@ -126,4 +158,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default EditProfile;
