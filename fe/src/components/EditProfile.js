@@ -1,22 +1,24 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./EditProfile.css";
 import {Button, Form} from "react-bootstrap";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 
 function EditProfile() {
   // const [userData, setUserData] = useState({});
-  const [full_name, setFullname] = useState();
-  const [email, setEmail] = useState();
-  const [gender, setGender] = useState();
-  const [addres, setAddres] = useState();
-  const [age, setAge] = useState();
+  const [full_name, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [addres, setAddres] = useState('');
+  const [age, setAge] = useState('');
+  // back to profile
+  let history = useHistory();
 
   let id = 1
-  const [userData, setUserData] = useState({});
+  
   const user = () => {
    
     // console.log(userData);
@@ -33,24 +35,33 @@ function EditProfile() {
 
   };
   
-
   function edituser (event) {
   event.preventDefault();
+
+  let  userData = {
+    'full_name': full_name,
+    'email': email,
+    'gender': gender,
+    'addres' : addres,
+    'age' : age,
+  }
   console.log(event.target[0].value)
-    alert("Data Anda Telah Berubah")
+    
     Axios.patch(`http://localhost:3302/edit-user/${id}`, userData)
     .then((res) => {
       console.log(res.data);
-
+      alert("Data Anda Telah Berubah")
+      // back to profile
+      history.push("/profile");
     })
     .catch((err) => console.log(err));
   }
-
+// use effect [] untuk perubahan data
  console.log(user)
   useEffect(() => {
     console.log("test")
     user()
-  });
+  }, []);
 
   // FOR ADMIN CHECKING USER
   // const get = () => {
@@ -81,9 +92,7 @@ function EditProfile() {
                     className="reg-input-bar"
                     placeholder="Name"
                     value = {full_name}
-                    onChange={(e) => {
-                      setUserData({userData, full_name: e.target.value });
-                    }}
+                    onChange={e =>setFullname(e.target.value)}
                   />
                 </label>
                 <label>
@@ -94,7 +103,7 @@ function EditProfile() {
                     placeholder="name@email.com"
                     value = {email}
                     onChange={(e) => {
-                      setUserData({ ...userData, email: e.target.value });
+                      setEmail(e.target.value);
                     }}
                   />
                 </label>
@@ -106,7 +115,7 @@ function EditProfile() {
                     placeholder="Gender"
                     value = {gender}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setGender(e.target.value);
                     }}
                   />
                 </label>
@@ -118,7 +127,7 @@ function EditProfile() {
                     placeholder="Address"
                     value = {addres}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setAddres(e.target.value);
                     }}
                   />
                 </label>
@@ -130,7 +139,7 @@ function EditProfile() {
                     placeholder="Age"
                     value = {age}
                     onChange={(e) => {
-                      setUserData({ ...userData, full_name: e.target.value });
+                      setAge(e.target.value);
                     }}
                   />
                 </label>

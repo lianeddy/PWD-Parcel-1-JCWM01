@@ -7,7 +7,7 @@ import {Button} from "react-bootstrap";
 
 
 function UserProfile() {
-  const [userData, setUserData] = useState({});
+  const [userData] = useState({});
   const [full_name, setFullname] = useState();
   const [email, setEmail] = useState();
   const [gender, setGender] = useState();
