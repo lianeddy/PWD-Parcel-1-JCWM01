@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
 import MyNavbar from "./components/MyNavbar";
+import EditProfile from "./components/EditProfile";
+import UserProfile from "./components/UserProfile";
 
 import { connect } from "react-redux";
 import { userKeepLogin, checkStorage } from "./redux/actions/user";
@@ -38,6 +40,8 @@ class App extends React.Component {
               exact
               component={VerificationPage}
             />
+            <Route path="/profile" component={UserProfile} />
+            <Route path="/edit" component={EditProfile} />
           </Switch>
         </BrowserRouter>
       );

@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    user-select: none;
+  }
+  
+  h1,
+  h2,
+  p {
+    opacity: 0.8;
+  }
+  
+  .EditProfile{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    background-color: rgb(234, 244, 248);
+    height: 1200px;
+  }
+  
+  .reg-container{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: flex-end;
+    width: 80vw;
+    height: 1200px;
+    border-radius: 50px;
+    margin-top: 50px;
+    background-color: rgb(255, 255, 255);
+    overflow: -moz-hidden-unscrollable;
+  }
+  
+  .Profile-side {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 50px 80px;
+  }
+  
+  .reg-icon {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    cursor: pointer;
+  }
+  
+  .reg-icon-text {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  
+  .reg-desc {
+    margin-top: 20px;
+  }
+  
+  .reg-desc-h1 {
+    margin-top: 150px;
+    font-size: 2rem;
+  }
+  
+  .reg-desc-text {
+    margin: 0px 0 20px 0;
+    font-size: 0.9rem;
+  }
+  
+  .reg-input {
+    display: flex;
+    margin-top: px;
+  }
+  
+  .reg-input-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .reg-input-text {
+    font-size: 1.3rem;
+  }
+  
+  .reg-input-bar {
+    margin: 5px 0 20px 0;
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 20px;
+  }
+  
+  
+  .reg-privacy-right {
+    width: 20%;
+    font-size: 0.8rem;
+  }
+  
+  .reg-privacy-left {
+    cursor: pointer;
+  }
+  
+  .reg-button {
+    margin: 25px 0 20px 0;
+    background-color: rgb(0, 255, 21);
+    width: 90%;
+    height: 45px;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .reg-button:hover {
+    background-color: rgb(11, 255, 68);
+  }
+  
+  .reg-button-text {
+    font-size: 1rem;
+    color: white;
+    opacity: 1;
+  }
+  
+
+  .content-side {
+    width: 0%;
+    height: 720px;
+    background-color: rgb(255, 255, 255);
+  }
+  
