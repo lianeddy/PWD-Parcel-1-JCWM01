@@ -56,7 +56,7 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchProducts();
+    // this.fetchProducts();
   }
 
   renderProducts = () => {
