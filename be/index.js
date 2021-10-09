@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
+const bearerToken = require("express-bearer-token");
+const { userRouters } = require("./routers");
 
 const PORT = 3302;
 const app = express();
