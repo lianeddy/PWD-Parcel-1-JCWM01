@@ -16,7 +16,10 @@ app.get("/", (req, res) => {
 });
 
 const { userRouters } = require("./routers");
+const { productRouters } = require("./routers");
 
 app.use("/users", userRouters);
+
+app.use("/product", productRouters);
 
 app.listen(PORT, () => console.log("Api Running :", PORT));

@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
+import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
 
 import { connect } from "react-redux";
@@ -31,6 +32,8 @@ class App extends React.Component {
           <Switch>
             <Route component={Login} path="/login" />
             <Route component={Forgot} path="/forgot" />
+            <Route component={ProductDetail} path="/product-detail/:id" />
+
             <Route component={Home} path="/" />
           </Switch>
         </BrowserRouter>
