@@ -1,86 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 import "./Verification.css";
 
-class Verification extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: "Verifing Account... Please wait...",
-      verify: false,
-    };
-  }
+function Verification(props) {
+  const [verifyState, setVerifyState] = useState({
+    message: "Verifing Account... Please wait...",
+    verify: false,
+  });
 
-  componentDidMount() {
+  let history = useHistory();
+
+  useEffect(() => {
     console.log("masuk axios");
-    console.log(this);
-    console.log(this.props);
-    console.log(this.props.req.computedMatch);
-    console.log(this.props.req.computedMatch.params.token);
-    console.log(this.state);
+    console.log(props);
+    console.log(props.req.computedMatch);
+    console.log(props.req.computedMatch.params.token);
+    console.log(verifyState);
     Axios.patch(
       "http://localhost:3302/user/verified",
       {},
       {
         headers: {
-          Authorization: `Bearer ${this.props.req.computedMatch.params.token}`,
+          Authorization: `Bearer ${props.req.computedMatch.params.token}`,
         },
       }
     )
       .then((res) => {
         console.log("res 1");
-        this.setState({
+        setVerifyState({
           message: "Your Account is Verified",
           verify: true,
           messagePlus: "You will be redirected to landing page...",
         });
+        setTimeout(() => {
+          history.push("/register");
+        }, 3000);
       })
       .catch((err) => {
         console.log(err);
         console.log("error cuy");
-        this.setState({ message: "Failed to Verified Account" });
+        setVerifyState({ message: "Failed to Verified Account" });
       });
-  }
-  // Axios.patch(
-  //   "http://localhost:3302/user/verified",
-  //   {},
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${this.props.computedMatch.params.token}`,
-  //     },
-  //   }
-  // )
+  }, []);
 
-  // useEffect(() => {
-  //   console.log("masuk usEffect");
-  //   // console.log(props);
-  //   Axios.patch("http://localhost:3302/user/verified", { full_name: "test" })
-  //     .then((res) => {
-  //       console.log("ok");
-  //       setVerifyMessage("Your Account is verified");
-  //       console.log(verifyMessage);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  render() {
-    return (
-      <>
-        <div className="verification">
-          <div className="verification-container">
-            <i className={this.state.verify ? "fas fa-check" : "none"} />
-            <div className="ver-done-word">
-              <h1 className="ver-done-word-1">{this.state.message}</h1>
-              <p className="ver-done-word-2">{this.state.messagePlus}</p>
-            </div>
+  return (
+    <>
+      <div className="verification">
+        <div className="verification-container">
+          <i className={verifyState.verify ? "fas fa-check" : "none"} />
+          <div className="ver-done-word">
+            <h1 className="ver-done-word-1">{verifyState.message}</h1>
+            <p className="ver-done-word-2">{verifyState.messagePlus}</p>
           </div>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default Verification;

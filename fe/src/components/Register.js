@@ -21,7 +21,9 @@ function Register() {
       .then((res) => {
         console.log(res.data);
         console.log("register done");
-        history.push("/registerdone");
+        setTimeout(() => {
+          history.push("/registerdone");
+        }, 3000);
       })
       .catch((err) => console.log(err));
   };

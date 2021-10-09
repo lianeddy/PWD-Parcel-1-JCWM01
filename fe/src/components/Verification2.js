@@ -3,7 +3,7 @@ import Axios from "axios";
 // import { useHistory } from "react-router";
 import "./Verification.css";
 
-class Verification extends React.Component {
+class Verification2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,4 +83,4 @@ class Verification extends React.Component {
   }
 }
 
-export default Verification;
+export default Verification2;
