@@ -84,7 +84,16 @@ app.patch('/edit-user/:id', (req,res)=> {
 //     })
 // })
 
-
+app.get("/order", (req, res) => {
+  let scriptQuery = "select od.status, od.created_at, p.nama, od.no_order, oi.quantity, p.harga, od.total from order_details as od join order_items as oi on od.id = oi.order_id join parcel as p on oi.parcel_id = p.parcel_id  ";
+  if (req.query.id) {  
+    scriptQuery += `where od.user_id = 1`
+  }
+  db.query(scriptQuery, (err, results) => {
+    if (err) res.status(500).send(err);
+    res.status(200).send(results);
+  });
+});
 // Middleware
 const { userRouters } = require("./routers/index");
 app.use("/user", userRouters);
