@@ -5,11 +5,19 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   auth: (req, res, next) => {
-    jwt.verify(req.token, "private123key", (err, decode) => {
-      if (er) {
+    console.log("masuk  auth");
+    console.log(req.token);
+    jwt.verify(req.token, "private123", (err, decode) => {
+      if (err) {
+        console.log("error jwt veiryf");
         return res.status(401).send("User not auth");
       }
+
+      console.log("berhasil auth token");
+
       req.user = decode;
+
+      console.log(req.user);
 
       next();
     });

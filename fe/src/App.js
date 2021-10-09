@@ -13,7 +13,11 @@ function App() {
         <Switch>
           <LandingPage path="/" exact component={LandingPage} />
           <RegisterPage path="/register" exact component={RegisterPage} />
-          <VerificationPage path="/verify" exact component={VerificationPage} />
+          <VerificationPage
+            path="/authentication/:token"
+            exact
+            component={VerificationPage}
+          />
         </Switch>
       </Router>
     </>
