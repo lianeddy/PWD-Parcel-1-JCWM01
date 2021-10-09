@@ -136,7 +136,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  getCartData,
+  //getCartData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

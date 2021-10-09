@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+
 import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
 
@@ -18,7 +20,7 @@ class App extends React.Component {
     if (userLocalStorage) {
       const userData = userLocalStorage;
       this.props.userKeepLogin(userData);
-      this.props.getCartData(userData.id);
+      //this.props.getCartData(userData.id);
     } else {
       this.props.checkStorage();
     }
@@ -32,6 +34,8 @@ class App extends React.Component {
           <Switch>
             <Route component={Login} path="/login" />
             <Route component={Forgot} path="/forgot" />
+            <Route component={Admin} path="/admin" />
+
             <Route component={ProductDetail} path="/product-detail/:id" />
 
             <Route component={Home} path="/" />
@@ -53,7 +57,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   userKeepLogin,
   checkStorage,
-  getCartData,
+  //getCartData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

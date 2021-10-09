@@ -26,7 +26,7 @@ module.exports = {
       created_at,
       modified_at,
     } = req.body;
-    let insertQuery = `Insert into product values (null,${db.escape(
+    let insertQuery = `Insert into product values (${db.escape(id)},${db.escape(
       full_name
     )},${db.escape(desc)},${db.escape(quantity)},${db.escape(
       category
