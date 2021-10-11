@@ -12,14 +12,14 @@ class ProductDetail extends React.Component {
   };
 
   fetchProductData = () => {
-    Axios.get(`${URL_API}/products`, {
+    Axios.get(`${URL_API}/product/get`, {
       params: {
         id: this.props.match.params.id,
       },
     })
       .then((result) => {
         if (result.data) {
-          this.setState({ productData: result.data });
+          this.setState({ productData: result.data[0] });
         } else {
           this.setState({ productNotFound: true });
         }
@@ -84,22 +84,21 @@ class ProductDetail extends React.Component {
       <div className="container">
         {this.state.productNotFound ? (
           <div className="alert alert-warning mt-3">
-            Product with ID {this.props.match.params.productId} has been not
-            found
+            Product with ID {this.props.match.params.id} has been not found
           </div>
         ) : (
           <div className="row mt-3">
             <div className="col-6">
               <img
                 style={{ width: "100%" }}
-                src={this.state.productData.productImage}
+                src={this.state.productData.picture}
                 alt=""
               />
             </div>
             <div className="col-6 d-flex flex-column justify-content-center">
-              <h4>{this.state.productData.productName}</h4>
+              <h4>{this.state.productData.full_name}</h4>
               <h5>Rp {this.state.productData.price}</h5>
-              <p>{this.state.productData.description}</p>
+              <p>{this.state.productData.desc}</p>
               <div className="d-flex flex-row align-items-center">
                 <button
                   onClick={() => this.qtyBtnHandler("decrement")}
