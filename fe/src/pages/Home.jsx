@@ -16,7 +16,7 @@ class Home extends React.Component {
   };
 
   fetchProducts = () => {
-    Axios.get(`${URL_API}/products`)
+    Axios.get(`${URL_API}/product/get`)
       .then((result) => {
         alert("Berhasil");
         this.setState({
@@ -40,7 +40,7 @@ class Home extends React.Component {
   searchBtnHandler = () => {
     const filterProductList = this.state.productList.filter((val) => {
       return (
-        val.productName
+        val.full_name
           .toLowerCase()
           .includes(this.state.searchProductName.toLocaleLowerCase()) &&
         val.category
@@ -63,10 +63,10 @@ class Home extends React.Component {
     const beginningIndex = (this.state.page - 1) * this.state.itemPerPage;
     let rawData = [...this.state.filterProductList];
     const compareString = (a, b) => {
-      if (a.productName < b.productName) {
+      if (a.full_name < b.full_name) {
         return -1;
       }
-      if (b.productName > a.productName) {
+      if (b.full_name > a.full_name) {
         return 1;
       }
       return 0;

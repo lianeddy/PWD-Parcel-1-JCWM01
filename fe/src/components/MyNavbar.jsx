@@ -38,9 +38,7 @@ class MyNavbar extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <Link to="/cart">
-                        Cart ({this.props.cartGlobal.cartList.length})
-                      </Link>
+                      <Link to="/cart">Cart</Link>
                     </DropdownItem>
                     <DropdownItem>
                       <Link to="/history">History</Link>
@@ -75,7 +73,7 @@ class MyNavbar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userGlobal: state.user,
-    cartGlobal: state.cart,
+    // cartGlobal: state.cart,
   };
 };
 

@@ -10,6 +10,7 @@ import VerificationPage from "./pages/VerificationPage";
 import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
+import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
 import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/userProfile";
@@ -53,6 +54,11 @@ class App extends React.Component {
             exact
             component={VerificationPage}
           />
+          <Route component={Login} path="/login" />
+          <Route component={Forgot} path="/forgot" />
+          <Route component={ProductDetail} path="/product-detail/:id" />
+
+          <Route component={Home} path="/" />
         </Switch>
       </BrowserRouter>
     );

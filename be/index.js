@@ -109,7 +109,10 @@ app.patch("/edit-user/:id", (req, res) => {
 //         res.status(200).send(results)
 //     })
 // })
+const { userRouters, productRouters } = require("./routers");
 
 app.use("/users", userRouters);
+
+app.use("/product", productRouters);
 
 app.listen(PORT, () => console.log("Api Running :", PORT));
