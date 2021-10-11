@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 import Axios from "axios";
 import { URL_API } from "../helper";
+import Slider from "../components/Slider";
 
 class Home extends React.Component {
   state = {
@@ -115,6 +116,8 @@ class Home extends React.Component {
   render() {
     return (
       <div className="container mt-5">
+        <Slider />
+
         <div className="row">
           <div className="col-3">
             <div className="card">
