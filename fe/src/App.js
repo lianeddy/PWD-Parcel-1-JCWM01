@@ -41,7 +41,6 @@ class App extends React.Component {
           <Route component={Login} path="/login" />
           <Route component={Forgot} path="/forgot" />
           <RegisterPage path="/register" exact component={RegisterPage} />
-          <VerificationPage path="/verify" exact component={VerificationPage} />
           <Route path="/profile" component={UserProfile} />
           <Route path="/edit" component={EditProfile} />
           <RegisterDonePage
