@@ -4,6 +4,7 @@ const Crypto = require("crypto");
 const { createToken } = require("../helper/createToken");
 const transporter = require("../helper/nodemailer");
 const { stringify } = require("querystring");
+const { auth } = require("../helper/authToken");
 
 module.exports = {
   getUser: (req, res) => {
@@ -20,7 +21,7 @@ module.exports = {
     // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
     const { full_name, email, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    // const hash = Crypto.createHmac("shal", "hash123");
+    // const hash = Crypto.createHmac("sha1", "hash123").digest("hex");
     console.log("hash : " + hash);
 
     const insertQuery = `INSERT into user values (null, ${db.escape(
@@ -46,12 +47,15 @@ module.exports = {
           console.log(insertQuery);
           console.log("email setelah ISNET" + results2[0]);
           // bahan untuk membuat token
-          let { full_name, email, role, verified } = results2[0];
+          let { full_name, email, role, verified, id } = results2[0];
+
           console.log("stringfy : " + stringify(results2[0]));
           console.log("full_name : " + full_name);
           console.log("email : " + email);
+          console.log("verified : " + verified);
+          console.log("id : " + id);
           // membuat token
-          let token = createToken({ full_name, email, role, verified });
+          let token = createToken({ full_name, email, role, verified, id });
 
           console.log("token : " + token);
 
@@ -59,10 +63,14 @@ module.exports = {
             from: `admin <id.private.bootcamp@gmail.com>`,
             to: `${email}`,
             subject: `Account Verification`,
-            html: `<a href="http://localhost:3302/user/verification/${token}">Click here to verified your account.</a>`,
+            html: `<a href="http://localhost:3000/authentication/${token}">Click here to verified your account.</a>`,
           };
 
+          console.log("mail html:" + mail.html);
           console.log("mail : " + mail.to);
+
+          console.log("Bawah AUTH");
+          console.log("auth(token)");
 
           transporter.sendMail(mail, (errMail, resMail) => {
             console.log("transporter IN");
@@ -85,9 +93,11 @@ module.exports = {
     });
   },
   verification: (req, res) => {
-    let updateQuery = `UPDATE user set verified = 'yes' where email = ${db.escape(
-      req.user.email
-    )} and password = ${db.escape(req.user.password)}`;
+    console.log("masuk veruft");
+    // console.log(req.user);
+    let updateQuery = `UPDATE user set verified = 'yes' where id = ${db.escape(
+      req.user.id
+    )}`;
 
     db.query(updateQuery, (err, results) => {
       if (err) {

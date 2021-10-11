@@ -1,9 +1,13 @@
 import React from "react";
+import Verification from "../components/Verification";
 
-function VerificationPage() {
+// Verification Page if component and page seperated
+
+function VerificationPage(props) {
   return (
     <>
-      <h1>Verification Page</h1>
+      {console.log(props)}
+      <Verification req={props} />
     </>
   );
 }

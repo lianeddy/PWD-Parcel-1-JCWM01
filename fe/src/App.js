@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 
 import RegisterPage from "./pages/RegisterPage";
+import RegisterDonePage from "./pages/RegisterDonePage";
+import LandingPage from "./pages/LandingPage";
 import VerificationPage from "./pages/VerificationPage";
 
 import Home from "./pages/Home";
@@ -41,6 +43,16 @@ class App extends React.Component {
           <VerificationPage path="/verify" exact component={VerificationPage} />
           <Route path="/profile" component={UserProfile} />
           <Route path="/edit" component={EditProfile} />
+          <RegisterDonePage
+            path="/registerdone"
+            exact
+            component={RegisterDonePage}
+          />
+          <VerificationPage
+            path="/authentication/:token"
+            exact
+            component={VerificationPage}
+          />
         </Switch>
       </BrowserRouter>
     );

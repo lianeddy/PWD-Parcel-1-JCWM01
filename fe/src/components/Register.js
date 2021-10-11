@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
   const [userData, setUserData] = useState({});
   const [privacy, setPrivacy] = useState(false);
+
+  let history = useHistory();
 
   const register = () => {
     console.log(!userData.email);
@@ -17,6 +20,10 @@ function Register() {
     Axios.post(`http://localhost:3302/user/registeruser`, userData)
       .then((res) => {
         console.log(res.data);
+        console.log("register done");
+        setTimeout(() => {
+          history.push("/registerdone");
+        }, 3000);
       })
       .catch((err) => console.log(err));
   };
