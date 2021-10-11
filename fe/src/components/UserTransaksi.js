@@ -1,68 +1,202 @@
-import React from "react";
-import './userTransaksi.css'
-//Bootstrap for responsiveness
+import React from 'react'
+import { connect } from 'react-redux'
+import Axios from 'axios'
+import { API_URL } from "../constans/API"
+import { getCartData } from '../redux/actions/cart';
 
-class App extends React.Component {
- 
-    render() {
+class Cart extends React.Component {
+  state = {
+    isCheckoutMode: false,
+    recipientName: "",
+    address: "",
+    payment: 0,
+  }
+
+  deleteCartHandler = (cartId) => {
+    Axios.delete(`${API_URL}/carts/${cartId}`)
+    .then(() => {
+      this.props.getCartData(this.props.userGlobal.id)
+    })
+    .catch(() => {
+      alert("Terjadi kesalahan di server")
+    })
+  }
+
+  renderCart = () => {
+    return this.props.cartGlobal.cartList.map((val) => {
+      return (
+        <tr>
+          <td className="align-middle">
+            {val.productName}
+          </td>
+          <td className="align-middle">
+            {val.price}
+          </td>
+          <td className="align-middle">
+            <img src={val.productImage} alt="" style={{ height: "125px" }} />
+          </td>
+          <td className="align-middle">
+            {val.quantity}
+          </td>
+          <td className="align-middle">
+            {val.quantity * val.price}
+          </td>
+          <td className="align-middle">
+            <button onClick={() => this.deleteCartHandler(val.id)} className="btn btn-danger">
+              Delete
+            </button>
+          </td>
+        </tr>
+      )
+    })
+  }
+
+  renderSubtotalPrice = () => {
+    let subtotal = 0;
+    for(let i = 0; i < this.props.cartGlobal.cartList.length; i++) {
+      subtotal += this.props.cartGlobal.cartList[i].price * this.props.cartGlobal.cartList[i].quantity
+    }
+
+    return subtotal;
+  }
+
+  renderTaxFee = () => {
+    return this.renderSubtotalPrice() * 0.05;
+  }
+
+  renderTotalPrice = () => {
+    return this.renderSubtotalPrice() + this.renderTaxFee();
+  }
+
+  checkoutModeToggle = () => {
+    this.setState({ isCheckoutMode: !this.state.isCheckoutMode })
+  }
+
+  inputHandler = (event) => {
+    const { name, value } = event.target
+
+    this.setState({ [name]: value });
+  }
+
+  payBtnHandler = () => {
+    // 1. POST ke /transactions
+    // 2. DELETE semua cart item yg sudah dibayar
+
+    if (this.state.payment < this.renderTotalPrice()) {
+      alert(`Uang anda kurang ${this.renderTotalPrice() - this.state.payment}`)
+      return;
+    }
+
+    if (this.state.payment > this.renderTotalPrice()) {
+      alert(`Sukses anda mendapatkan kembalian ${this.state.payment - this.renderTotalPrice()}`)
+    } else if (this.state.payment === this.renderTotalPrice()) {
+      alert("Terima kasih sudah membayar dengan uang pas")
+    }
+
+    const d = new Date();
+    Axios.post(`${API_URL}/transactions`, {
+      userId: this.props.userGlobal.id,
+      address: this.state.address,
+      recipientName: this.state.recipientName,
+      totalPrice: parseInt(this.renderTotalPrice()),
+      totalPayment: parseInt(this.state.payment),
+      transactionDate: `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`, // DD-MM-YYYY
+      transactionItems: this.props.cartGlobal.cartList, // Array of objects -> cart
+    })
+    .then((result) => {
+      alert("Berhasil melakukan pembayaran")
+      result.data.transactionItems.forEach((val) => {
+        this.deleteCartHandler(val.id)
+      })
+    })
+    .catch(() => {
+      alert("Terjadi kesalahan di server")
+    })
+  }
+  render() {
     return (
-      <div className="main_container">
-     
-            <h1>Ecommerce</h1>
-        <div class="container padding-bottom-3x mb-1">
-        <div class="card mb-3">
-          {/* tracking code */}
-          <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Tracking Order No - </span><span class="text-medium">001698653lp</span></div>
-          <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Shipped Via:</span> UPS Ground</div>
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> Checking Quality</div>
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Expected Date:</span> APR 27, 2021</div>
+      <div className="p-5 text-center">
+        <h1>Cart</h1>
+        <div className="row mt-5">
+          <div className="col-9 text-center">
+            <table className="table">
+              <thead className="thead-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Image</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.renderCart()}
+              </tbody>
+              <tfoot className="bg-light">
+                <tr>
+                  <td colSpan="6">
+                    <button onClick={this.checkoutModeToggle} className="btn btn-success">
+                      Checkout
+                    </button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
-          <div class="card-body">
-            <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><i class="pe-7s-config"></i></div>
+          {
+            this.state.isCheckoutMode ? 
+            <div className="col-3">
+              {/* Form checkout */}
+              <div className="card text-left">
+                <div className="card-header">
+                  <strong>Order Summary</strong>
                 </div>
-                <h4 class="step-title">Confirmed Order</h4>
-              </div>
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><i class="pe-7s-config"></i></div>
+                <div className="card-body">
+                  <div className="d-flex my-2 flex-row justify-content-between align-items-center">
+                    <span className="font-weight-bold">Subtotal Price</span>
+                    <span>Rp {this.renderSubtotalPrice()}</span>
+                  </div>
+                  <div className="d-flex my-2 flex-row justify-content-between align-items-center">
+                    <span className="font-weight-bold">Tax Fee (5%)</span>
+                    <span>Rp {this.renderTaxFee()}</span>
+                  </div>
+                  <div className="d-flex my-2 flex-row justify-content-between align-items-center">
+                    <span className="font-weight-bold">Total Price</span>
+                    <span>Rp {this.renderTotalPrice()}</span>
+                  </div>
                 </div>
-                <h4 class="step-title">Processing Order</h4>
-              </div>
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><i class="pe-7s-medal"></i></div>
+                <div className="card-body border-top">
+                  <label htmlFor="recipientName">Recipient Name</label>
+                  <input onChange={this.inputHandler} type="text" className="form-control mb-3" name="recipientName"/>
+                  <label htmlFor="address">Address</label>
+                  <input onChange={this.inputHandler} type="text" className="form-control" name="address"/>
                 </div>
-                <h4 class="step-title">Quality Check</h4>
-              </div>
-              <div class="step">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><i class="pe-7s-car"></i></div>
+                <div className="card-footer">
+                  <div className="d-flex flex-row justify-content-between align-items-center">
+                    <input onChange={this.inputHandler} name="payment" className="form-control mx-1" type="number"/>
+                    <button onClick={this.payBtnHandler} className="btn btn-success mx-1">Pay</button>
+                  </div>
                 </div>
-                <h4 class="step-title">Product Dispatched</h4>
-              </div>
-              <div class="step">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><i class="pe-7s-home"></i></div>
-                </div>
-                <h4 class="step-title">Product Delivered</h4>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
-          <div class="custom-control custom-checkbox mr-3">
-            <input class="custom-control-input" type="checkbox" id="notify_me" checked="" />
-            <label class="custom-control-label" for="notify_me">Notify me when order is delivered</label>
-          </div>
-          <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="#">View Order Details</a></div>
+            : null
+          }
         </div>
       </div>
-      </div>
-    );
+    )
   }
 }
-export default App;
+
+const mapStateToProps = state => {
+  return {
+    cartGlobal: state.cart,
+    userGlobal: state.user,
+  }
+}
+
+const mapDispatchToProps = {
+  getCartData,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
