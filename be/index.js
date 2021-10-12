@@ -51,7 +51,8 @@ app.get("/productcategory", (req, res) => {
 // Contoh end
 
 // Middleware
-const { userRouters } = require("./routers/index");
+const { userRouters, uploadRouter } = require("./routers/index");
 app.use("/user", userRouters);
+app.use("/album ", uploadRouter);
 
 app.listen(PORT, () => console.log(`API Running at Port : ${PORT}`));

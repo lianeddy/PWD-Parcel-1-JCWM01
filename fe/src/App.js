@@ -5,6 +5,7 @@ import RegisterPage from "./pages/RegisterPage";
 import RegisterDonePage from "./pages/RegisterDonePage";
 import LandingPage from "./pages/LandingPage";
 import VerificationPage from "./pages/VerificationPage";
+import ProfilePicture from "./components/ProfilePicture";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             exact
             component={VerificationPage}
           />
+          <ProfilePicture path="/" exact component={ProfilePicture} />
         </Switch>
       </Router>
     </>

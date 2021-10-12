@@ -7,6 +7,7 @@ import "./Register.css";
 function Register() {
   const [userData, setUserData] = useState({});
   const [privacy, setPrivacy] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   let history = useHistory();
 
@@ -15,15 +16,16 @@ function Register() {
     console.log(!userData.password);
     console.log(!userData.full_name);
     console.log(!privacy);
+    setIsLoading(true);
 
     console.log(userData);
     Axios.post(`http://localhost:3302/user/registeruser`, userData)
       .then((res) => {
         console.log(res.data);
         console.log("register done");
-        setTimeout(() => {
-          history.push("/registerdone");
-        }, 3000);
+        setIsLoading(false);
+        // conditial rendering
+        history.push("/registerdone");
       })
       .catch((err) => console.log(err));
   };
@@ -135,7 +137,9 @@ function Register() {
                     register();
                   }}
                 >
-                  <p className="reg-button-text">Create account</p>
+                  <p className="reg-button-text">
+                    {isLoading ? "Loading..." : "Create account"}
+                  </p>
                 </button>
                 <div className="reg-login">
                   <p className="reg-login-left">Already have an account?</p>

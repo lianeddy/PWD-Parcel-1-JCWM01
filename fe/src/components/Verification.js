@@ -34,7 +34,8 @@ function Verification(props) {
           messagePlus: "You will be redirected to landing page...",
         });
         setTimeout(() => {
-          history.push("/register");
+          // redirect ke login
+          history.push("/");
         }, 3000);
       })
       .catch((err) => {
