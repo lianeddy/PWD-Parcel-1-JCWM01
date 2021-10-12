@@ -11,11 +11,15 @@ function UserTransaksi() {
   const [userData] = useState({});
   
   let id = 1
-  const user = async () => {
-    console.log(userData);
-
+  const user = async (status) => {
+    console.log(typeof status !== 'undefined');
+    let url = ""
+    if (typeof status !== 'undefined')
+      url = `http://localhost:3302/order?id=${id}&status=${status}`;
+    else
+      url = `http://localhost:3302/order?id=${id}`
     // ngambil data dari database by id yang login
-    Axios.get(`http://localhost:3302/order?id=${id}`, userData)
+    Axios.get(url, userData)
       .then(res => {
         setUserTransaksi(res.data)
         console.log(res.data);
@@ -60,15 +64,14 @@ function UserTransaksi() {
           },
         }}
       >
-      <link to={`/edit/${id}`>
-      <DropdownItem>On Going transaction</DropdownItem></link>
-      
-
-      <DropdownItem>Transaction Done</DropdownItem>
+  
+      <DropdownItem onClick={() => user(0)}>On Going transaction</DropdownItem>
+      <DropdownItem onClick={() => user(1)}>Transaction Done</DropdownItem>
+      <DropdownItem onClick={() => user()}>All transaction</DropdownItem>
       </DropdownMenu>
       </Dropdown>,
 
-{transactions.map(transaction => (
+
   
   <Table dark>
   <thead>
@@ -82,6 +85,7 @@ function UserTransaksi() {
       <th>Total</th>
     </tr>
   </thead>
+  {transactions.map(transaction => (
   <tbody>
     <tr>
       <td>{transaction.status}</td>
@@ -91,13 +95,12 @@ function UserTransaksi() {
       <td>{transaction.quantity}</td>
       <td>{transaction.harga}</td>
       <td>{transaction.total}</td>
-      
     </tr>
   </tbody>
-</Table>
         )
       )
     };
+    </Table>
     </>
   );
 };
