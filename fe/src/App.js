@@ -17,9 +17,10 @@ import { getCartData } from "./redux/actions/cart";
 class App extends React.Component {
   componentDidMount() {
     const userLocalStorage = localStorage.getItem("userDataEmmerce");
+    console.log("userLocalStorage", userLocalStorage);
     if (userLocalStorage) {
       const userData = userLocalStorage;
-      this.props.userKeepLogin(userData);
+      this.props.userKeepLogin();
       //this.props.getCartData(userData.id);
     } else {
       this.props.checkStorage();

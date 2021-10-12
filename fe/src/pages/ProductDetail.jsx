@@ -3,6 +3,7 @@ import Axios from "axios";
 import { URL_API } from "../helper";
 import { connect } from "react-redux";
 import { getCartData } from "../redux/actions/cart";
+import Footer from "../components/Footer";
 
 class ProductDetail extends React.Component {
   state = {
@@ -12,14 +13,19 @@ class ProductDetail extends React.Component {
   };
 
   fetchProductData = () => {
-    Axios.get(`${URL_API}/product/get`, {
+    Axios.get(`http://localhost:3300/product/get`, {
       params: {
         id: this.props.match.params.id,
       },
     })
       .then((result) => {
-        if (result.data) {
-          this.setState({ productData: result.data[0] });
+        console.log("result", result);
+        if (result.data.length) {
+          console.log("length", result.data.length);
+          this.setState({
+            productData: result.data[this.props.match.params.id - 1],
+          });
+          console.log("productData", result.data[0]);
         } else {
           this.setState({ productNotFound: true });
         }
@@ -123,6 +129,7 @@ class ProductDetail extends React.Component {
             </div>
           </div>
         )}
+        <Footer />
       </div>
     );
   }

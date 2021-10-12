@@ -22,6 +22,7 @@ export const loginUser = ({ email, password }) => {
           console.log(res.data);
           if (res.password === res.data.password) {
             //delete res.data.password;
+            console.log("userDataEmmerce", res.data);
             localStorage.setItem("userDataEmmerce", res.data.dataLogin);
             // menjalankan fungsi action
             // this.authLogin(res.data.dataLogin);
@@ -65,8 +66,10 @@ export const logoutUser = () => {
   };
 };
 
-export const userKeepLogin = (userData) => {
+export const userKeepLogin = () => {
+  let userData = {};
   return (dispatch) => {
+    userData["id"] = 2;
     Axios.get(`${URL_API}/users/get`, {
       params: {
         id: userData.id,
@@ -74,10 +77,15 @@ export const userKeepLogin = (userData) => {
     })
       .then((result) => {
         delete result.data[0].password;
-        localStorage.setItem("userDataEmmerce", JSON.stringify(result.data[0]));
+        console.log("resul.data[0]", result.data);
+        let user = result.data.filter((e) => e.id === userData.id)[0];
+        console.log("user", user);
+        console.log("user.data.id", userData.id);
+
+        localStorage.setItem("userDataEmmerce", JSON.stringify(user));
         dispatch({
           type: "USER_LOGIN",
-          payload: result.data[0],
+          payload: user,
         });
       })
       .catch(() => {

@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard";
 import Axios from "axios";
 import { URL_API } from "../helper";
 import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 class Home extends React.Component {
   state = {
@@ -197,6 +198,7 @@ class Home extends React.Component {
               {this.renderProducts()}
             </div>
           </div>
+          <Footer />
         </div>
       </div>
     );

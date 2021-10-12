@@ -3,9 +3,9 @@ const { db } = require("../database");
 module.exports = {
   getData: (req, res) => {
     let scriptQuery = `Select * from product;`;
-    if (req.query.full_name) {
-      scriptQuery = `Select * from product where full_name = ${db.escape(
-        req.query.full_name
+    if (req.query.id) {
+      scriptQuery = `Select * from product where id = ${db.escape(
+        req.query.id
       )};`;
     }
     db.query(scriptQuery, (err, results) => {

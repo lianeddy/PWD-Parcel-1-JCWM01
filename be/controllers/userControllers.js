@@ -7,7 +7,7 @@ module.exports = {
     req.body.password = Crypto.createHmac("sha1", "hash123")
       .update(req.body.password)
       .digest("hex");
-    console.log(req.body);
+    console.log("req.body", req.body);
     let scriptQuery = `Select * from users where email=${db.escape(
       req.body.email
     )} and password=${db.escape(req.body.password)};`;
@@ -17,6 +17,7 @@ module.exports = {
       console.log(results);
       if (results.length > 0) {
         let { id, full_name, email, password, role, verified } = results[0];
+        console.log("results[0]", results[0]);
         let token = createToken({
           id,
           full_name,
