@@ -66,53 +66,59 @@ export const logoutUser = () => {
   };
 };
 
-export const userKeepLogin = () => {
-  let userData = {};
+// mentoring external
+//  export const userKeepLogin = () => {
+//   let userData = {};
+//   return (dispatch) => {
+//     userData["id"] = 2;
+//     Axios.get(`${URL_API}/users/get`, {
+//       params: {
+//         id: userData.id,
+//       },
+//     })
+//       .then((result) => {
+//         delete result.data[0].password;
+//         console.log("resul.data[0]", result.data);
+//         let user = result.data.filter((e) => e.id === userData.id)[0];
+//         console.log("user", user);
+//         console.log("user.data.id", userData.id);
+
+//         localStorage.setItem("userDataEmmerce", JSON.stringify(user));
+//         dispatch({
+//           type: "USER_LOGIN",
+//           payload: user,
+//         });
+//       })
+//       .catch(() => {
+//         alert(`Terjadi kesalahan di server`);
+//       });
+//   };
+// };
+
+export const userKeepLogin = (userData) => {
+  console.log("cekuser", userData);
   return (dispatch) => {
-    userData["id"] = 2;
     Axios.get(`${URL_API}/users/get`, {
       params: {
         id: userData.id,
       },
     })
       .then((result) => {
+        console.log("result", result);
         delete result.data[0].password;
-        console.log("resul.data[0]", result.data);
-        let user = result.data.filter((e) => e.id === userData.id)[0];
-        console.log("user", user);
-        console.log("user.data.id", userData.id);
-
-        localStorage.setItem("userDataEmmerce", JSON.stringify(user));
+        localStorage.setItem("userDataEmmerce", JSON.stringify(result.data[0]));
+        console.log("userData", result.data[0]);
         dispatch({
           type: "USER_LOGIN",
-          payload: user,
+          payload: result.data[0],
         });
+        console.log("user_login", result.data[0]);
       })
       .catch(() => {
         alert(`Terjadi kesalahan di server`);
       });
   };
 };
-
-// export const userKeepLogin = (userData) => {
-//   return (dispatch) => {
-//     Axios.get(`${URL_API}/users/get`, {
-//       id: userData.id,
-//     })
-//       .then((res) => {
-//         //delete res.data[0].password;
-//         localStorage.setItem("userDataEmmerce", res.data.dataLogin);
-
-//         dispatch({
-//           type: "USER_LOGIN",
-//           payload: res.data.dataLogin,
-//         });
-//       })
-//       .catch(() => {
-//         alert("Terjadi kesalahan server");
-//       });
-//   };
-// };
 
 export const checkStorage = () => {
   return {
