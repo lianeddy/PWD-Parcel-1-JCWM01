@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import "./userTransaksi.css";
+// import "./userTransaksi.css";
+import { Table,Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import {Button} from "react-bootstrap";
 
 
 function UserTransaksi() {
@@ -20,6 +20,7 @@ function UserTransaksi() {
         setUserTransaksi(res.data)
         console.log(res.data);
         console.log(transactions)
+        
   
       })
       .catch((err) => console.log(err));
@@ -31,6 +32,76 @@ function UserTransaksi() {
     user()
   }, []);
 
+  const [isOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(prevState => !prevState);
+
+  return (
+    <>
+    <Dropdown isOpen={isOpen} toggle={toggle}>
+      <DropdownToggle>
+        Transaction Check
+      </DropdownToggle>
+      <DropdownMenu
+        modifiers={{
+          setMaxHeight: {
+            enabled: true,
+            order: 890,
+            fn: (data) => {
+              return {
+                ...data,
+                styles: {
+                  ...data.styles,
+                  overflow: 'auto',
+                  maxHeight: '100px',
+                },
+              };
+            },
+          },
+        }}
+      >
+      <link to={`/edit/${id}`>
+      <DropdownItem>On Going transaction</DropdownItem></link>
+      
+
+      <DropdownItem>Transaction Done</DropdownItem>
+      </DropdownMenu>
+      </Dropdown>,
+
+{transactions.map(transaction => (
+  
+  <Table dark>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Order Number</th>
+      <th>Parcel</th>
+      <th>Quantity</th>
+      <th>Parcel Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{transaction.status}</td>
+      <td>{transaction.created_at}</td>
+      <td>{transaction.no_order}</td>
+      <td>{transaction.nama}</td>
+      <td>{transaction.quantity}</td>
+      <td>{transaction.harga}</td>
+      <td>{transaction.total}</td>
+      
+    </tr>
+  </tbody>
+</Table>
+        )
+      )
+    };
+    </>
+  );
+};
+
   // FOR ADMIN CHECKING USER
   // const get = () => {
   //   Axios.get("http://localhost:3302/user/getuser")
@@ -40,69 +111,68 @@ function UserTransaksi() {
   //     .catch((err) => console.log(err));
   // };
 
-  return (
-    <>
-    <div className="container">
-      <div className="row">
-    {transactions.map(transaction => (
-      <div className="card">
-        <div className="card-body">
-          <div className="row">
-            <div className="col">
-              <label>
-                <h2 className="status">Status</h2>
-                <p>{transaction.status}</p>
-              </label>
-            </div>
-            <div className="col">
-              <label>
-                <h2 className="date">Date</h2>
-                <p>{transaction.created_at}</p>
-              </label>
-            </div>
-            <div className="col">
-              <label>
-                <h2 className="parcel">Order Number</h2>
-                <p>{transaction.no_order}</p>
-              </label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              <label>
-                <h2 className="data">Parcel</h2>
-                <p>{transaction.nama}</p>
-              </label>
-            </div>
-            <div className="col">
-              <label>
-                <h2 className="data">Quantity</h2>
-                <p>{transaction.quantity}</p>
-              </label>
-            </div>
-            <div className="col">
-              <label>
-                <h2 className="data">Parcel Price</h2>
-                <p>{transaction.harga}</p>
-              </label>
-            </div>
-            <div className="col">
-              <label>
-                <h2 className="data">Total</h2>
-                <p>{transaction.total}</p>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div className="content-side"></div>
-      </div>
+  
+    // <>
+    // <div className="container">
+    //   <div className="row">
+    // {transactions.map(transaction => (
+    //   <div className="card">
+    //     <div className="card-body">
+    //       <div className="row">
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="status">Status</h2>
+    //             <p>{transaction.status}</p>
+    //           </label>
+    //         </div>
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="date">Date</h2>
+    //             <p>{transaction.created_at}</p>
+    //           </label>
+    //         </div>
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="parcel">Order Number</h2>
+    //             <p>{transaction.no_order}</p>
+    //           </label>
+    //         </div>
+    //       </div>
+    //       <div className="row">
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="data">Parcel</h2>
+    //             <p>{transaction.nama}</p>
+    //           </label>
+    //         </div>
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="data">Quantity</h2>
+    //             <p>{transaction.quantity}</p>
+    //           </label>
+    //         </div>
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="data">Parcel Price</h2>
+    //             <p>{transaction.harga}</p>
+    //           </label>
+    //         </div>
+    //         <div className="col">
+    //           <label>
+    //             <h2 className="data">Total</h2>
+    //             <p>{transaction.total}</p>
+    //           </label>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     <div className="content-side"></div>
+    //   </div>
       
-    ))}
-    </div>
-    </div>
+    // ))}
+    // </div>
+    // </div>
       
-    </>
-  );
-}
+    // </>
+
 
 export default UserTransaksi;
