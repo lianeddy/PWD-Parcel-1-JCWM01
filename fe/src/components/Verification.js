@@ -43,6 +43,7 @@ function Verification(props) {
         console.log("error cuy");
         setVerifyState({ message: "Failed to Verified Account" });
       });
+    // eslint-disable-next-line
   }, []);
 
   return (

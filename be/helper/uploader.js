@@ -4,24 +4,31 @@ const fs = require("fs");
 
 module.exports = {
   uploader: (directory, fileNamePrefix) => {
+    console.log("masuk uploader");
     // Lokasi penyimpanan file
     let defaultDirectory = "./public";
 
     // diskStorage : untuk menyimpan file dari frontend FE ke dalam directory backend BE
     const storage = multer.diskStorage({
-      destination: (req, res, cb) => {
+      destination: (req, file, cb) => {
         const pathDirectory = defaultDirectory + directory;
 
+        console.log("tests");
+
+        console.log("masuk uploader2");
+        console.log(pathDirectory);
         if (fs.existsSync(pathDirectory)) {
           console.log(
             "Directory ada, fungsi bawah ini ngecek ada ato tidaknya directory"
           );
           cb(null, pathDirectory);
         } else {
+          console.log("direktorty ga ada");
           fs.mkdir(pathDirectory, { recursive: true }, (err) =>
             cb(err, pathDirectory)
           );
         }
+        console.log("direktorty ga ada222");
       },
       filename: (req, file, cb) => {
         let ext = file.originalname.split(".");
@@ -37,7 +44,7 @@ module.exports = {
       cb(null, true);
     };
     return multer({
-      storage,
+      storage: storage,
       fileFilter,
     });
   },

@@ -1,0 +1,25 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.pict-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pict-container-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  background-color: blueviolet;
+  border-radius: 150px;
+  overflow: hidden;
+}
+
+.img-prev {
+  height: 300px;
+}
