@@ -37,7 +37,7 @@ module.exports = {
       },
     });
     const fileFilter = (req, file, cb) => {
-      const ext = /\.(jpg|jpeg|png|gif|txt|JPG|JPEG)/;
+      const ext = /\.(jpg|jpeg|png|gif|txt|JPG|JPEG|jfif)/;
       if (!file.originalname.match(ext)) {
         return cb(new Error("Your file type are denied"), false);
       }

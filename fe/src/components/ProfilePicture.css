@@ -4,22 +4,91 @@
   box-sizing: border-box;
 }
 
-.pict-container {
-  display: flex;
-  flex-direction: column;
+.pict-word {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: rgba(0, 0, 0, 0.938);
 }
 
-.pict-container-2 {
+.pict-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  height: 250px;
+  background-color: rgba(155, 102, 204, 0.6);
+  align-items: center;
+}
+
+.pict-container-1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   background-color: blueviolet;
   border-radius: 150px;
   overflow: hidden;
 }
 
 .img-prev {
-  height: 300px;
+  width: 300px;
+  height: auto;
+}
+
+#form-control {
+  display: none;
+}
+
+.pict-input-file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background-color: blueviolet;
+  cursor: pointer;
+}
+
+.pict-input-text {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+
+.pict-input-file:active {
+  background-color: rgb(145, 62, 223);
+}
+
+.pict-container-3 {
+  margin-left: 30px;
+}
+
+.pict-button-patch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background-color: rgb(164, 90, 233);
+  cursor: pointer;
+  margin-top: 10px;
+  color: white;
+  font-size: 1rem;
+}
+
+.pict-button-patch:active {
+  background-color: rgb(145, 62, 223);
+}
+
+.pict-input-upperText {
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
 }

@@ -1,21 +1,48 @@
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProfilePicture.css";
 
 function ProfilePicture() {
-  const [filePict, setFilePict] = useState();
+  const [filePict, setFilePict] = useState({});
 
-  console.log(filePict);
+  const id = 105;
+
+  useEffect(() => {
+    getAlbum();
+  }, []);
+
+  const getAlbum = () => {
+    Axios.get(`http://localhost:3302/album/getuserphoto?id=${id}`)
+      .then((res) => {
+        console.log("axios get berhasil");
+        console.log(res);
+        console.log(res.data);
+        console.log(res.data[0]);
+        console.log(res.data[0].profile_pic);
+        setFilePict(res.data[0].profile_pic);
+
+        // change preview data
+        let preview = document.getElementById("img-preview");
+        preview.src = "http://localhost:3302" + res.data[0].profile_pic;
+        console.log(preview);
+      })
+      .catch((err) => {
+        console.log("axios get error");
+        console.log(err);
+      });
+  };
+
+  // console.log(filePict);
 
   const onBtnAddFile = (e) => {
     // console.log("e", e);
-    // console.log("get elemt by id", document.getElementById("img-preview"));
-    // console.log("Target", e.target);
-    // console.log("Target files", e.target.files);
+    console.log("get elemt by id", document.getElementById("img-preview"));
+    console.log("Target", e.target);
+    console.log("Target files", e.target.files);
     // console.log("URL create", URL.createObjectURL(e.target.files[0]));
     if (e.target.files[0]) {
       setFilePict({
-        addFileName: e.target.files[0].name,
+        // addFileName: e.target.files[0].name,
         addFile: e.target.files[0],
       });
 
@@ -31,6 +58,7 @@ function ProfilePicture() {
     }
   };
 
+  // POST PICTURE (GA KEPAKE SIH HRSNYA SOALNYA UDH ADA PATCH)
   const uploadFunction = () => {
     console.log("masuk upload func");
     console.log(filePict);
@@ -64,23 +92,65 @@ function ProfilePicture() {
     }
   };
 
+  // PATCH URL PROFILE_PICT
+  const patchPicture = () => {
+    console.log("masuk patchPicture");
+
+    if (filePict.addFile) {
+      let formData = new FormData();
+      console.log("Form");
+
+      formData.append("file", filePict.addFile);
+
+      Axios.patch("http://localhost:3302/album/editprofilepicture", formData)
+        .then((res) => {
+          console.log("axios patch berhasil");
+          alert(res.data.message);
+        })
+        .catch((err) => {
+          console.log("axios patch error");
+          console.log(err);
+        });
+    }
+    console.log("ga ada file");
+  };
+
   return (
     <>
       <div className="pict-container">
-        <h1>Ada tulisan</h1>
-        <div className="pict-container-1">{/* <img id="img-preview" /> */}</div>
-        <div className="pict-container-2">
-          <img id="img-preview" className="img-prev" />
+        <div>
+          {/* <h1 className="pict-word">Profile Picture</h1> */}
+          <div className="pict-container-1">
+            <img id="img-preview" className="img-prev" />
+          </div>
         </div>
         <div className="pict-container-3">
-          <label htmlFor="img">Image : </label>
-          <input type="file" className="form-control" onChange={onBtnAddFile} />
-          <button
+          <p className="pict-input-upperText">
+            Select an image from your computer (jpg, jpeg, gif, jfif, etc)
+          </p>
+          <label htmlFor="img" for="form-control" className="pict-input-file">
+            <i className="pict-input-text">Choose Picture</i>
+          </label>
+          <input
+            type="file"
+            id="form-control"
+            onChange={onBtnAddFile}
+            accept="image/jpg, image/jpeg"
+          />
+          {/* <button
             onClick={() => {
               uploadFunction();
             }}
           >
             Click here
+          </button> */}
+          <button
+            onClick={() => {
+              patchPicture();
+            }}
+            className="pict-button-patch"
+          >
+            Set Profile Picture
           </button>
         </div>
       </div>

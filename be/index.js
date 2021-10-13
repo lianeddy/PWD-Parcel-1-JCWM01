@@ -10,6 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bearerToken());
 
+app.use(express.static("public"));
+
 // Contoh
 app.get("/", (req, res) => {
   res.status(200).send("<h1>Integrated mySQL and Express</h1>");
