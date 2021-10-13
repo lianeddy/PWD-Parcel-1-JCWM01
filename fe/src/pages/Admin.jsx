@@ -181,11 +181,11 @@ class Admin extends React.Component {
   };
 
   addNewProduct = () => {
-    Axios.post(`${URL_API}/product/add-product`, {
-      productName: this.state.addProductName,
+    Axios.post(`http://localhost:3300/product/add-product`, {
+      full_name: this.state.addProductName,
       price: parseInt(this.state.addPrice),
-      productImage: this.state.addProductImage,
-      description: this.state.addDescription,
+      picture: this.state.addProductImage,
+      desc: this.state.addDescription,
       category: this.state.addCategory,
     })
       .then(() => {
@@ -281,9 +281,9 @@ class Admin extends React.Component {
                       className="form-control"
                     >
                       <option value="">All Item</option>
-                      <option value="kaos">Kaos</option>
-                      <option value="celana">Celana</option>
-                      <option value="aksesoris">Aksesoris</option>
+                      <option value="choco">Choco</option>
+                      <option value="snack">Snack</option>
+                      <option value="drinks">Drinks</option>
                     </select>
                   </td>
                   <td colSpan="2">

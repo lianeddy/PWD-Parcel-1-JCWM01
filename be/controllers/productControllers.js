@@ -15,28 +15,16 @@ module.exports = {
   },
   addData: (req, res) => {
     console.log(req.body);
-    let {
-      full_name,
-      desc,
-      quantity,
-      category,
-      inventory_id,
-      picture,
-      price,
-      created_at,
-      modified_at,
-    } = req.body;
-    let insertQuery = `Insert into product values (${db.escape(id)},${db.escape(
+    let { full_name, price, picture, desc, category } = req.body;
+    let insertQuery = `Insert into product values (null, ${db.escape(
       full_name
-    )},${db.escape(desc)},${db.escape(quantity)},${db.escape(
-      category
-    )},${db.escape(inventory_id)},${db.escape(picture)},${db.escape(
-      price
-    )},${db.escape(created_at)},${db.escape(modified_at)});`;
+    )},${db.escape(desc)},null,${db.escape(category)},null,${db.escape(
+      picture
+    )},${db.escape(price)},null,null;`;
     console.log(insertQuery);
     db.query(insertQuery, (err, results) => {
       if (err) {
-        console.log(err);
+        console.log("err", err);
         res.status(500).send(err);
       }
 
@@ -47,7 +35,7 @@ module.exports = {
           res
             .status(200)
             .send({ message: "Penambahan Product Berhasil", data: results2 });
-          // res.status(200).send(results)
+          return;
         }
       );
     });
