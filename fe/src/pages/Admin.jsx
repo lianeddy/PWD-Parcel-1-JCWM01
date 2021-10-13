@@ -51,10 +51,10 @@ class Admin extends React.Component {
 
   saveBtnHandler = () => {
     Axios.patch(`${URL_API}/product/edit-product/${this.state.editId}`, {
-      productName: this.state.editProductName,
+      full_name: this.state.editProductName,
       price: parseInt(this.state.editPrice),
-      productImage: this.state.editProductImage,
-      description: this.state.editDescription,
+      picture: this.state.editProductImage,
+      desc: this.state.editDescription,
       category: this.state.editCategory,
     })
       .then(() => {
@@ -131,9 +131,9 @@ class Admin extends React.Component {
                 className="form-control"
               >
                 <option value="">All Item</option>
-                <option value="kaos">Kaos</option>
-                <option value="celana">Celana</option>
-                <option value="aksesoris">Aksesoris</option>
+                <option value="choco">Choco</option>
+                <option value="snack">Snack</option>
+                <option value="drink">Drinks</option>
               </select>
             </td>
             <td>
