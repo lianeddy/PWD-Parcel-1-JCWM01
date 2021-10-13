@@ -2,7 +2,8 @@ import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 // import "./userTransaksi.css";
-import { Table,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup,Label,Input,FormText, Button } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup,Label,Input, Button,Modal, ModalHeader, ModalBody, ModalFooter, Row, Badge } from 'reactstrap';
 
 
 
@@ -40,8 +41,52 @@ function UserTransaksi() {
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
+  
+  const [modal, setModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState("")
+
+  const toggle1 = () => setModal(!modal);
+
+     // On file select (from the pop up)
+    function onFileChange (event) {
+    
+      // Update the state
+      console.log (event.target.files[0])
+      setSelectedFile(event.target.files[0] );
+      
+    
+    };
+    
+    // On file upload (click the upload button)
+    function onFileUpload (event) {
+
+       // Create an object of formData
+       const formData = new FormData();
+    
+       // Update the formData object
+       formData.append(
+         "myFile",
+         selectedFile,
+         selectedFile.name
+       );
+     
+       // Details of the uploaded file
+       console.log(formData);
+     
+       // Request made to the backend api
+       // Send formData object
+       Axios.post("http://localhost:3302/upload-payment", formData)
+       .then(res => {
+        console.log(res.status)
+        // tambahain text : jika res.status 200 alert "berhasil" selain itu alert "upload gagal"
+
+        // update database. di payment detail img name teraimpan di database
+      })
+    };
+
   return (
     <>
+    <div className="container">
     <Dropdown isOpen={isOpen} toggle={toggle}>
       <DropdownToggle>
         Transaction Check
@@ -70,21 +115,47 @@ function UserTransaksi() {
       <DropdownItem onClick={() => user()}>All transaction</DropdownItem>
       </DropdownMenu>
       </Dropdown>,
+    
+    {transactions.map(transaction => (
+    <Row>
+    
+    <div>
+    
+      <Card>
+        <CardBody>
+          <CardTitle tag="h5">{transaction.no_order}</CardTitle>
+          <Badge color="primary">{transaction.status}</Badge>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">{transaction.created_at}</CardSubtitle>
+          <Row>
+            <div className="col-6">
+              {transaction.products}
+            </div>
+          </Row>
+          {/* if condition react */}
+          {transaction.status == 0 &&
+          <Button color="danger" onClick={toggle1}>Payment Proof</Button>
+          }
+        </CardBody>
+      </Card>
+    
+    </div>
+    </Row>
+    ))}
+
 
 
   
-  <Table dark>
+  {/* <Table dark>
   <thead>
     <tr>
       <th>Status</th>
       <th>Date</th>
-      <th>Proof Payment</th>
       <th>Order Number</th>
       <th>Parcel</th>
       <th>Quantity</th>
       <th>Parcel Price</th>
       <th>Total</th>
-      <th>Confirm Order</th>
+      <th>Action</th>
     </tr>
   </thead>
   {transactions.map(transaction => (
@@ -92,26 +163,39 @@ function UserTransaksi() {
     <tr>
       <td>{transaction.status}</td>
       <td>{transaction.created_at}</td>
-      <FormGroup>
-          <Label for="exampleFile"></Label>
-          <Input type="file" name="file" id="exampleFile" />
-      </FormGroup>
       <td>{transaction.no_order}</td>
       <td>{transaction.nama}</td>
       <td>{transaction.quantity}</td>
       <td>{transaction.harga}</td>
       <td>{transaction.total}</td>
-      <Button color="primary" size="sm">Confirm</Button>
-      <Button color="secondary" size="sm">Cancel</Button>
-      {/* <Button color="primary" size="sm">Small Button</Button>{' '}
-      <Button color="secondary" size="sm">Small Button</Button>\ */}
+      <td><Button color="danger" onClick={toggle1}>Payment Proof</Button></td>
+
     </tr>
   </tbody>
         )
       )
     };
-    </Table>
+    </Table> */}
+    </div>
+    <div>
+      
+      <Modal isOpen={modal} toggle={toggle1}>
+        <ModalHeader toggle={toggle1}>Modal title</ModalHeader>
+        <ModalBody>
+            <FormGroup>
+              <Label for="exampleFile"></Label>
+              <Input type="file" name="file" id="exampleFile" onChange={onFileChange} />
+
+            </FormGroup>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={onFileUpload}>Done</Button>
+          <Button color="secondary" onClick={toggle1}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
     </>
+    
   );
 };
 

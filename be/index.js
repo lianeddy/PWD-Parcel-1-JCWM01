@@ -5,6 +5,8 @@ const mysql = require ('mysql')
 const PORT = 3302
 const app = express()
 
+const multer = require('multer');
+
 app.use(cors())
 app.use(express.json())
 
@@ -16,6 +18,17 @@ const db = mysql.createConnection({
     port : 3306,
     multipleStatements : true
 }) 
+// multer code
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, './uploads');
+    },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
+  }
+});
+
+const uploadImg = multer({storage: storage}).single('myFile');
 
 db.connect((err) => {
     if (err) {
@@ -85,18 +98,49 @@ app.patch('/edit-user/:id', (req,res)=> {
 // })
 
 app.get("/order", (req, res) => {
-  let scriptQuery = "select od.status, od.created_at, p.nama, od.no_order, oi.quantity, p.harga, od.total from order_details as od join order_items as oi on od.id = oi.order_id join parcel as p on oi.parcel_id = p.parcel_id  ";
-  let whereQuery = `where od.user_id = ${req.query.id}`
+  let scriptQuery = "select od.status, od.created_at, GROUP_CONCAT(p.nama, ' x ', oi.quantity, ' : ', 'Rp. ', (oi.quantity * p.harga) SEPARATOR '\r\n') as products, od.no_order, oi.quantity, p.harga, sum(od.total) as total from order_details as od join order_items as oi on od.id = oi.order_id join parcel as p on oi.parcel_id = p.parcel_id";
+  let whereQuery = ` where od.user_id = ${req.query.id}`
   if (req.query.status)
     whereQuery += ` and od.status=${req.query.status}`
+    whereQuery += ` group by od.id`
   if (req.query.id) {  
     scriptQuery += whereQuery
   }
   db.query(scriptQuery, (err, results) => {
     if (err) res.status(500).send(err);
+    let item = []
     res.status(200).send(results);
+
   });
 });
+
+// upload payment
+app.post ('/upload-payment', (req, res) => {
+  uploadImg(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      res.status(201).send(err);
+    } else if (err){
+      res.status(201).send(err);
+    }
+
+    res.status(200).send('File Uploaded')
+  })
+  
+  
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Middleware
 const { userRouters } = require("./routers/index");
 app.use("/user", userRouters);
