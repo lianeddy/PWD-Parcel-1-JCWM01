@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 // import "./userTransaksi.css";
-import { Table,Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Table,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup,Label,Input,FormText, Button } from 'reactstrap';
 
 
 
@@ -78,11 +78,13 @@ function UserTransaksi() {
     <tr>
       <th>Status</th>
       <th>Date</th>
+      <th>Proof Payment</th>
       <th>Order Number</th>
       <th>Parcel</th>
       <th>Quantity</th>
       <th>Parcel Price</th>
       <th>Total</th>
+      <th>Confirm Order</th>
     </tr>
   </thead>
   {transactions.map(transaction => (
@@ -90,11 +92,19 @@ function UserTransaksi() {
     <tr>
       <td>{transaction.status}</td>
       <td>{transaction.created_at}</td>
+      <FormGroup>
+          <Label for="exampleFile"></Label>
+          <Input type="file" name="file" id="exampleFile" />
+      </FormGroup>
       <td>{transaction.no_order}</td>
       <td>{transaction.nama}</td>
       <td>{transaction.quantity}</td>
       <td>{transaction.harga}</td>
       <td>{transaction.total}</td>
+      <Button color="primary" size="sm">Confirm</Button>
+      <Button color="secondary" size="sm">Cancel</Button>
+      {/* <Button color="primary" size="sm">Small Button</Button>{' '}
+      <Button color="secondary" size="sm">Small Button</Button>\ */}
     </tr>
   </tbody>
         )
