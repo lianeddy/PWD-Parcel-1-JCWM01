@@ -1,14 +1,6 @@
 import Axios from "axios";
 import { URL_API } from "../../helper";
 
-// export const authLogin = (data) => {
-//   console.log("Data masuk Action dari component :", data);
-//   return {
-//     type: "USER_LOGIN",
-//     payload: data,
-//   };
-// };
-
 export const forgotUser = () => {};
 
 export const loginUser = ({ email, password }) => {
@@ -23,17 +15,18 @@ export const loginUser = ({ email, password }) => {
           if (res.password === res.data.password) {
             //delete res.data.password;
             console.log("userDataEmmerce", res.data);
-            localStorage.setItem("userDataEmmerce", res.data.dataLogin);
+            // localStorage.setItem("userDataEmmerce", res.data.dataLogin);
             // menjalankan fungsi action
             // this.authLogin(res.data.dataLogin);
             // this.setState({ redirect: true });
             console.log("Login Suksess ✔");
             // this.inUsername.value = "";
             // this.inPass.value = "";
-            /* localStorage.setItem(
-              "userDataEmmerce",
-              JSON.stringify(result.data[0])
-            );*/
+            // localStorage.setItem(
+            //   "userDataEmmerce",
+            //   JSON.stringify(result.data[0])
+            // );
+            localStorage.setItem("token", res.data.token);
 
             dispatch({
               type: "USER_LOGIN",
@@ -66,56 +59,21 @@ export const logoutUser = () => {
   };
 };
 
-// mentoring external
-//  export const userKeepLogin = () => {
-//   let userData = {};
-//   return (dispatch) => {
-//     userData["id"] = 2;
-//     Axios.get(`${URL_API}/users/get`, {
-//       params: {
-//         id: userData.id,
-//       },
-//     })
-//       .then((result) => {
-//         delete result.data[0].password;
-//         console.log("resul.data[0]", result.data);
-//         let user = result.data.filter((e) => e.id === userData.id)[0];
-//         console.log("user", user);
-//         console.log("user.data.id", userData.id);
-
-//         localStorage.setItem("userDataEmmerce", JSON.stringify(user));
-//         dispatch({
-//           type: "USER_LOGIN",
-//           payload: user,
-//         });
-//       })
-//       .catch(() => {
-//         alert(`Terjadi kesalahan di server`);
-//       });
-//   };
-// };
-
-export const userKeepLogin = (userData) => {
-  console.log("cekuser", userData);
+export const keepLogin = (token) => {
   return (dispatch) => {
-    Axios.get(`${URL_API}/users/get`, {
-      params: {
-        id: userData.id,
+    Axios.get(`${URL_API}/users/keeplogin`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     })
-      .then((result) => {
-        console.log("result", result);
-        delete result.data[0].password;
-        localStorage.setItem("userDataEmmerce", JSON.stringify(result.data[0]));
-        console.log("userData", result.data[0]);
+      .then((res) => {
         dispatch({
           type: "USER_LOGIN",
-          payload: result.data[0],
+          payload: res.data[0],
         });
-        console.log("user_login", result.data[0]);
       })
-      .catch(() => {
-        alert(`Terjadi kesalahan di server`);
+      .catch((err) => {
+        console.log(err);
       });
   };
 };

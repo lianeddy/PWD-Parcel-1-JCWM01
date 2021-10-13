@@ -48,4 +48,15 @@ module.exports = {
     //     res.status(200).send({ message: "You not admin, can't access data" })
     // }
   },
+  keepLogin: (req, res) => {
+    console.log(req.user, "hasil decode");
+    let scriptQuery = `select * from users where id = ${db.escape(
+      req.user.id
+    )}`;
+    db.query(scriptQuery, (err, results) => {
+      if (err) return res.status(500).send(err);
+
+      return res.status(200).send(results);
+    });
+  },
 };
