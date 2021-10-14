@@ -14,6 +14,7 @@ function UserTransaksi() {
   
   let history = useHistory();
   let id = 1
+  
   const user = async (status) => {
     console.log(typeof status !== 'undefined');
     let url = ""
@@ -45,9 +46,15 @@ function UserTransaksi() {
 
   
   const [modal, setModal] = useState(false);
+  const [current_order_detail_id, setOrderDetailId] = useState(0)
   const [selectedFile, setSelectedFile] = useState("")
 
-  const toggle1 = () => setModal(!modal);
+  const toggle1 = (order_detail_id) => {
+    
+    setOrderDetailId(order_detail_id)  
+    setModal(!modal);
+  }
+  const toggle2 = () => setModal(!modal)
 
      // On file select (from the pop up)
     function onFileChange (event) {
@@ -69,9 +76,13 @@ function UserTransaksi() {
        formData.append(
          "myFile",
          selectedFile,
-         selectedFile.name
+         selectedFile.name,
        );
-     
+      
+       formData.append (
+        'orderDetailId', current_order_detail_id
+       )
+        
        // Details of the uploaded file
        console.log(formData);
      
@@ -87,8 +98,12 @@ function UserTransaksi() {
 
         // update database. di payment detail img name teraimpan di database
       })
+      setModal(!modal);
     };
-
+    function modalEnter  ()  {
+      console.log('ss')
+      console.log(current_order_detail_id)
+    }
   return (
     <>
     <div className="container">
@@ -138,7 +153,7 @@ function UserTransaksi() {
           </Row>
           {/* if condition react */}
           {transaction.status == 0 &&
-          <Button color="danger" onClick={toggle1}>Payment Proof</Button>
+          <Button color="danger" onClick={()=>toggle1((transaction.order_detail_id))} >Payment Proof</Button>
           }
         </CardBody>
       </Card>
@@ -184,7 +199,7 @@ function UserTransaksi() {
     </div>
     <div>
       
-      <Modal isOpen={modal} toggle={toggle1}>
+      <Modal isOpen={modal} onEnter={modalEnter} >
         <ModalHeader toggle={toggle1}>Modal title</ModalHeader>
         <ModalBody>
             <FormGroup>
@@ -195,7 +210,7 @@ function UserTransaksi() {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={onFileUpload}>Done</Button>
-          <Button color="secondary" onClick={toggle1}>Cancel</Button>
+          <Button color="secondary" onClick={toggle2}>Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>
