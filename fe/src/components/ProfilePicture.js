@@ -2,16 +2,20 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./ProfilePicture.css";
 
-function ProfilePicture() {
+function ProfilePicture(req) {
   const [filePict, setFilePict] = useState({});
 
   const id = 105;
+  console.log("test");
+  console.log(req);
+  console.log(req.computedMatch.params);
 
   useEffect(() => {
     getAlbum();
   }, []);
 
   const getAlbum = () => {
+    console.log("getAlbum");
     Axios.get(`http://localhost:3302/album/getuserphoto?id=${id}`)
       .then((res) => {
         console.log("axios get berhasil");

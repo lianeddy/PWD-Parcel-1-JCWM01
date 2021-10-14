@@ -68,11 +68,10 @@ module.exports = {
 
       upload(req, res, (err) => {
         if (err) {
-          // console.log(err);
+          console.log(err);
           res.status(500).send(err);
         }
 
-        // console.log(req);
         console.log("req, file", req.files.file);
 
         const { file } = req.files;
@@ -85,15 +84,33 @@ module.exports = {
 
         let sqlInsert = `UPDATE user SET profile_pic = ${db.escape(
           filepath
-        )} WHERE id = 105`;
+        )} WHERE id =105`;
+        // ${req.params.id}
 
-        db.query(sqlInsert, (err, result) => {
+        // get OLD path
+        const getQuery = "SELECT profile_pic from user where id = 105;";
+        db.query(getQuery, (err, results) => {
           if (err) {
-            console.log(err);
+            console.log("error getQuery");
             fs.unlinkSync("./public" + filepath);
             res.status(500).send(err);
           }
+          console.log("getQuery success");
+          // Update NEW IMAGE PATH
+          db.query(sqlInsert, (err, result) => {
+            if (err) {
+              console.log("error sqlInsert");
+              fs.unlinkSync("./public" + filepath);
+              res.status(500).send(err);
+            }
+            console.log("out sqlInsert");
+          });
 
+          console.log(results[0].profile_pic);
+          let oldPath = "./public" + results[0].profile_pic;
+          console.log(oldPath);
+          // Delete OLD PATH in PUBLIC
+          fs.unlinkSync("./public" + results[0].profile_pic);
           res.status(200).send({ message: "Upload file success" });
         });
       });
