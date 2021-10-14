@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import EditProfile from "./components/EditProfile";
 import userProfile from "./components/userProfile";
 import UserTransaksi from "./components/UserTransaksi";
-import UserPayment from "./components/UserPayment";
+
 // commect
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Route path="/profile" component={userProfile} />
         <Route path="/edit" component={EditProfile} />
         <Route path="/UserTransaksi" component={UserTransaksi} />
-        <Route path="/UserPayment" component={UserPayment} />
+       
 
 
       </Router>

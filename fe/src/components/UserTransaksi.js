@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import "./userTransaksi.css";
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup,Label,Input, Button,Modal, ModalHeader, ModalBody, ModalFooter, Row, Badge } from 'reactstrap';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -11,6 +12,7 @@ function UserTransaksi() {
   const [transactions, setUserTransaksi] = useState([]);
   const [userData] = useState({});
   
+  let history = useHistory();
   let id = 1
   const user = async (status) => {
     console.log(typeof status !== 'undefined');
@@ -78,6 +80,9 @@ function UserTransaksi() {
        Axios.post("http://localhost:3302/upload-payment", formData)
        .then(res => {
         console.log(res.status)
+        alert ("Upload Success")
+        history.push("/UserTransaksi") ;
+        
         // tambahain text : jika res.status 200 alert "berhasil" selain itu alert "upload gagal"
 
         // update database. di payment detail img name teraimpan di database
