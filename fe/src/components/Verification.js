@@ -34,7 +34,8 @@ function Verification(props) {
           messagePlus: "You will be redirected to landing page...",
         });
         setTimeout(() => {
-          history.push("/register");
+          // redirect ke login
+          history.push("/");
         }, 3000);
       })
       .catch((err) => {
@@ -42,6 +43,7 @@ function Verification(props) {
         console.log("error cuy");
         setVerifyState({ message: "Failed to Verified Account" });
       });
+    // eslint-disable-next-line
   }, []);
 
   return (

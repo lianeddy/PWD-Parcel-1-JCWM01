@@ -6,6 +6,8 @@ import RegisterPage from "./pages/RegisterPage";
 import RegisterDonePage from "./pages/RegisterDonePage";
 import LandingPage from "./pages/LandingPage";
 import VerificationPage from "./pages/VerificationPage";
+import ProfilePicture from "./components/ProfilePicture";
+import AdminSalesReport from "./pages/AdminSalesReport";
 
 import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
@@ -58,6 +60,12 @@ class App extends React.Component {
             path="/authentication/:token"
             exact
             component={VerificationPage}
+          />
+          <ProfilePicture path="/profile" exact component={ProfilePicture} />
+          <AdminSalesReport
+            path="/admin/salesreport"
+            exact
+            component={AdminSalesReport}
           />
         </Switch>
       </BrowserRouter>

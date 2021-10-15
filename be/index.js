@@ -3,6 +3,7 @@ const cors = require("cors");
 const mysql = require("mysql");
 const bearerToken = require("express-bearer-token");
 const { userRouters } = require("./routers");
+const { db } = require("./database");
 
 const PORT = 3302;
 const app = express();
@@ -101,15 +102,37 @@ app.patch("/edit-user/:id", (req, res) => {
   });
 });
 
-// app.delete('/delete-user/: iduser', (req, res) => {
-//     let deleteQuery = `DELETE from user where id user = ${db.escape(req.params.iduser)};`
+app.get("/album/profile", (req, res) => {
+  db.query("Select * from user where id=100", (err, results) => {
+    if (err) res.status(500).send(err);
+    res.status(200).send(results);
+  });
+});
 
-//     db.query(deleteQuery, (err, result) => {
-//         if (err) res.status(500).send(err)
-//         res.status(200).send(results)
-//     })
-// })
+app.patch("/album/editpict", (req, res) => {
+  db.query(
+    'UPDATE user SET profile_pic = "test" WHERE id = 3',
+    (err, results) => {
+      console.log("masuk");
+      console.log(err);
+      if (err) {
+        console.log("gagal");
+        res.status(500).send(err);
+      }
+      console.log("berhasil");
+      res.status(200).send(results);
+    }
+  );
+});
 
-app.use("/users", userRouters);
+app.post("/testone", (req, res) => {
+  console.log("hey");
+});
+// Contoh end
+
+// Middleware
+const { userRouters, uploadRouter } = require("./routers/index");
+app.use("/user", userRouters);
+app.use("/album", uploadRouter);
 
 app.listen(PORT, () => console.log("Api Running :", PORT));
