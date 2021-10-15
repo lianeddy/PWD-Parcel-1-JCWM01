@@ -4,7 +4,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "mysql123",
-  database: "temporary_parcel",
+  database: "parcel_2",
   port: 3306,
   multipleStatements: true,
 });

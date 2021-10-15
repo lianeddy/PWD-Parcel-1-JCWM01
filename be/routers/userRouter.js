@@ -4,6 +4,7 @@ const { auth } = require("../helper/authToken");
 const routers = express.Router();
 
 routers.get("/getuser", userControllers.getUser);
+routers.get("/checkemail", userControllers.checkEmail);
 routers.post("/registeruser", userControllers.registerUser);
 // routers.patch("/verified", userControllers.verification);
 routers.patch("/verified", auth, userControllers.verification);

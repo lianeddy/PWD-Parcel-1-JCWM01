@@ -17,6 +17,17 @@ module.exports = {
       res.status(200).send(results);
     });
   },
+  checkEmail: (req, res) => {
+    console.log(req.query);
+    console.log(req.query.email);
+    let scriptQuery = `Select * from user where email=${db.escape(
+      req.query.email
+    )};`;
+    db.query(scriptQuery, (err, results) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(results);
+    });
+  },
   registerUser: async (req, res) => {
     // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
     const { full_name, email, password } = req.body;

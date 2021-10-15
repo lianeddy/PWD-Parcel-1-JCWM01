@@ -8,8 +8,25 @@ function Register() {
   const [userData, setUserData] = useState({});
   const [privacy, setPrivacy] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMessage, setIsMessage] = useState("");
+  const [isMessagePass, setIsMessagePass] = useState("");
 
   let history = useHistory();
+
+  const checkEmail = () => {
+    Axios.get(`http://localhost:3302/user/checkemail?email=${userData.email}`)
+      .then((res) => {
+        if (Boolean(res.data[0])) {
+        }
+        console.log(res.data);
+        console.log(Boolean(res.data[0]));
+        console.log("check email berhasil");
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("check email gagal");
+      });
+  };
 
   const register = () => {
     console.log(!userData.email);
@@ -18,16 +35,48 @@ function Register() {
     console.log(!privacy);
     setIsLoading(true);
 
-    console.log(userData);
-    Axios.post(`http://localhost:3302/user/registeruser`, userData)
+    console.log(userData, "userData");
+    Axios.get(`http://localhost:3302/user/checkemail?email=${userData.email}`)
       .then((res) => {
-        console.log(res.data);
-        console.log("register done");
-        setIsLoading(false);
-        // conditial rendering
-        history.push("/registerdone");
+        console.log(userData.email);
+        console.log(Boolean(res.data[0]) + "a  truuue");
+        console.log(userData.password.length);
+        if (!Boolean(res.data[0]) && userData.password.length >= 8) {
+          console.log(res.data);
+          console.log("check email berhasil");
+          Axios.post(`http://localhost:3302/user/registeruser`, userData)
+            .then((res) => {
+              console.log(res.data);
+              console.log("register done");
+              // setIsLoading(false);
+              // conditial rendering
+              history.push("/registerdone");
+            })
+            .catch((err) => console.log(err));
+        } else if (
+          !Boolean(res.data[0]) == true &&
+          userData.password.length <= 8
+        ) {
+          setIsLoading(false);
+          setIsMessage("");
+          setIsMessagePass("Password minimal 8 variable.");
+        } else if (
+          !Boolean(res.data[0]) == false &&
+          userData.password.length >= 8
+        ) {
+          setIsLoading(false);
+          setIsMessage("Email already used.");
+          setIsMessagePass("");
+        } else {
+          setIsLoading(false);
+          setIsMessage("Email already used.");
+          setIsMessagePass("Password minimal 8 variable.");
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        console.log("check email gagal");
+      });
   };
 
   const checkboxPrivacy = () => {
@@ -89,8 +138,13 @@ function Register() {
                     placeholder="name@email.com"
                     onChange={(e) => {
                       setUserData({ ...userData, email: e.target.value });
+                      setIsMessagePass("");
+                      setIsMessage("");
                     }}
                   />
+                  <p className="message-email">
+                    {isMessage ? isMessage : null}
+                  </p>
                 </label>
                 <label>
                   <h2 className="reg-input-text">Password</h2>
@@ -100,8 +154,13 @@ function Register() {
                     placeholder="at least 8 character"
                     onChange={(e) => {
                       setUserData({ ...userData, password: e.target.value });
+                      setIsMessagePass("");
+                      setIsMessage("");
                     }}
                   />
+                  <p className="message-pass">
+                    {isMessagePass ? isMessagePass : null}
+                  </p>
                 </label>
                 <label className="reg-privacy">
                   <input
@@ -128,10 +187,19 @@ function Register() {
                   //   !privacy
                   // }
                   disabled={
+                    // normalnya
+                    // userData.email = false, isLoading = false
+                    //      Jadi disabled = false (ga bsa di click)
+                    // begitu terisi semua data, dan di click isLoading() jalan = true
+                    //      Jadi disabled nya 4true = bisa diclick, begitu diclick sekali setIsLoading = true
+                    // conditionnya jika 3true 1false MAKA true
+                    // conditionnya jika 1true 3false MAKA true
+                    // conditionnya jika 4false MAKA false
                     !userData.email ||
                     !userData.password ||
                     !userData.full_name ||
-                    !privacy
+                    !privacy ||
+                    isLoading
                   }
                   onClick={() => {
                     register();
