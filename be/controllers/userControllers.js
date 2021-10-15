@@ -30,7 +30,8 @@ module.exports = {
         } else {
           return res
             .status(200)
-            .send({ dataLogin: results[0], token, message: "Login Success" });
+            .send({ dataLogin: results[0], token, message: "Login Success", pw : req.body.password  });
+
         }
       }
     });
@@ -53,8 +54,7 @@ module.exports = {
     let scriptQuery = `select * from user where id = ${db.escape(
       req.user.id
     )}`;
-    db.query(scriptQuery, (err, results) 
-    => {
+    db.query(scriptQuery, (err, results) => {
       if (err) return res.status(500).send(err);
 
       return res.status(200).send(results);
