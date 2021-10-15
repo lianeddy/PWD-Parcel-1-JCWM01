@@ -18,18 +18,16 @@ import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/userProfile";
 
 import { connect } from "react-redux";
-import { keepLogin, checkStorage } from "./redux/actions/user";
+import { userKeepLogin, checkStorage } from "./redux/actions/user";
 import { getCartData } from "./redux/actions/cart";
 
 class App extends React.Component {
   componentDidMount() {
-    const userLocalStorage = localStorage.getItem("token");
+    const userLocalStorage = localStorage.getItem("userDataEmmerce");
     if (userLocalStorage) {
       const userData = userLocalStorage;
-      // this.props.userKeepLogin(userData);
+      this.props.userKeepLogin(userData);
       //this.props.getCartData(userData.id);
-      this.props.keepLogin(userData);
-      this.props.getCartData(userData.id);
     } else {
       this.props.checkStorage();
     }
@@ -75,7 +73,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  keepLogin,
+  userKeepLogin,
   checkStorage,
   //getCartData,
 };

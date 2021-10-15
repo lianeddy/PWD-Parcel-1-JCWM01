@@ -22,12 +22,10 @@ export const loginUser = ({ email, password }) => {
           console.log(res.data);
           if (res.password === res.data.password) {
             //delete res.data.password;
-            //localStorage.setItem("userDataEmmerce", res.data.dataLogin);
+            localStorage.setItem("userDataEmmerce", res.data.dataLogin);
             // menjalankan fungsi action
             // this.authLogin(res.data.dataLogin);
             // this.setState({ redirect: true });
-            localStorage.setItem("token", res.data.token);
-
             console.log("Login Suksess ✔");
             // this.inUsername.value = "";
             // this.inPass.value = "";
@@ -67,42 +65,23 @@ export const logoutUser = () => {
   };
 };
 
-// export const userKeepLogin = (userData) => {
-//   return (dispatch) => {
-//     Axios.get(`${URL_API}/users/get`, {
-//       params: {
-//         id: userData.id,
-//       },
-//     })
-//       .then((result) => {
-//         delete result.data[0].password;
-//         localStorage.setItem("userDataEmmerce", JSON.stringify(result.data[0]));
-//         dispatch({
-//           type: "USER_LOGIN",
-//           payload: result.data[0],
-//         });
-//       })
-//       .catch(() => {
-//         alert(`Terjadi kesalahan di server`);
-//       });
-//   };
-// };
-
-export const keepLogin = (token) => {
+export const userKeepLogin = (userData) => {
   return (dispatch) => {
-    Axios.get(`${URL_API}/users/keeplogin`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    Axios.get(`${URL_API}/users/get`, {
+      params: {
+        id: userData.id,
       },
     })
-      .then((res) => {
+      .then((result) => {
+        delete result.data[0].password;
+        localStorage.setItem("userDataEmmerce", JSON.stringify(result.data[0]));
         dispatch({
           type: "USER_LOGIN",
-          payload: res.data[0],
+          payload: result.data[0],
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        alert(`Terjadi kesalahan di server`);
       });
   };
 };
