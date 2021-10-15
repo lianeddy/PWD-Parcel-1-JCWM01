@@ -68,43 +68,22 @@ export const logoutUser = () => {
 export const userKeepLogin = (userData) => {
   return (dispatch) => {
     Axios.get(`${URL_API}/users/get`, {
-      params: {
-        id: userData.id,
-      },
+      id: userData.id,
     })
-      .then((result) => {
-        delete result.data[0].password;
-        localStorage.setItem("userDataEmmerce", JSON.stringify(result.data[0]));
+      .then((res) => {
+        //delete res.data[0].password;
+        localStorage.setItem("userDataEmmerce", res.data.dataLogin);
+
         dispatch({
           type: "USER_LOGIN",
-          payload: result.data[0],
+          payload: res.data.dataLogin,
         });
       })
       .catch(() => {
-        alert(`Terjadi kesalahan di server`);
+        alert("Terjadi kesalahan server");
       });
   };
 };
-
-// export const userKeepLogin = (userData) => {
-//   return (dispatch) => {
-//     Axios.get(`${URL_API}/users/get`, {
-//       id: userData.id,
-//     })
-//       .then((res) => {
-//         //delete res.data[0].password;
-//         localStorage.setItem("userDataEmmerce", res.data.dataLogin);
-
-//         dispatch({
-//           type: "USER_LOGIN",
-//           payload: res.data.dataLogin,
-//         });
-//       })
-//       .catch(() => {
-//         alert("Terjadi kesalahan server");
-//       });
-//   };
-// };
 
 export const checkStorage = () => {
   return {
