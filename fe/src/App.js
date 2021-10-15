@@ -10,6 +10,9 @@ import VerificationPage from "./pages/VerificationPage";
 import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+
+import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
 import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/userProfile";
@@ -23,7 +26,7 @@ class App extends React.Component {
     const userLocalStorage = localStorage.getItem("userDataEmmerce");
     if (userLocalStorage) {
       const userData = userLocalStorage;
-      //this.props.userKeepLogin(userData);
+      this.props.userKeepLogin(userData);
       //this.props.getCartData(userData.id);
     } else {
       this.props.checkStorage();
@@ -42,6 +45,8 @@ class App extends React.Component {
           <RegisterPage path="/register" exact component={RegisterPage} />
           <Route path="/profile" component={UserProfile} />
           <Route path="/edit" component={EditProfile} />
+          <Route component={Admin} path="/admin" />
+          <Route component={ProductDetail} path="/product-detail/:id" />
           <RegisterDonePage
             path="/registerdone"
             exact
@@ -70,7 +75,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   userKeepLogin,
   checkStorage,
-  getCartData,
+  //getCartData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
