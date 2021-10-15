@@ -6,6 +6,7 @@ import RegisterDonePage from "./pages/RegisterDonePage";
 import LandingPage from "./pages/LandingPage";
 import VerificationPage from "./pages/VerificationPage";
 import ProfilePicture from "./components/ProfilePicture";
+import AdminSalesReport from "./pages/AdminSalesReport";
 
 function App() {
   return (
@@ -26,6 +27,11 @@ function App() {
             component={VerificationPage}
           />
           <ProfilePicture path="/profile" exact component={ProfilePicture} />
+          <AdminSalesReport
+            path="/admin/salesreport"
+            exact
+            component={AdminSalesReport}
+          />
         </Switch>
       </Router>
     </>
