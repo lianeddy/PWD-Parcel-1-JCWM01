@@ -20,7 +20,7 @@ module.exports = {
       full_name
     )},${db.escape(desc)},null,${db.escape(category)},null,${db.escape(
       picture
-    )},${db.escape(price)},null,null,null;`;
+    )},${db.escape(price)},null,null,null;)`;
     console.log(insertQuery);
     db.query(insertQuery, (err, results) => {
       if (err) {

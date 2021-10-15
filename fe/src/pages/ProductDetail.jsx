@@ -13,7 +13,7 @@ class ProductDetail extends React.Component {
   };
 
   fetchProductData = () => {
-    Axios.get(`http://localhost:3300/product/get`, {
+    Axios.get(`${URL_API}/product/get`, {
       params: {
         id: this.props.match.params.id,
       },
@@ -21,11 +21,9 @@ class ProductDetail extends React.Component {
       .then((result) => {
         console.log("result", result);
         if (result.data.length) {
-          console.log("length", result.data.length);
           this.setState({
             productData: result.data[this.props.match.params.id - 1],
           });
-          console.log("productData", result.data[0]);
         } else {
           this.setState({ productNotFound: true });
         }
