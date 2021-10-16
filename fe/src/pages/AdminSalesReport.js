@@ -1,6 +1,7 @@
 import React from "react";
-import SalesReport from "../components/SalesReport";
-import Sidebar from "../components/Sidebar";
+import SalesReport from "../components/adminComponents/SalesReport";
+import Sidebar from "../components/adminComponents/Sidebar";
+import Home from "./adminPage/Home";
 
 function AdminSalesReport() {
   return (
@@ -8,7 +9,7 @@ function AdminSalesReport() {
       {/* <SalesReport /> */}
       <div className="container" style={{ display: "flex" }}>
         <Sidebar />
-        <div style={{ flex: "4" }}>other page</div>
+        <Home />
       </div>
     </>
   );
