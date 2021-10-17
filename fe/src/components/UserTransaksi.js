@@ -162,40 +162,6 @@ function UserTransaksi() {
     </Row>
     ))}
 
-
-
-  
-  {/* <Table dark>
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Date</th>
-      <th>Order Number</th>
-      <th>Parcel</th>
-      <th>Quantity</th>
-      <th>Parcel Price</th>
-      <th>Total</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  {transactions.map(transaction => (
-  <tbody>
-    <tr>
-      <td>{transaction.status}</td>
-      <td>{transaction.created_at}</td>
-      <td>{transaction.no_order}</td>
-      <td>{transaction.nama}</td>
-      <td>{transaction.quantity}</td>
-      <td>{transaction.harga}</td>
-      <td>{transaction.total}</td>
-      <td><Button color="danger" onClick={toggle1}>Payment Proof</Button></td>
-
-    </tr>
-  </tbody>
-        )
-      )
-    };
-    </Table> */}
     </div>
     <div>
       
@@ -219,77 +185,7 @@ function UserTransaksi() {
   );
 };
 
-  // FOR ADMIN CHECKING USER
-  // const get = () => {
-  //   Axios.get("http://localhost:3302/user/getuser")
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   
-    // <>
-    // <div className="container">
-    //   <div className="row">
-    // {transactions.map(transaction => (
-    //   <div className="card">
-    //     <div className="card-body">
-    //       <div className="row">
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="status">Status</h2>
-    //             <p>{transaction.status}</p>
-    //           </label>
-    //         </div>
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="date">Date</h2>
-    //             <p>{transaction.created_at}</p>
-    //           </label>
-    //         </div>
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="parcel">Order Number</h2>
-    //             <p>{transaction.no_order}</p>
-    //           </label>
-    //         </div>
-    //       </div>
-    //       <div className="row">
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="data">Parcel</h2>
-    //             <p>{transaction.nama}</p>
-    //           </label>
-    //         </div>
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="data">Quantity</h2>
-    //             <p>{transaction.quantity}</p>
-    //           </label>
-    //         </div>
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="data">Parcel Price</h2>
-    //             <p>{transaction.harga}</p>
-    //           </label>
-    //         </div>
-    //         <div className="col">
-    //           <label>
-    //             <h2 className="data">Total</h2>
-    //             <p>{transaction.total}</p>
-    //           </label>
-    //         </div>
-    //       </div>
-    //     </div>
-    //     <div className="content-side"></div>
-    //   </div>
-      
-    // ))}
-    // </div>
-    // </div>
-      
-    // </>
 
 
 export default UserTransaksi;
