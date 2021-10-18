@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.css";
 
 import RegisterPage from "./pages/RegisterPage";
@@ -35,13 +35,16 @@ class App extends React.Component {
 
   render() {
     // if (this.props.userGlobal.storageIsChecked) {
+    const user = true;
     return (
       <BrowserRouter>
         <MyNavbar />
         <Switch>
-          <Route component={Login} path="/login" />
+          <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+          <Route path="/register">
+            {user ? <Redirect to="/" /> : <RegisterPage />}
+          </Route>
           <Route component={Forgot} path="/forgot" />
-          <RegisterPage path="/register" exact component={RegisterPage} />
           <Route path="/profile" component={UserProfile} />
           <Route path="/edit" component={EditProfile} />
           <RegisterDonePage
