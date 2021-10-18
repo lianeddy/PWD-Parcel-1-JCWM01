@@ -10,6 +10,7 @@ import MyNavbar from "./components/MyNavbar";
 import { connect } from "react-redux";
 import { keepLogin, checkStorage } from "./redux/actions/user";
 import { getCartData } from "./redux/actions/cart";
+import Admin from "./pages/Admin";
 
 class App extends React.Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends React.Component {
             <Route component={Login} path="/login" />
             <Route component={Forgot} path="/forgot" />
             <Route component={Home} path="/" />
+            <Route component={Admin} path="/admin" />
           </Switch>
         </BrowserRouter>
       );
