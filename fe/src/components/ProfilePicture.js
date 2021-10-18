@@ -5,7 +5,7 @@ import "./ProfilePicture.css";
 function ProfilePicture(req) {
   const [filePict, setFilePict] = useState({});
 
-  const id = 105;
+  const id = 12;
   console.log("test");
   console.log(req);
   console.log(req.computedMatch.params);

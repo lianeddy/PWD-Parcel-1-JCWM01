@@ -34,7 +34,6 @@
 }
 
 .sidebar-list-item {
-  padding: 10px 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -46,8 +45,28 @@
   background-color: rgb(240, 240, 255);
 }
 
-.fas,
+.fas {
+  margin-right: 10px;
+  font-size: 20px;
+  flex: 1;
+}
+
 .fa {
   margin-right: 10px;
   font-size: 20px;
+  flex: 1;
+}
+
+.side-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-decoration: none;
+  color: #555;
+  padding: 10px 10px;
+  width: 100%;
+}
+
+.side-link-text {
+  flex: 6;
 }

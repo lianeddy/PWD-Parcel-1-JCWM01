@@ -84,11 +84,11 @@ module.exports = {
 
         let sqlInsert = `UPDATE user SET profile_pic = ${db.escape(
           filepath
-        )} WHERE id =105`;
+        )} WHERE id = 12`;
         // ${req.params.id}
 
         // get OLD path
-        const getQuery = "SELECT profile_pic from user where id = 105;";
+        const getQuery = "SELECT profile_pic from user where id = 12;";
         db.query(getQuery, (err, results) => {
           if (err) {
             console.log("error getQuery");
@@ -106,9 +106,9 @@ module.exports = {
             console.log("out sqlInsert");
           });
 
-          console.log(results[0].profile_pic);
+          console.log("profile picture ", results[0].profile_pic);
           let oldPath = "./public" + results[0].profile_pic;
-          console.log(oldPath);
+          console.log("[old path] ", oldPath);
           // Delete OLD PATH in PUBLIC
           fs.unlinkSync("./public" + results[0].profile_pic);
           res.status(200).send({ message: "Upload file success" });

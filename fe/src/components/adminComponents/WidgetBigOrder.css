@@ -1,0 +1,74 @@
+.widget-large {
+  flex: 2;
+  box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  padding: 20px;
+}
+
+.wid-button {
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #fff;
+}
+
+.wid-large-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.wid-lg-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.wid-lg-buttondone {
+  padding: 5px 7px;
+  border: none;
+  border-radius: 10px;
+  background: #e5faf2;
+  color: #3bb077;
+}
+
+.wid-lg-buttonDeclined {
+  padding: 5px 7px;
+  border: none;
+  border-radius: 10px;
+  background: #fff0f1;
+  color: #d95087;
+}
+
+.wid-lg-buttonPending {
+  padding: 5px 7px;
+  border: none;
+  border-radius: 10px;
+  background: #ebf1fe;
+  color: #2a7ade;
+}
+
+.wid-lg-table {
+  width: 100%;
+  border-spacing: 20px;
+  /* display: flex; */
+}
+
+.wid-lg-th {
+  text-align: left;
+  font-weight: 800;
+}
+
+.wid-lg-user {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.wid-lg-date,
+.wid-lg-amount {
+  font-weight: 300;
+}

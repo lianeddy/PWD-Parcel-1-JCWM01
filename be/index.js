@@ -78,11 +78,42 @@ app.patch("/album/editpict", (req, res) => {
 app.post("/testone", (req, res) => {
   console.log("hey");
 });
+
+app.post("/testpostproduk", (req, res) => {
+  console.log(new Date());
+  const d = new Date();
+  // console.log(d.getFullYear());
+  // console.log(d.getMonth() + 1);
+  // console.log(d.getDay());
+  // console.log(d.getHours());
+  // console.log(d.getMinutes());
+  // console.log(d.getSeconds());
+  const sqlDate = `${d.getFullYear()}-${
+    d.getMonth() + 1
+  }-${d.getDay()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+  console.log(typeof sqlDate);
+  console.log(sqlDate);
+  let postQuery = `INSERT INTO product (p_name, notes, category_id, admin_price, selling_price, stock,created_at) values ("beng","test",2,2000,3000,10, ${db.escape(
+    sqlDate
+  )});`;
+
+  db.query(postQuery, (err, results) => {
+    console.log("post query done");
+    if (err) {
+      console.log("error gagal");
+      res.status(500).send(err);
+    }
+    console.log("post query berhasil");
+    res.status(200).send(results);
+  });
+});
+
 // Contoh end
 
 // Middleware
-const { userRouters, uploadRouter } = require("./routers/index");
+const { userRouters, uploadRouter, adminRouter } = require("./routers/index");
 app.use("/user", userRouters);
 app.use("/album", uploadRouter);
+app.use("/admin", adminRouter);
 
 app.listen(PORT, () => console.log(`API Running at Port : ${PORT}`));
