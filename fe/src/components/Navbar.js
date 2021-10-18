@@ -1,121 +1,90 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import {
+  Navbar,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  NavbarBrand,
+  NavbarText,
+  DropdownMenu,
+  DropdownItem,
+  Nav,
+} from "reactstrap";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import UpperText from "./UpperText";
 
-function Navbar() {
-  const [click, setClick] = useState(true);
-
-  const clickHandler = () => {
-    setClick(!click);
-    console.log(click);
-  };
-
-  const revertNavMenu = () => {
-    if ((window.innerWidth < 959) & (window.innerWidth > 960)) {
-      setClick(true);
-    }
-  };
-
-  useEffect(() => {
-    revertNavMenu();
-  }, []);
-
-  window.addEventListener("resize", revertNavMenu);
-
+function MyNavbar() {
   return (
-    <>
-      <UpperText />
-      <nav className="navbar">
-        <div className="navbar-container">
-          {/* grey holder skin - when hamburger menu active */}
-          <div
-            className={click ? "none" : "grey-holder"}
-            onClick={click ? "" : clickHandler}
-          ></div>
-          <div className="navbar-logoArea">
-            <Link className="nav-logo" to="/">
-              <div className="nav-logo-brand">
-                <p className="fontBig fw-500 spacing5 font-nunito">NIKKEN</p>
-                <p className="fontSmall fw-700 spacing2 pl-2 font-nunito">
-                  EXPERIENCE SOMETHING
-                </p>
-              </div>
-              <i className="far fa-comment-alt nav-logo-picture"></i>
-            </Link>
-          </div>
-
-          <div className="burger-icon-normal" onClick={clickHandler}>
-            <i className="fas fa-bars fas-fixed"></i>
-          </div>
-
-          {/* HAMBURGER MENU (max-width : 960px) */}
-          <div
-            className={
-              click
-                ? "navbar-menuArea-burger"
-                : "navbar-menuArea-burger--active"
-            }
-          >
-            <div className="burger-icon">
-              <p className="fontMed fw-500 spacing5">NIKKEN</p>
-              <i
-                className="fas fa-bars fontMed burger-icon-fixed"
-                onClick={clickHandler}
-              ></i>
-            </div>
-            <ul className="burger-list">
-              <li className="burger-listItem">
-                <i className="fas fa-home" />
-                <Link className="burger-link">Home</Link>
-              </li>
-              <li className="burger-listItem">
-                <i className="fas fa-hands-helping" />
-                <Link className="burger-link">Service</Link>
-              </li>
-              <li className="burger-listItem">
-                <i className="fas fa-box-open" />
-                <Link className="burger-link">Product</Link>
-              </li>
-              <li className="burger-listItem">
-                <i className="fas fa-envelope" />
-                <Link className="burger-link">Contact</Link>
-              </li>
-              <br className="burger-line" />
-              <p>line breaker</p>
-              <li className="burger-listItem">
-                <Link className="burger-link">SERVICE</Link>
-              </li>
-              <li className="burger-listItem">
-                <Link className="burger-link">PRODUCT</Link>
-              </li>
-              <li className="burger-listItem">
-                <Link className="burger-link">CONTACT</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* NORMAL MENU */}
-          <div className="navbar-menuArea">
-            <ul className="nav-list">
-              <li className="nav-listItem">
-                <Link className="nav-link">HOME</Link>
-              </li>
-              <li className="nav-listItem">
-                <Link className="nav-link">SERVICE</Link>
-              </li>
-              <li className="nav-listItem">
-                <Link className="nav-link">PRODUCT</Link>
-              </li>
-              <li className="nav-listItem">
-                <Link className="nav-link">CONTACT</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </>
+    <div>
+      <Navbar color="light" light className="nav-container">
+        <NavbarBrand className="nav-logo">
+          <Link to="/" className="nav-logo-link">
+            Parcel Shop
+          </Link>
+          <i className="fas fa-shopping-cart nav-logo-item" />
+        </NavbarBrand>
+        <Nav className="nav-menu">
+          {/* {this.props.userGlobal.email ? (
+            <>
+              <NavItem>
+                <NavbarText>Hello, {this.props.userGlobal.email}</NavbarText>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Pages
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <Link to="/cart">
+                      Cart ({this.props.cartGlobal.cartList.length})
+                    </Link>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Link to="/history">History</Link>
+                  </DropdownItem>
+                  {this.props.userGlobal.role === "admin" ? (
+                    <DropdownItem>
+                      <Link to="/admin">Admin</Link>
+                    </DropdownItem>
+                  ) : null}
+                  <DropdownItem divider />
+                  <DropdownItem onClick={this.props.logoutUser}>
+                    Logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </>
+          ) :  */}
+          (
+          <NavItem>
+            <NavbarText>
+              <Link to="/login" className="nav-login">
+                Login
+              </Link>
+              <Link to="/register" className="nav-register">
+                Register
+              </Link>
+            </NavbarText>
+          </NavItem>
+          ){/* } */}
+        </Nav>
+      </Navbar>
+    </div>
   );
 }
 
-export default Navbar;
+// const mapStateToProps = (state) => {
+//   return {
+//     userGlobal: state.user,
+//     cartGlobal: state.cart,
+//   };
+// };
+
+// const mapDispatchToProps = {
+//   logoutUser,
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(MyNavbar);
+export default MyNavbar;
