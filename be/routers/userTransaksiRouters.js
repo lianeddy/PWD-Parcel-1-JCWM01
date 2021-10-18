@@ -3,6 +3,7 @@ const routers = express.Router();
 const {userTransaksiControllers} = require("../controllers")
 
 
-routers.post("/usertransaksi", userTransaksiControllers.uploadPayment)
+routers.post("/upload-payment", userTransaksiControllers.uploadPayment)
+routers.get("/transaction", userTransaksiControllers.getOrder)
 
 module.exports = routers;

@@ -19,9 +19,9 @@ function UserTransaksi() {
     console.log(typeof status !== 'undefined');
     let url = ""
     if (typeof status !== 'undefined')
-      url = `http://localhost:3302/order?id=${id}&status=${status}`;
+      url = `http://localhost:3302/order/transaction?id=${id}&status=${status}`;
     else
-      url = `http://localhost:3302/order?id=${id}`
+      url = `http://localhost:3302/order/transaction?id=${id}`
     // ngambil data dari database by id yang login
     Axios.get(url, userData)
       .then(res => {
@@ -74,7 +74,7 @@ function UserTransaksi() {
     
        // Update the formData object
        formData.append(
-         "myFile",
+         "file",
          selectedFile,
          selectedFile.name,
        );
@@ -88,7 +88,7 @@ function UserTransaksi() {
      
        // Request made to the backend api
        // Send formData object
-       Axios.post("http://localhost:3302/upload-payment", formData)
+       Axios.post("http://localhost:3302/order/upload-payment", formData)
        .then(res => {
         console.log(res.status)
         alert ("Upload Success")

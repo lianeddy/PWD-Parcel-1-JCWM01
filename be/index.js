@@ -19,16 +19,16 @@ const db = mysql.createConnection({
     multipleStatements : true
 }) 
 // multer code
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, './uploads');
-    },
-  filename: function (req, file, cb) {
-      cb(null, file.originalname);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//       cb(null, './uploads');
+//     },
+//   filename: function (req, file, cb) {
+//       cb(null, file.originalname);
+//   }
+// });
 
-const uploadImg = multer({storage: storage}).single('myFile');
+// const uploadImg = multer({storage: storage}).single('myFile');
 
 db.connect((err) => {
     if (err) {
@@ -97,45 +97,45 @@ app.patch('/edit-user/:id', (req,res)=> {
 //     })
 // })
 
-app.get("/order", (req, res) => {
-  let scriptQuery = "select od.status, od.created_at, GROUP_CONCAT(p.nama, ' x ', oi.quantity, ' : ', 'Rp. ', (oi.quantity * p.harga) SEPARATOR '\r\n') as products, od.no_order, od.id as order_detail_id, oi.quantity, p.harga, sum(od.total) as total from order_details as od join order_items as oi on od.id = oi.order_id join parcel as p on oi.parcel_id = p.parcel_id";
-  let whereQuery = ` where od.user_id = ${req.query.id}`
-  if (req.query.status)
-    whereQuery += ` and od.status=${req.query.status}`
-    whereQuery += ` group by od.id`
-  if (req.query.id) {  
-    scriptQuery += whereQuery
-  }
-  db.query(scriptQuery, (err, results) => {
-    if (err) res.status(500).send(err);
-    let item = []
-    res.status(200).send(results);
+// app.get("/order", (req, res) => {
+//   let scriptQuery = "select od.status, od.created_at, GROUP_CONCAT(p.nama, ' x ', oi.quantity, ' : ', 'Rp. ', (oi.quantity * p.harga) SEPARATOR '\r\n') as products, od.no_order, od.id as order_detail_id, oi.quantity, p.harga, sum(od.total) as total from order_details as od join order_items as oi on od.id = oi.order_id join parcel as p on oi.parcel_id = p.parcel_id";
+//   let whereQuery = ` where od.user_id = ${req.query.id}`
+//   if (req.query.status)
+//     whereQuery += ` and od.status=${req.query.status}`
+//     whereQuery += ` group by od.id`
+//   if (req.query.id) {  
+//     scriptQuery += whereQuery
+//   }
+//   db.query(scriptQuery, (err, results) => {
+//     if (err) res.status(500).send(err);
+//     let item = []
+//     res.status(200).send(results);
 
-  });
-});
+//   });
+// });
 
-// upload payment
-app.post ('/upload-payment', (req, res) => {
-  uploadImg(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      res.status(201).send(err);
-    } else if (err){
-      res.status(201).send(err);
-    }
-    //console.log(req.body)
-    let dataUpdate = `pic_name = "${req.file?.filename}"`
-    let updateQuery = `UPDATE order_details set ${dataUpdate} where id = ${req.body.orderDetailId}`
-    //console.log(updateQuery)
-     db.query(updateQuery, (err,result) => {
-    //     if(err) res.status(500).send(err)
-    //     res.status(200).send(result)
-     })
-    console.log (req.file?.filename)
-    res.status(200).send('File Uploaded')
-  })
+// // upload payment
+// app.post ('/upload-payment', (req, res) => {
+//   uploadImg(req, res, function (err) {
+//     if (err instanceof multer.MulterError) {
+//       res.status(201).send(err);
+//     } else if (err){
+//       res.status(201).send(err);
+//     }
+//     //console.log(req.body)
+//     let dataUpdate = `pic_name = "${req.file?.filename}"`
+//     let updateQuery = `UPDATE order_details set ${dataUpdate} where id = ${req.body.orderDetailId}`
+//     //console.log(updateQuery)
+//      db.query(updateQuery, (err,result) => {
+//     //     if(err) res.status(500).send(err)
+//     //     res.status(200).send(result)
+//      })
+//     console.log (req.file?.filename)
+//     res.status(200).send('File Uploaded')
+//   })
   
   
-})
+// })
 
 
 
@@ -150,7 +150,9 @@ app.post ('/upload-payment', (req, res) => {
 
 
 // Middleware
-const { userTransaksiRouters } = require("./routers/index");
-app.use("/user", userTransaksiRouters);
+const { userTransaksiRouters, userProfileRouters } = require("./routers/index");
+
+app.use("/order", userTransaksiRouters);
+app.use("/user", userProfileRouters);
 
 app.listen(PORT, () => console.log('Api Running : ', PORT))

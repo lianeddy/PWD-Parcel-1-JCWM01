@@ -19,7 +19,7 @@ function UserProfile() {
     console.log(userData);
 
     // ngambil data dari database by id yang login
-    Axios.get(`http://localhost:3302/user?id=${id}`, userData)
+    Axios.get(`http://localhost:3302/user/get?id=${id}`, userData)
       .then((res) => {
         console.log(res.data);
         setFullname(res.data[0].full_name);

@@ -47,7 +47,7 @@ function EditProfile() {
   }
   console.log(event.target[0].value)
     
-    Axios.patch(`http://localhost:3302/edit-user/${id}`, userData)
+    Axios.patch(`http://localhost:3302/user/edit/${id}`, userData)
     .then((res) => {
       console.log(res.data);
       alert("Data Anda Telah Berubah")
