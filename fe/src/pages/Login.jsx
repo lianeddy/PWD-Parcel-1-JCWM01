@@ -78,7 +78,6 @@ class Login extends React.Component {
                     Login
                   </button>
                   <Link to={"/forgot"}>Forgot Password?</Link>
-                  <Link to={"/forgot"}>Edit Password</Link>
                 </div>
               </div>
             </div>
