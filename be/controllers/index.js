@@ -1,3 +1,4 @@
-const userControllers = require("./userController");
+const userProfileControllers = require("./UserProfileController");
+const userTransaksiControllers = require("./userTransaksiController")
 
-module.exports = { userControllers };
+module.exports = { userProfileControllers, userTransaksiControllers  };

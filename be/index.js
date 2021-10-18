@@ -150,7 +150,7 @@ app.post ('/upload-payment', (req, res) => {
 
 
 // Middleware
-const { userRouters } = require("./routers/index");
-app.use("/user", userRouters);
+const { userTransaksiRouters } = require("./routers/index");
+app.use("/user", userTransaksiRouters);
 
 app.listen(PORT, () => console.log('Api Running : ', PORT))
