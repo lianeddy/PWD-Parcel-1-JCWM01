@@ -10,17 +10,18 @@ module.exports = {
     }
     db.query(scriptQuery, (err, results) => {
       if (err) res.status(500).send(err);
-      res.status(200).send(results);
+      console.log("result BE[0]", results[0]);
+      res.status(200).send(results[0]);
     });
   },
   addData: (req, res) => {
     console.log(req.body);
-    let { full_name, price, picture, desc, category } = req.body;
+    let { full_name, price, picture, descr, category } = req.body;
     let insertQuery = `Insert into product values (null, ${db.escape(
       full_name
-    )},${db.escape(desc)},null,${db.escape(category)},null,${db.escape(
+    )}, ${db.escape(descr)}, null, ${db.escape(category)}, null, ${db.escape(
       picture
-    )},${db.escape(price)},null,null,null;)`;
+    )}, ${db.escape(price)}, null, null, null) `;
     console.log(insertQuery);
     db.query(insertQuery, (err, results) => {
       if (err) {
@@ -47,7 +48,7 @@ module.exports = {
       dataUpdate.push(` ${prop} = ${db.escape(req.body[prop])}`);
     }
 
-    let updateQuery = `UPDATE product p set p.${dataUpdate} where id = ${parseInt(
+    let updateQuery = `UPDATE product set ${dataUpdate} where id = ${parseInt(
       req.params.id
     )} `;
     console.log(updateQuery);

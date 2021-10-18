@@ -25,7 +25,7 @@ const Left = styled.div`
 
 const Logo = styled.h1``;
 
-const Desc = styled.p`
+const Descr = styled.p`
   margin: 20px 0px;
 `;
 
@@ -89,12 +89,12 @@ const Footer = () => {
     <Container>
       <Left>
         <Logo>PARCEL SHOP.</Logo>
-        <Desc>
+        <Descr>
           There are many variations parcels of snack of Lorem ipsum, dolor sit
           amet consectetur adipisicing elit. Mollitia velit nostrum sapiente
           tempora ipsum nam, repudiandae odio ipsa consectetur minima sunt
           provident dicta quae dolores nobis qui rerum aperiam omnis.
-        </Desc>
+        </Descr>
         <SocialContainer>
           <SocialIcon color="3B5999">
             <Facebook />

@@ -67,7 +67,7 @@ const Title = styled.h1`
   font-size: 50px;
 `;
 
-const Desc = styled.p`
+const Descr = styled.p`
   margin: 50px 0px;
   font-size: 10px;
   font-weight: 500;
@@ -104,7 +104,7 @@ const Slider = () => {
             </ImgContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
+              <Descr>{item.descr}</Descr>
               {/* //<Button>SHOW NOW</Button> */}
             </InfoContainer>
           </Slide>

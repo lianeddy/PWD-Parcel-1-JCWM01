@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 
 class ProductDetail extends React.Component {
   state = {
-    productData: {},
+    productData: null,
     productNotFound: false,
     quantity: 1,
   };
@@ -20,13 +20,9 @@ class ProductDetail extends React.Component {
     })
       .then((result) => {
         console.log("result", result);
-        if (result.data.length) {
-          this.setState({
-            productData: result.data[this.props.match.params.id - 1],
-          });
-        } else {
-          this.setState({ productNotFound: true });
-        }
+        this.setState({
+          productData: result.data,
+        });
       })
       .catch(() => {
         alert("Terjadi kesalahan di server!");
@@ -84,6 +80,10 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    console.log("render", this.state);
+    if (this.state.productData === null) {
+      return <p> Loading ...</p>;
+    }
     return (
       <div className="container">
         {this.state.productNotFound ? (
@@ -102,7 +102,7 @@ class ProductDetail extends React.Component {
             <div className="col-6 d-flex flex-column justify-content-center">
               <h4>{this.state.productData.full_name}</h4>
               <h5>Rp {this.state.productData.price}</h5>
-              <p>{this.state.productData.desc}</p>
+              <p>{this.state.productData.descr}</p>
               <div className="d-flex flex-row align-items-center">
                 <button
                   onClick={() => this.qtyBtnHandler("decrement")}

@@ -41,7 +41,7 @@ class Admin extends React.Component {
       editProductName: editData.full_name,
       editPrice: editData.price,
       editProductImage: editData.picture,
-      editDescription: editData.desc,
+      editDescription: editData.descr,
       editCategory: editData.category,
     });
   };
@@ -55,7 +55,7 @@ class Admin extends React.Component {
       full_name: this.state.editProductName,
       price: parseInt(this.state.editPrice),
       picture: this.state.editProductImage,
-      desc: this.state.editDescription,
+      descr: this.state.editDescription,
       category: this.state.editCategory,
     })
       .then(() => {
@@ -158,7 +158,7 @@ class Admin extends React.Component {
           <td>
             <img className="admin-product-image" src={val.picture} />{" "}
           </td>
-          <td>{val.desc}</td>
+          <td>{val.descr}</td>
           <td>{val.category}</td>
           <td>
             <button
@@ -182,11 +182,11 @@ class Admin extends React.Component {
   };
 
   addNewProduct = () => {
-    Axios.post(`http://localhost:3300/product/add-product`, {
+    Axios.post(`${URL_API}/product/add-product`, {
       full_name: this.state.addProductName,
       price: parseInt(this.state.addPrice),
       picture: this.state.addProductImage,
-      desc: this.state.addDescription,
+      descr: this.state.addDescription,
       category: this.state.addCategory,
     })
       .then(() => {
