@@ -20,12 +20,15 @@ import { getCartData } from "./redux/actions/cart";
 
 class App extends React.Component {
   componentDidMount() {
+    console.log("masuk did uapdte app");
     const userLocalStorage = localStorage.getItem("userDataEmmerce");
+    console.log("[userLocalStorage] in");
     if (userLocalStorage) {
       const userData = userLocalStorage;
       //this.props.userKeepLogin(userData);
       //this.props.getCartData(userData.id);
     } else {
+      console.log("[userLocalStorage] out");
       this.props.checkStorage();
     }
   }

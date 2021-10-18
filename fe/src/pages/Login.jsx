@@ -24,6 +24,7 @@ class Login extends React.Component {
   };
 
   inputHandler = (event) => {
+    console.log("masuk input handler");
     const value = event.target.value;
     const name = event.target.name;
 
