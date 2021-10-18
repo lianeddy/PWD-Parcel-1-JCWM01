@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import RegisterPage from "./pages/RegisterPage";
 import RegisterDonePage from "./pages/RegisterDonePage";
@@ -27,11 +27,9 @@ function App() {
             component={VerificationPage}
           />
           <ProfilePicture path="/profile" exact component={ProfilePicture} />
-          <AdminSalesReport
-            path="/admin/salesreport"
-            exact
-            component={AdminSalesReport}
-          />
+          <Route path="/admin/salesreport">
+            <AdminSalesReport />
+          </Route>
         </Switch>
       </Router>
     </>

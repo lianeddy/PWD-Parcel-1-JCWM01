@@ -1,0 +1,62 @@
+.widget-small {
+  flex: 1;
+  box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  padding: 20px;
+  margin-right: 20px;
+}
+
+.wid-sm-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.wid-sm-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.wid-sm-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wid-sm-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.wid-sm-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.wid-sm-user-name {
+  font-weight: 600;
+}
+
+.wid-sm-user-title {
+  font-weight: 300;
+}
+
+.wid-sm-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  background: #eeeef7;
+  color: #555;
+  cursor: pointer;
+}
+
+.fa-eye {
+  font-size: 16px;
+  margin-right: 5px;
+}
