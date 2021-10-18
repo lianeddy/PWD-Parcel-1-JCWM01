@@ -35,6 +35,7 @@ class Admin extends React.Component {
   };
 
   editToggle = (editData) => {
+    console.log("editdata", editData);
     this.setState({
       editId: editData.id,
       editProductName: editData.full_name,

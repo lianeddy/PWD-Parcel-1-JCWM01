@@ -42,15 +42,16 @@ module.exports = {
   },
   editData: (req, res) => {
     let dataUpdate = [];
+    console.log("dataUpdate", dataUpdate);
     for (let prop in req.body) {
-      dataUpdate.push(`${prop} = ${db.escape(req.body[prop])}`);
+      dataUpdate.push(` ${prop} = ${db.escape(req.body[prop])}`);
     }
 
-    let updateQuery = `UPDATE product set ${dataUpdate} where id = ${db.escape(
+    let updateQuery = `UPDATE product p set p.${dataUpdate} where id = ${parseInt(
       req.params.id
-    )};`;
+    )} `;
     console.log(updateQuery);
-    db.query(updateQuery, (err, results) => {
+    db.query(updateQuery, [], (err, results) => {
       if (err) res.status(500).send(err);
       res.status(200).send(results);
     });
