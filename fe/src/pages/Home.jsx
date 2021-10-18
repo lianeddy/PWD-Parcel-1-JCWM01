@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 import Axios from "axios";
 import { URL_API } from "../helper";
+import "./Home.css";
 
 class Home extends React.Component {
   state = {
@@ -26,7 +27,7 @@ class Home extends React.Component {
         });
       })
       .catch(() => {
-        alert("Terjadi kesalahan server!");
+        // alert("Terjadi kesalahan server!");
       });
   };
 
@@ -114,50 +115,50 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-3">
-            <div className="card">
-              <div className="card-header">
+      <div className="page">
+        {/* <div>test</div> */}
+        <div className="pg-container">
+          <div className="pg-box">
+            <div className="pg-box-1">
+              <div className="pg-box1-text">
                 <strong>Filter Products</strong>
               </div>
-              <div className="card-body">
+              <div className="pg-box1-table">
                 <label htmlFor="searchProductName">Product Name</label>
                 <input
                   onChange={this.inputHandler}
                   name="searchProductName"
                   type="text"
-                  className="form-control mb-3"
+                  className="pg-box1-input"
                 />
-                <label htmlFor="searchCategory">Search Category</label>
+                <label htmlFor="searchCategory" className="pg-box1-search">
+                  Search Category
+                </label>
                 <select
                   onChange={this.inputHandler}
                   name="searchCategory"
-                  className="form-control"
+                  className="pg-box1-cat"
                 >
                   <option value="">All Item</option>
                   <option value="kaos">Choco</option>
                   <option value="celana">Snack</option>
                   <option value="aksesoris">Drink</option>
                 </select>
-                <button
-                  onClick={this.searchBtnHandler}
-                  className="btn btn-primary mt-3"
-                >
+                <button onClick={this.searchBtnHandler} className="pg-box1-but">
                   Search
                 </button>
               </div>
             </div>
-            <div className="card mt-4">
-              <div className="card-header">
+            <div className="pg-box-2">
+              <div className="pg-box2-text">
                 <strong>Sort Product</strong>
               </div>
-              <div className="card-body">
+              <div className="pg-box2-choice">
                 <label htmlFor="sortBy"></label>
                 <select
                   onChange={this.inputHandler}
                   name="sortBy"
-                  className="form-control"
+                  className="pg-box2-select"
                 >
                   <option value="">Default</option>
                   <option value="lowPrice">Lowest Price</option>
@@ -167,32 +168,30 @@ class Home extends React.Component {
                 </select>
               </div>
             </div>
-            <div className="mt-3">
-              <div className="d-flex flex-row justify-content-between align-item-center">
+            <div className="pg-box-3">
+              <div className="pg-box-3-container">
                 <button
                   disabled={this.state.page === 1}
                   onClick={this.prevPageHandler}
-                  className="btn btn-dark"
+                  className=""
                 >
                   {"<"}
                 </button>
-                <div className="text-center">
+                <div className="">
                   Page {this.state.page} of {this.state.maxPage}
                 </div>
                 <button
                   disabled={this.state.page === this.state.maxPage}
                   onClick={this.nextPageHandler}
-                  className="btn btn-dark"
+                  className=""
                 >
                   {">"}
                 </button>
               </div>
             </div>
           </div>
-          <div className="col-9">
-            <div className="d-flex flex-wrap flex-row">
-              {this.renderProducts()}
-            </div>
+          <div className="">
+            <div className="">{this.renderProducts()}</div>
           </div>
         </div>
       </div>

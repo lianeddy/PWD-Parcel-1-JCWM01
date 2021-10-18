@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 
 import RegisterPage from "./pages/RegisterPage";
 import RegisterDonePage from "./pages/RegisterDonePage";
@@ -36,7 +36,6 @@ class App extends React.Component {
       <BrowserRouter>
         <MyNavbar />
         <Switch>
-          <Route component={Home} path="/" />
           <Route component={Login} path="/login" />
           <Route component={Forgot} path="/forgot" />
           <RegisterPage path="/register" exact component={RegisterPage} />
@@ -52,6 +51,7 @@ class App extends React.Component {
             exact
             component={VerificationPage}
           />
+          <Route component={Home} path="/" />
         </Switch>
       </BrowserRouter>
     );

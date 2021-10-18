@@ -16,17 +16,20 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/user";
+import "./MyNavbar.css";
 
 class MyNavbar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light>
-          <NavbarBrand>
-            <Link to="/">Parcel Shop</Link>
-            <ShoppingCartOutlined />
+        <Navbar color="light" light className="nav-container">
+          <NavbarBrand className="nav-logo">
+            <Link to="/" className="nav-logo-link">
+              Parcel Shop
+            </Link>
+            <i className="fas fa-shopping-cart nav-logo-item" />
           </NavbarBrand>
-          <Nav>
+          <Nav className="nav-menu">
             {this.props.userGlobal.email ? (
               <>
                 <NavItem>
@@ -60,8 +63,13 @@ class MyNavbar extends React.Component {
             ) : (
               <NavItem>
                 <NavbarText>
-                  <Link to="/login">Login</Link> |{" "}
-                  <Link to="/register">Register</Link>
+                  <Link to="/login" className="nav-login">
+                    Login
+                  </Link>{" "}
+                  |{" "}
+                  <Link to="/register" className="nav-register">
+                    Register
+                  </Link>
                 </NavbarText>
               </NavItem>
             )}

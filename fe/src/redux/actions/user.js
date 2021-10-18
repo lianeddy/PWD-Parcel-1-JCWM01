@@ -13,6 +13,7 @@ export const forgotUser = () => {};
 
 export const loginUser = ({ email, password }) => {
   return (dispatch) => {
+    console.log("masuk axios");
     Axios.post(URL_API + `/users/login`, {
       email,
       password,

@@ -1,10 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import "./UserProfile.css";
+// import "./UserProfile.css";
 
-import {Button} from "react-bootstrap";
-
+import { Button } from "react-bootstrap";
 
 function UserProfile() {
   const [userData] = useState({});
@@ -13,8 +12,8 @@ function UserProfile() {
   const [gender, setGender] = useState();
   const [adress, setAdress] = useState();
   const [age, setAge] = useState();
-  
-  let id = 1
+
+  let id = 1;
   const user = () => {
     console.log(userData);
 
@@ -32,10 +31,10 @@ function UserProfile() {
       .catch((err) => console.log(err));
   };
   // const [userEdit, setUser] = useState({});
-  console.log(user)
+  console.log(user);
   useEffect(() => {
-    console.log("test")
-    user()
+    console.log("test");
+    user();
   });
 
   // FOR ADMIN CHECKING USER
@@ -52,8 +51,7 @@ function UserProfile() {
       <div className="wrapper">
         <div className="reg-container">
           <div className="UserProfile-side">
-            <div className="reg-icon">
-            </div>
+            <div className="reg-icon"></div>
             <div className="right">
               <h1 className="info">Your Profile</h1>
               <p className="reg-desc-text">
@@ -73,7 +71,6 @@ function UserProfile() {
                 <label>
                   <h2 className="data">Gender</h2>
                   <p>{gender}</p>
-
                 </label>
                 <label>
                   <h2 className="data">Address</h2>
@@ -85,9 +82,9 @@ function UserProfile() {
                 </label>
                 <Link to={`/edit/${id}`}>
                   <Button className="reg-button" type="button">
-                  Edit Profile
-                </Button>
-                 </Link>
+                    Edit Profile
+                  </Button>
+                </Link>
               </form>
             </div>
           </div>

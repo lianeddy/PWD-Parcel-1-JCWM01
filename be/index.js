@@ -13,21 +13,21 @@ app.use(bearerToken());
 
 app.use(express.static("public"));
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  passsword: "",
-  database: "parcel_ecommerce",
-  port: 3306,
-  multipleStatements: true,
-});
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   passsword: "",
+//   database: "parcel_ecommerce",
+//   port: 3306,
+//   multipleStatements: true,
+// });
 
-db.connect((err) => {
-  if (err) {
-    return console.error(`error : ${err.message}`);
-  }
-  console.log(`Connected to MySQL Server `);
-});
+// db.connect((err) => {
+//   if (err) {
+//     return console.error(`error : ${err.message}`);
+//   }
+//   console.log(`Connected to MySQL Server `);
+// });
 
 app.get("/", (req, res) => {
   res.status(200).send("<h4>Integrated mysql with express</h4/>");

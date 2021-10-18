@@ -1,66 +1,61 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 // import { Link } from "react-router-dom";
-import "./EditProfile.css";
-import {Button, Form} from "react-bootstrap";
+// import "./EditProfile.css";
+import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-
-
 
 function EditProfile() {
   // const [userData, setUserData] = useState({});
-  const [full_name, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
-  const [addres, setAddres] = useState('');
-  const [age, setAge] = useState('');
+  const [full_name, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [addres, setAddres] = useState("");
+  const [age, setAge] = useState("");
   // back to profile
   let history = useHistory();
 
-  let id = 1
-  
+  let id = 1;
+
   const user = () => {
-   
     // console.log(userData);
-    Axios.get(`http://localhost:3302/user?id=${id}`)
+    Axios.get(`http://localhost:3302/user?id=${id}`).then((res) => {
+      console.log(res.data);
+
+      setFullname(res.data[0].full_name);
+      setEmail(res.data[0].email);
+      setGender(res.data[0].gender);
+      setAddres(res.data[0].addres);
+      setAge(res.data[0].age);
+    });
+  };
+
+  function edituser(event) {
+    event.preventDefault();
+
+    let userData = {
+      full_name: full_name,
+      email: email,
+      gender: gender,
+      addres: addres,
+      age: age,
+    };
+    console.log(event.target[0].value);
+
+    Axios.patch(`http://localhost:3302/edit-user/${id}`, userData)
       .then((res) => {
         console.log(res.data);
-
-        setFullname(res.data[0].full_name);
-        setEmail(res.data[0].email);
-        setGender(res.data[0].gender);
-        setAddres(res.data[0].addres);
-        setAge(res.data[0].age);
+        alert("Data Anda Telah Berubah");
+        // back to profile
+        history.push("/profile");
       })
-
-  };
-  
-  function edituser (event) {
-  event.preventDefault();
-
-  let  userData = {
-    'full_name': full_name,
-    'email': email,
-    'gender': gender,
-    'addres' : addres,
-    'age' : age,
+      .catch((err) => console.log(err));
   }
-  console.log(event.target[0].value)
-    
-    Axios.patch(`http://localhost:3302/edit-user/${id}`, userData)
-    .then((res) => {
-      console.log(res.data);
-      alert("Data Anda Telah Berubah")
-      // back to profile
-      history.push("/profile");
-    })
-    .catch((err) => console.log(err));
-  }
-// use effect [] untuk perubahan data
- console.log(user)
+  // use effect [] untuk perubahan data
+  console.log(user);
   useEffect(() => {
-    console.log("test")
-    user()
+    console.log("test");
+    user();
   }, []);
 
   // FOR ADMIN CHECKING USER
@@ -91,8 +86,8 @@ function EditProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Name"
-                    value = {full_name}
-                    onChange={e =>setFullname(e.target.value)}
+                    value={full_name}
+                    onChange={(e) => setFullname(e.target.value)}
                   />
                 </label>
                 <label>
@@ -101,7 +96,7 @@ function EditProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="name@email.com"
-                    value = {email}
+                    value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
@@ -113,7 +108,7 @@ function EditProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Gender"
-                    value = {gender}
+                    value={gender}
                     onChange={(e) => {
                       setGender(e.target.value);
                     }}
@@ -125,7 +120,7 @@ function EditProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Address"
-                    value = {addres}
+                    value={addres}
                     onChange={(e) => {
                       setAddres(e.target.value);
                     }}
@@ -137,16 +132,15 @@ function EditProfile() {
                     type="text"
                     className="reg-input-bar"
                     placeholder="Age"
-                    value = {age}
+                    value={age}
                     onChange={(e) => {
                       setAge(e.target.value);
                     }}
                   />
                 </label>
-    
-                  <Button className="reg-button" type="submit" >
+
+                <Button className="reg-button" type="submit">
                   Update Data
-                  
                 </Button>
               </Form>
             </div>
