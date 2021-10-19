@@ -1,0 +1,161 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  user-select: none;
+}
+
+h1,
+h2,
+p {
+  opacity: 0.8;
+}
+
+.register {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  background-color: rgb(210, 175, 243);
+  height: 720px;
+}
+
+.reg-container {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: space-between;
+  width: 80vw;
+  height: 620px;
+  border-radius: 20px;
+  margin-top: 50px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.register-side {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  padding: 50px 80px;
+}
+
+.reg-icon {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+}
+
+.reg-icon-text {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.reg-desc {
+  margin-top: 40px;
+}
+
+.reg-desc-h1 {
+  font-size: 1.8rem;
+}
+
+.reg-desc-text {
+  margin: 12px 0 20px 0;
+  font-size: 0.9rem;
+}
+
+.reg-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.reg-input-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.reg-input-text {
+  font-size: 0.9rem;
+}
+
+.reg-input-bar {
+  margin: 5px 0 20px 0;
+  height: 30px;
+  width: 90%;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding-left: 13px;
+}
+
+.reg-privacy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  /* cursor: pointer; */
+  margin-top: 5px;
+}
+
+.reg-privacy-right {
+  width: 90%;
+  font-size: 0.8rem;
+}
+
+.reg-privacy-left {
+  cursor: pointer;
+}
+
+.reg-button {
+  margin: 25px 0 20px 0;
+  background-color: rgb(144, 65, 218);
+  width: 90%;
+  height: 45px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+}
+
+.reg-button:hover {
+  background-color: blueviolet;
+}
+
+.reg-button-text {
+  font-size: 1rem;
+  color: white;
+  opacity: 1;
+}
+
+.reg-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.reg-login-left {
+  margin-right: 5px;
+  font-size: 0.8rem;
+}
+
+.reg-login-right {
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.reg-login-right:hover {
+  opacity: 1;
+}
+
+.content-side {
+  width: 55%;
+  height: 720px;
+  background-color: rgb(151, 76, 221);
+}

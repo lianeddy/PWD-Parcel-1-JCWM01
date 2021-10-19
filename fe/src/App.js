@@ -10,6 +10,10 @@ import Admin from "./pages/Admin";
 import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
 
+import RegisterPage from "./pages/RegisterPage";
+import RegisterDonePage from "./pages/RegisterDonePage";
+import VerificationPage from "./pages/VerificationPage";
+
 import { connect } from "react-redux";
 import { keepLogin, checkStorage } from "./redux/actions/user";
 import { getCartData } from "./redux/actions/cart";
@@ -36,6 +40,13 @@ class App extends React.Component {
             <Route component={Login} path="/login" />
             <Route component={Forgot} path="/forgot" />
             <Route component={Admin} path="/admin" />
+
+            {/* <RegisterPage path="/register" exact component={RegisterPage} />
+            <RegisterDonePage
+              path="/registerdone"
+              exact
+              component={RegisterDonePage}
+            /> */}
 
             <Route component={ProductDetail} path="/product-detail/:id" />
 
