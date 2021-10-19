@@ -101,15 +101,10 @@ app.patch("/edit-user/:id", (req, res) => {
   });
 });
 
-// app.delete('/delete-user/: iduser', (req, res) => {
-//     let deleteQuery = `DELETE from user where id user = ${db.escape(req.params.iduser)};`
+// Routes
+const { userTransaksiRouters, userProfileRouters } = require("./routers/index");
 
-//     db.query(deleteQuery, (err, result) => {
-//         if (err) res.status(500).send(err)
-//         res.status(200).send(results)
-//     })
-// })
+app.use("/order", userTransaksiRouters);
+app.use("/user", userProfileRouters);
 
-app.use("/users", userRouters);
-
-app.listen(PORT, () => console.log("Api Running :", PORT));
+app.listen(PORT, () => console.log('Api Running : ', PORT))
