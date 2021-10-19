@@ -4,14 +4,14 @@
   box-sizing: border-box;
 }
 
-.pict-word {
+.no-pict-word {
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   margin-bottom: 20px;
   color: rgba(0, 0, 0, 0.938);
 }
 
-.pict-container {
+.no-pict-container {
   /* padding: 20px; */
   display: flex;
   flex-direction: row;
@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.pict-container-1 {
+.no-pict-container-1 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,7 @@
   display: none;
 }
 
-.pict-input-file {
+.no-pict-input-file {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,24 +50,25 @@
   border: 1px solid rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   background-color: blueviolet;
+  opacity: 0.6;
   cursor: pointer;
 }
 
-.pict-input-text {
+.no-pict-input-text {
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
 }
 
-.pict-input-file:active {
+.no-pict-input-file:active {
   background-color: rgb(145, 62, 223);
 }
 
-.pict-container-3 {
+.no-pict-container-3 {
   margin-left: 60px;
 }
 
-.pict-button-patch {
+.no-pict-button-patch {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,13 +81,15 @@
   margin-top: 10px;
   color: white;
   font-size: 1rem;
+  opacity: 0.6;
 }
 
-.pict-button-patch:active {
+.no-pict-button-patch:active {
   background-color: rgb(145, 62, 223);
+  opacity: 0.6;
 }
 
-.pict-input-upperText {
+.no-pict-input-upperText {
   color: black;
   font-family: "Roboto", sans-serif;
   font-size: 0.9rem;

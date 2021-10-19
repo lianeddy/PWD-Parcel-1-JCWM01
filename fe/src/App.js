@@ -20,6 +20,9 @@ import { userKeepLogin, checkStorage } from "./redux/actions/user";
 import { getCartData } from "./redux/actions/cart";
 import AdminSalesReport from "./pages/AdminSalesReport";
 
+// import ProfilePicture from "./components/ProfilePicture";
+import ProfilePictureNoEdit from "./components/ProfilePictureNoEdit";
+
 class App extends React.Component {
   componentDidMount() {
     const userLocalStorage = localStorage.getItem("userDataEmmerce");
@@ -57,6 +60,12 @@ class App extends React.Component {
           <Route path="/admin/salesreport">
             <AdminSalesReport />
           </Route>
+
+          <ProfilePictureNoEdit
+            path="/pictprofile"
+            exact
+            component={ProfilePictureNoEdit}
+          />
 
           <Route component={Home} path="/" />
         </Switch>

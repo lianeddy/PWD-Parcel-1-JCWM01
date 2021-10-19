@@ -4,6 +4,7 @@ import Axios from "axios";
 import "./EditProfile.css";
 import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import ProfilePicture from "./ProfilePicture";
 
 function EditProfile() {
   // const [userData, setUserData] = useState({});
@@ -138,6 +139,9 @@ function EditProfile() {
                     }}
                   />
                 </label>
+                <div className="edit-wrap-picture">
+                  <ProfilePicture />
+                </div>
 
                 <Button className="edit-wrap-button" type="submit">
                   Update Data

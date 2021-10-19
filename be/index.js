@@ -105,6 +105,7 @@ const {
   userTransaksiRouters,
   userProfileRouters,
   userRouters,
+  uploadRouters,
 } = require("./routers/index");
 const { db } = require("./database");
 
@@ -113,5 +114,7 @@ app.use("/order", userTransaksiRouters);
 app.use("/user", userProfileRouters);
 // users (login, register, etc)
 app.use("/users", userRouters);
+// album (user picture)
+app.use("/album", uploadRouters);
 
 app.listen(PORT, () => console.log("Api Running : ", PORT));

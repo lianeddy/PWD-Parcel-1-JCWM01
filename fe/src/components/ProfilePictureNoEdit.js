@@ -1,8 +1,8 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import "./ProfilePicture.css";
+import "./ProfilePictureNoEdit.css";
 
-function ProfilePicture(req) {
+function ProfilePictureNoEdit(req) {
   const [filePict, setFilePict] = useState({});
 
   const id = 12;
@@ -40,11 +40,16 @@ function ProfilePicture(req) {
 
   const onBtnAddFile = (e) => {
     // console.log("e", e);
-    console.log("get elemt by id", document.getElementById("img-preview"));
+    console.log(
+      "get elemt by id",
+      document.getElementById("img-preview"),
+      "tests"
+    );
     console.log("Target", e.target);
     console.log("Target files", e.target.files);
     // console.log("URL create", URL.createObjectURL(e.target.files[0]));
     if (e.target.files[0]) {
+      console.log("set file pict");
       setFilePict({
         // addFileName: e.target.files[0].name,
         addFile: e.target.files[0],
@@ -61,6 +66,7 @@ function ProfilePicture(req) {
       // console.log("createObjectUrl 3", URL.createObjectURL(e.target.files[0]));
     }
   };
+  console.log("set file out");
 
   // POST PICTURE (GA KEPAKE SIH HRSNYA SOALNYA UDH ADA PATCH)
   const uploadFunction = () => {
@@ -121,25 +127,30 @@ function ProfilePicture(req) {
 
   return (
     <>
-      <div className="pict-container">
+      <div className="no-pict-container">
         <div>
-          {/* <h1 className="pict-word">Profile Picture</h1> */}
-          <div className="pict-container-1">
+          {/* <h1 className="no-pict-word">Profile Picture</h1> */}
+          <div className="no-pict-container-1">
             <img id="img-preview" className="img-prev" />
           </div>
         </div>
-        <div className="pict-container-3">
-          <p className="pict-input-upperText">
+        <div className="no-pict-container-3">
+          <p className="no-pict-input-upperText">
             Select an image from your computer (jpg, jpeg, gif, jfif, etc)
           </p>
-          <label htmlFor="img" for="form-control" className="pict-input-file">
-            <i className="pict-input-text">Choose Picture</i>
+          <label
+            htmlFor="img"
+            for="form-control"
+            className="no-pict-input-file"
+          >
+            <i className="no-pict-input-text">Choose Picture</i>
           </label>
           <input
             type="file"
             id="form-control"
             onChange={onBtnAddFile}
             accept="image/jpg, image/jpeg"
+            disabled
           />
           {/* <button
             onClick={() => {
@@ -149,10 +160,12 @@ function ProfilePicture(req) {
             Click here
           </button> */}
           <button
+            disabled
             onClick={() => {
-              patchPicture();
+              console.log("masuk button set");
+              // patchPicture();
             }}
-            className="pict-button-patch"
+            className="no-pict-button-patch"
           >
             Set Profile Picture
           </button>
@@ -162,4 +175,4 @@ function ProfilePicture(req) {
   );
 }
 
-export default ProfilePicture;
+export default ProfilePictureNoEdit;

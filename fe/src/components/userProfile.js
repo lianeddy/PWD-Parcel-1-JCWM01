@@ -5,7 +5,7 @@ import "./UserProfile.css";
 
 import { Button } from "react-bootstrap";
 
-// import ProfilePicture from "./ProfilePicture";
+import ProfilePictureNoEdit from "./ProfilePictureNoEdit";
 
 function UserProfile() {
   const [userData] = useState({});
@@ -85,6 +85,9 @@ function UserProfile() {
                   <h2 className="wrap-2-text">Age</h2>
                   <p className="wrap-2-data">{age}</p>
                 </label>
+                <div className="wrap-picture">
+                  <ProfilePictureNoEdit />
+                </div>
                 <Link to={`/edit/${id}`}>
                   <Button className="wrap-button" type="button">
                     Edit Profile

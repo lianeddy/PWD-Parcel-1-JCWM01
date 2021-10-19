@@ -76,12 +76,16 @@ body {
   margin-top: 10px;
 }
 
+.wrap-picture {
+  display: flex;
+}
+
 .wrap-2 {
   display: flex;
   flex-direction: column;
   /* background-color: blue; */
   width: 100%;
-  padding: 40px;
+  padding: 0px 40px 40px 40px;
 }
 
 .wrap-2-form {
