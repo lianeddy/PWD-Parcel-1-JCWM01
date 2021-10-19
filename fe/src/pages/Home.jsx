@@ -64,6 +64,7 @@ class Home extends React.Component {
   renderProducts = () => {
     const beginningIndex = (this.state.page - 1) * this.state.itemPerPage;
     let rawData = [...this.state.filterProductList];
+    console.log("rawData", rawData);
     const compareString = (a, b) => {
       if (a.full_name < b.full_name) {
         return -1;

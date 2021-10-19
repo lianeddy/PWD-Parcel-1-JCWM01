@@ -4,14 +4,13 @@ module.exports = {
   getData: (req, res) => {
     let scriptQuery = `Select * from product;`;
     if (req.query.id) {
-      scriptQuery = `Select * from product where id = ${db.escape(
+      scriptQuery = `Select * from product where id = ${parseInt(
         req.query.id
-      )};`;
+      )} `;
     }
     db.query(scriptQuery, (err, results) => {
       if (err) res.status(500).send(err);
-      console.log("result BE[0]", results[0]);
-      res.status(200).send(results[0]);
+      res.status(200).send(results);
     });
   },
   addData: (req, res) => {

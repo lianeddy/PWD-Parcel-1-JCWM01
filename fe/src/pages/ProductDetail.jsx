@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 
 class ProductDetail extends React.Component {
   state = {
-    productData: null,
+    productData: "",
     productNotFound: false,
     quantity: 1,
   };
@@ -21,7 +21,7 @@ class ProductDetail extends React.Component {
       .then((result) => {
         console.log("result", result);
         this.setState({
-          productData: result.data,
+          productData: result.data[0],
         });
       })
       .catch(() => {
