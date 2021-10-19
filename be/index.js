@@ -108,7 +108,9 @@ const {
 } = require("./routers/index");
 
 app.use("/order", userTransaksiRouters);
+// user (edit Profile)
 app.use("/user", userProfileRouters);
+// users (login, register, etc)
 app.use("/users", userRouters);
 
 app.listen(PORT, () => console.log("Api Running : ", PORT));

@@ -53,6 +53,7 @@ class App extends React.Component {
             exact
             component={VerificationPage}
           />
+
           <Route component={Home} path="/" />
         </Switch>
       </BrowserRouter>

@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "./Register.css";
+import { URL_API } from "../helper";
 
 function Register() {
   const [userData, setUserData] = useState({});
@@ -17,7 +18,7 @@ function Register() {
     console.log(!privacy);
 
     console.log(userData);
-    Axios.post(`http://localhost:3302/user/registeruser`, userData)
+    Axios.post(URL_API + `/users/registeruser`, userData)
       .then((res) => {
         console.log(res.data);
         console.log("register done");
