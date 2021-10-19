@@ -145,7 +145,7 @@ function EditProfile() {
               </Form>
             </div>
           </div>
-          <div className="content-side"></div>
+          {/* <div className="content-side"></div> */}
         </div>
       </div>
     </>

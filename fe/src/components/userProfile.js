@@ -81,14 +81,14 @@ function UserProfile() {
                   <p>{age}</p>
                 </label>
                 <Link to={`/edit/${id}`}>
-                  <Button className="reg-button" type="button">
+                  <Button className="" type="button">
                     Edit Profile
                   </Button>
                 </Link>
               </form>
             </div>
           </div>
-          <div className="content-side"></div>
+          {/* <div className="content-side"></div> */}
         </div>
       </div>
     </>

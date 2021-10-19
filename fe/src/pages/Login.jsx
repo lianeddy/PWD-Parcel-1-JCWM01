@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { loginUser } from "../redux/actions/user";
 import { connect } from "react-redux";
-import styled from "styled-components";
+// import styled from "styled-components";
 import "./Login.css";
 
 // const Container = styled.div`
