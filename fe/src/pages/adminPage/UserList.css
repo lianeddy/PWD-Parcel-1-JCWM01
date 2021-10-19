@@ -1,0 +1,7 @@
+.user-list {
+  flex: 4;
+}
+
+.user-widget {
+  display: flex;
+}

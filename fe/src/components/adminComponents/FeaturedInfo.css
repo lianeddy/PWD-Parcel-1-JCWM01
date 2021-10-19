@@ -1,0 +1,59 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.featured {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.fe-item {
+  flex: 1;
+  margin: 0px 20px;
+  padding: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+}
+
+.fe-title {
+  font-size: 20px;
+}
+
+.fe-money-container {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.fe-money {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.fe-money-rate {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.fa-chevron-up {
+  color: rgb(64, 225, 67);
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.fa-chevron-down {
+  color: rgb(250, 40, 40);
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.fe-sub {
+  font-size: 15px;
+  color: grey;
+}

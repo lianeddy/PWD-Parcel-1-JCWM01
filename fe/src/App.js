@@ -18,6 +18,7 @@ import UserTransaksi from "./components/UserTransaksi";
 import { connect } from "react-redux";
 import { userKeepLogin, checkStorage } from "./redux/actions/user";
 import { getCartData } from "./redux/actions/cart";
+import AdminSalesReport from "./pages/AdminSalesReport";
 
 class App extends React.Component {
   componentDidMount() {
@@ -53,6 +54,9 @@ class App extends React.Component {
             exact
             component={VerificationPage}
           />
+          <Route path="/admin/salesreport">
+            <AdminSalesReport />
+          </Route>
 
           <Route component={Home} path="/" />
         </Switch>
