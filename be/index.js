@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const bearerToken = require("express-bearer-token");
-const { userRouters } = require("./routers");
 
 const PORT = 3302;
 const app = express();
@@ -102,9 +101,14 @@ app.patch("/edit-user/:id", (req, res) => {
 });
 
 // Routes
-const { userTransaksiRouters, userProfileRouters } = require("./routers/index");
+const {
+  userTransaksiRouters,
+  userProfileRouters,
+  userRouters,
+} = require("./routers/index");
 
 app.use("/order", userTransaksiRouters);
 app.use("/user", userProfileRouters);
+app.use("/users", userRouters);
 
-app.listen(PORT, () => console.log('Api Running : ', PORT))
+app.listen(PORT, () => console.log("Api Running : ", PORT));

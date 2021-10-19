@@ -5,7 +5,7 @@ const routers = express.Router();
 
 routers.get("/getuser", userControllers.getUser);
 routers.post("/registeruser", userControllers.registerUser);
-routers.patch("/verified", userControllers.verification);
+routers.patch("/verified", auth, userControllers.verification);
 routers.get("/get", userControllers.getAllUsers);
 routers.post("/login", userControllers.getData);
 
