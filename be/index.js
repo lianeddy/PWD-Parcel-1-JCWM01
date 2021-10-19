@@ -106,6 +106,7 @@ const {
   userProfileRouters,
   userRouters,
 } = require("./routers/index");
+const { db } = require("./database");
 
 app.use("/order", userTransaksiRouters);
 // user (edit Profile)

@@ -12,18 +12,11 @@ body {
   background-color: rgb(234, 244, 248);
 }
 
-h1,
-h2,
-p {
-  opacity: 0.8;
-  margin-top: 20px;
-  font-size: 30px;
-}
-
 .info {
   margin-top: 50px;
   font-size: 50px;
 }
+
 .reg-desc-text {
   font-size: 20px;
   margin-bottom: 0px;
@@ -37,16 +30,101 @@ p {
 }
 
 .wrapper {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
+  transform: translate(-50%, -50%); */
+  /* width: 450px; */
   display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
 }
 
-.wrapper .left {
+.wrap-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+  background-color: white;
+  margin: 40px;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.userProfile-side {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.wrap-1 {
+  /* background-color: red; */
+  width: 100%;
+  padding: 40px;
+}
+
+.wrap-1-info {
+  color: #353c4e;
+  font-size: 60px;
+}
+
+.wrap-1-text {
+  font-size: 25px;
+  opacity: 0.6;
+  margin-top: 10px;
+}
+
+.wrap-2 {
+  display: flex;
+  flex-direction: column;
+  /* background-color: blue; */
+  width: 100%;
+  padding: 40px;
+}
+
+.wrap-2-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap-2-form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.wrap-2-text {
+  color: #353c4e;
+  font-size: 30px;
+  flex: 2;
+}
+
+.wrap-2-data {
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  flex: 3;
+}
+
+.wrap-button {
+  margin-top: 20px;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgb(213, 212, 212);
+  cursor: pointer;
+}
+
+.wrap-button:hover {
+  background-color: rgb(167, 166, 166);
+}
+
+/* .wrapper .left {
   width: 35%;
   background: linear-gradient(to right, #01a9ac, #01dbdf);
   padding: 30px 25px;
@@ -134,4 +212,4 @@ p {
   color: #fff;
   display: block;
   font-size: 18px;
-}
+} */
