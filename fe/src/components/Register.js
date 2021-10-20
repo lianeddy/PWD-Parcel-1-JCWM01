@@ -24,7 +24,7 @@ function Register() {
         console.log("register done");
         setTimeout(() => {
           history.push("/registerdone");
-        }, 3000);
+        }, 1000);
       })
       .catch((err) => console.log(err));
   };

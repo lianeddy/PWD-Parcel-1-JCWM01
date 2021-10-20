@@ -16,7 +16,7 @@ p {
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  background-color: rgb(210, 175, 243);
+  background-color: rgb(234, 244, 248);
   height: 720px;
 }
 
@@ -112,7 +112,7 @@ p {
 
 .reg-button {
   margin: 25px 0 20px 0;
-  background-color: rgb(144, 65, 218);
+  background-color: rgb(163, 218, 240);
   width: 90%;
   height: 45px;
   border-radius: 10px;
@@ -121,7 +121,7 @@ p {
 }
 
 .reg-button:hover {
-  background-color: blueviolet;
+  background-color: rgb(99, 200, 240);
 }
 
 .reg-button-text {
@@ -157,5 +157,6 @@ p {
 .content-side {
   width: 55%;
   height: 720px;
-  background-color: rgb(151, 76, 221);
+  /* background-color: rgb(151, 76, 221); */
+  background-color: rgb(208, 233, 243);
 }

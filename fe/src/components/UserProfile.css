@@ -8,11 +8,11 @@
   font-family: "Josefin Sans", sans-serif;
 }
 
-body {
+/* body {
   background-color: rgb(234, 244, 248);
-}
+} */
 
-.info {
+/* .info {
   margin-top: 50px;
   font-size: 50px;
 }
@@ -27,7 +27,7 @@ body {
 }
 .reg-button:hover {
   background-color: rgb(255, 10, 10);
-}
+} */
 
 .wrapper {
   /* position: absolute;
@@ -39,6 +39,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+  background-color: rgb(234, 244, 248);
 }
 
 .wrap-container {
