@@ -160,3 +160,23 @@ p {
   /* background-color: rgb(151, 76, 221); */
   background-color: rgb(208, 233, 243);
 }
+
+.message-email {
+  position: absolute;
+  top: 468px;
+  /* background-color: rgba(150, 146, 146, 0.326); */
+  z-index: 12;
+  color: rgb(251, 67, 67);
+  font-size: 0.7rem;
+  padding-left: 250px;
+}
+
+.message-pass {
+  position: absolute;
+  top: 538px;
+  /* background-color: rgba(150, 146, 146, 0.326); */
+  z-index: 12;
+  color: rgb(251, 67, 67);
+  font-size: 0.7rem;
+  padding-left: 201px;
+}

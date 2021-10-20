@@ -45,17 +45,19 @@
   background-color: rgb(240, 240, 255);
 }
 
-.fas {
+.fas.fa-home,
+.fas.fa-chart-line,
+.fas.fa-chart-bar {
   margin-right: 10px;
   font-size: 20px;
   flex: 1;
 }
 
-.fa {
+/* .fa {
   margin-right: 10px;
   font-size: 20px;
   flex: 1;
-}
+} */
 
 .side-link {
   display: flex;

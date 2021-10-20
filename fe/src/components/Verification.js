@@ -16,9 +16,9 @@ function Verification(props) {
     console.log(props);
     console.log(props.req.computedMatch);
     console.log(props.req.computedMatch.params.token);
-    console.log(verifyState);
+    // console.log(verifyState);
     Axios.patch(
-      "http://localhost:3302/user/verified",
+      "http://localhost:3302/users/verified",
       {},
       {
         headers: {
@@ -34,7 +34,8 @@ function Verification(props) {
           messagePlus: "You will be redirected to landing page...",
         });
         setTimeout(() => {
-          history.push("/register");
+          // redirect ke login
+          history.push("/");
         }, 3000);
       })
       .catch((err) => {
@@ -42,6 +43,7 @@ function Verification(props) {
         console.log("error cuy");
         setVerifyState({ message: "Failed to Verified Account" });
       });
+    // eslint-disable-next-line
   }, []);
 
   return (

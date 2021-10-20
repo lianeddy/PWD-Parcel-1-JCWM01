@@ -60,11 +60,22 @@ module.exports = {
       res.status(200).send(results);
     });
   },
+  checkEmail: (req, res) => {
+    console.log(req.query);
+    console.log(req.query.email);
+    let scriptQuery = `Select * from user where email=${db.escape(
+      req.query.email
+    )};`;
+    db.query(scriptQuery, (err, results) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(results);
+    });
+  },
   registerUser: async (req, res) => {
     // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
     const { full_name, email, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    // const hash = Crypto.createHmac("shal", "hash123");
+    // const hash = Crypto.createHmac("sha1", "hash123").digest("hex");
     console.log("hash : " + hash);
 
     const insertQuery = `INSERT into user values (null, ${db.escape(
@@ -90,12 +101,15 @@ module.exports = {
           console.log(insertQuery);
           console.log("email setelah ISNET" + results2[0]);
           // bahan untuk membuat token
-          let { full_name, email, role, verified } = results2[0];
+          let { full_name, email, role, verified, id } = results2[0];
+
           console.log("stringfy : " + stringify(results2[0]));
           console.log("full_name : " + full_name);
           console.log("email : " + email);
+          console.log("verified : " + verified);
+          console.log("id : " + id);
           // membuat token
-          let token = createToken({ full_name, email, role, verified });
+          let token = createToken({ full_name, email, role, verified, id });
 
           console.log("token : " + token);
 
@@ -103,10 +117,14 @@ module.exports = {
             from: `admin <id.private.bootcamp@gmail.com>`,
             to: `${email}`,
             subject: `Account Verification`,
-            html: `<a href="http://localhost:3302/user/verification/${token}">Click here to verified your account.</a>`,
+            html: `<a href="http://localhost:3000/authentication/${token}">Click here to verified your account.</a>`,
           };
 
+          console.log("mail html:" + mail.html);
           console.log("mail : " + mail.to);
+
+          console.log("Bawah AUTH");
+          console.log("auth(token)");
 
           transporter.sendMail(mail, (errMail, resMail) => {
             console.log("transporter IN");
