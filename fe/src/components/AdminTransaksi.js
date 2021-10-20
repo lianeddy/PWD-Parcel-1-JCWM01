@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-// import "./userTransaksi.css";
+import "./adminTransaksi.css";
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup,Label,Input, Button,Modal, ModalHeader, ModalBody, ModalFooter, Row, Badge } from 'reactstrap';
 import { useHistory } from "react-router-dom";
@@ -13,15 +13,15 @@ function UserTransaksi() {
   const [userData] = useState({});
   
   let history = useHistory();
-  let id = 1
+
   
   const user = async (status) => {
     console.log(typeof status !== 'undefined');
     let url = ""
     if (typeof status !== 'undefined')
-      url = `http://localhost:3302/order/transaction?id=${id}&status=${status}`;
+      url = `http://localhost:3302/admin/admin?status=${status}`;
     else
-      url = `http://localhost:3302/order/transaction?id=${id}`
+      url = `http://localhost:3302/admin/admin`
     // ngambil data dari database by id yang login
     Axios.get(url, userData)
       .then(res => {
@@ -88,7 +88,7 @@ function UserTransaksi() {
      
        // Request made to the backend api
        // Send formData object
-       Axios.post("http://localhost:3302/order/upload-payment", formData)
+       Axios.post("http://localhost:3302/admin/upload-payment", formData)
        .then(res => {
         console.log(res.status)
         alert ("Upload Success")
@@ -104,6 +104,45 @@ function UserTransaksi() {
       console.log('ss')
       console.log(current_order_detail_id)
     }
+
+    const confirm = async (id) => {
+      let url = ""
+      let data = {id:id,status:2}
+      url = `http://localhost:3302/admin/confirm`;
+      // ngambil data dari database by id yang login
+      Axios.post(url, data)
+        .then(res => {
+          user()
+          console.log(res.data);
+          console.log(transactions)
+          
+    
+        })
+        .catch((err) => console.log(err));
+    };
+
+    const rejected = async (id) => {
+      let url = ""
+      let data = {id:id,status:3}
+      url = `http://localhost:3302/admin/confirm`;
+      // ngambil data dari database by id yang login
+      Axios.post(url, data)
+        .then(res => {
+          user()
+          console.log(res.data);
+          console.log(transactions)
+          
+    
+        })
+        .catch((err) => console.log(err));
+    };
+    
+    
+
+
+
+
+
   return (
     <>
     <div className="container">
@@ -119,20 +158,27 @@ function UserTransaksi() {
             fn: (data) => {
               return {
                 ...data,
-                styles: {
-                  ...data.styles,
-                  overflow: 'auto',
-                  maxHeight: '100px',
-                },
+                // styles: {
+                //   ...data.styles,
+                //   overflow: 'auto',
+                //   maxHeight: '100px',
+                // },
               };
             },
           },
         }}
       >
-  
-      <DropdownItem onClick={() => user(0)}>On Going transaction</DropdownItem>
-      <DropdownItem onClick={() => user(1)}>Transaction Done</DropdownItem>
+        {/* status = 0 (transaksi belum dibayar)
+        status = 1 (menunggu confirm pembayaran)
+        status = 2 (payment approve)
+        status = 3 (rejected) 
+        status = 4 (selesai) */}
       <DropdownItem onClick={() => user()}>All transaction</DropdownItem>
+      <DropdownItem onClick={() => user(0)}>Waiting Payment</DropdownItem>
+      <DropdownItem onClick={() => user(1)}>Waiting Confirm Payment</DropdownItem>
+      <DropdownItem onClick={() => user(2)}>Payment Approve</DropdownItem>
+      <DropdownItem onClick={() => user(3)}>Rejected</DropdownItem>
+      <DropdownItem onClick={() => user(4)}>Transaction Done</DropdownItem>
       </DropdownMenu>
       </Dropdown>,
     
@@ -152,8 +198,14 @@ function UserTransaksi() {
             </div>
           </Row>
           {/* if condition react */}
-          <Button color="danger">Confirm</Button>
-          <Button color="danger">Reject</Button>
+         
+          {transaction.status == 1 &&
+          <>
+          <Button color="success" onClick={()=>confirm((transaction.order_detail_id))}>Confirm</Button>
+          <Button color="danger" onClick={()=>rejected((transaction.order_detail_id))}>Rejected</Button>
+          </>
+          }
+      
           
         </CardBody>
       </Card>

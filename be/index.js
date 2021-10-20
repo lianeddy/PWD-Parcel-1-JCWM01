@@ -153,6 +153,7 @@ app.patch('/edit-user/:id', (req,res)=> {
 const { userTransaksiRouters, userProfileRouters } = require("./routers/index");
 
 app.use("/order", userTransaksiRouters);
+app.use("/admin", userTransaksiRouters);
 app.use("/user", userProfileRouters);
 
 app.listen(PORT, () => console.log('Api Running : ', PORT))

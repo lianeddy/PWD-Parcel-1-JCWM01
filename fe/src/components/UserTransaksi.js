@@ -119,20 +119,23 @@ function UserTransaksi() {
             fn: (data) => {
               return {
                 ...data,
-                styles: {
-                  ...data.styles,
-                  overflow: 'auto',
-                  maxHeight: '100px',
-                },
+                // styles: {
+                //   ...data.styles,
+                //   overflow: 'auto',
+                //   maxHeight: '100px',
+                // },
               };
             },
           },
         }}
       >
-  
-      <DropdownItem onClick={() => user(0)}>On Going transaction</DropdownItem>
-      <DropdownItem onClick={() => user(1)}>Transaction Done</DropdownItem>
       <DropdownItem onClick={() => user()}>All transaction</DropdownItem>
+      <DropdownItem onClick={() => user(0)}>Waiting Payment</DropdownItem>
+      <DropdownItem onClick={() => user(1)}>Waiting Confirm Payment</DropdownItem>
+      <DropdownItem onClick={() => user(2)}>Payment Approve</DropdownItem>
+      <DropdownItem onClick={() => user(3)}>Rejected</DropdownItem>
+      <DropdownItem onClick={() => user(4)}>Transaction Done</DropdownItem>
+      
       </DropdownMenu>
       </Dropdown>,
     
