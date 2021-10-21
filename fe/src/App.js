@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import EditPassword from "./pages/EditPassword";
 
 import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
@@ -36,6 +37,7 @@ class App extends React.Component {
             <Route component={Login} path="/login" />
             <Route component={Forgot} path="/forgot" />
             <Route component={Admin} path="/admin" />
+            <Route component={EditPassword} path="/EditPassword" />
 
             <Route component={ProductDetail} path="/product-detail/:id" />
 

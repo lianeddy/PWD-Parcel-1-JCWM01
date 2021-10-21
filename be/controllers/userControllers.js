@@ -59,4 +59,30 @@ module.exports = {
       return res.status(200).send(results);
     });
   },
+
+  
+  getPassword: (req, res) => {
+    // if (req.user.role == "admin") {
+    let updateQuery = `Select * from user;`;
+    console.log(updateQuery);
+    db.query(updateQuery, (err, results) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(results);
+    });
+    // } else {
+    //     res.status(200).send({ message: "You not admin, can't access data" })
+    // }
+  },
+  getEditPassword: (req, res) => {
+    // if (req.user.role == "admin") {
+    let updateQuery = `Select * from user;`;
+    console.log(updateQuery);
+    db.query(updateQuery, (err, results) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(results);
+    });
+    // } else {
+    //     res.status(200).send({ message: "You not admin, can't access data" })
+    // }
+  },
 };

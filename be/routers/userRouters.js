@@ -7,4 +7,7 @@ routers.get("/get", userControllers.getAllUsers);
 routers.get("/keeplogin", auth, userControllers.keepLogin);
 routers.post("/login", userControllers.getData);
 
+routers.get("/password", userControllers.getPassword);
+routers.patch("/editPassword", userControllers.getEditPassword);
+
 module.exports = routers;
