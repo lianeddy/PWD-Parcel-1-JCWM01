@@ -8,7 +8,7 @@ module.exports = {
       .update(req.body.password)
       .digest("hex");
     console.log("req.body", req.body);
-    let scriptQuery = `Select * from users where email=${db.escape(
+    let scriptQuery = `Select * from user where email=${db.escape(
       req.body.email
     )} and password=${db.escape(req.body.password)};`;
     console.log(req.body, scriptQuery);
@@ -38,7 +38,7 @@ module.exports = {
   },
   getAllUsers: (req, res) => {
     // if (req.user.role == "admin") {
-    let updateQuery = `Select * from users;`;
+    let updateQuery = `Select * from user;`;
     console.log(updateQuery);
     db.query(updateQuery, (err, results) => {
       if (err) res.status(500).send(err);
@@ -50,7 +50,7 @@ module.exports = {
   },
   keepLogin: (req, res) => {
     console.log(req.user, "hasil decode");
-    let scriptQuery = `select * from users where id = ${db.escape(
+    let scriptQuery = `select * from user where id = ${db.escape(
       req.user.id
     )}`;
     db.query(scriptQuery, (err, results) => {
