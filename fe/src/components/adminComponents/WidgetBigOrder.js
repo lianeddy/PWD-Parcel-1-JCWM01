@@ -3,9 +3,18 @@ import React, { useState, useEffect } from "react";
 import "./WidgetBigOrder.css";
 
 function WidgetBigOrder() {
+  // get data from db
   const [orderList, setOrderList] = useState();
+  // generate UI(tr, td) for data
   const [returnOrder, setReturnOrder] = useState("test");
+  // generate HTML option month + year
   const [generateMonth, setGenerateMonth] = useState([<option>None</option>]);
+  const [generateYear, setGenerateYear] = useState([<option>None</option>]);
+  // get current month and year value
+  const [selectPeriod, setSelectPeriod] = useState({
+    month: "1",
+    year: "2017",
+  });
 
   const Button = ({ type }) => {
     return <button className={"wid-lg-button" + type}>{type}</button>;
@@ -13,8 +22,11 @@ function WidgetBigOrder() {
 
   useEffect(() => {
     getProduct();
+    generateOption();
+    // renderOrder();
   }, []);
 
+  // set state product with data selected
   const getProduct = () => {
     Axios.get(`http://localhost:3302/admin/getorderlist`)
       .then((res) => {
@@ -30,6 +42,7 @@ function WidgetBigOrder() {
     console.log("axios get");
   };
 
+  // render to appear in UI
   const renderOrder = () => {
     console.log("renderOrder masuk");
     var test = orderList.map((i) => {
@@ -63,7 +76,8 @@ function WidgetBigOrder() {
     setReturnOrder(test);
   };
 
-  const generateSelectMonth = () => {
+  // generate <option> month and year
+  const generateOption = () => {
     let dateToday = new Date();
     let todayMonth = dateToday.getMonth() + 1;
     let todayYear = dateToday.getFullYear();
@@ -71,7 +85,14 @@ function WidgetBigOrder() {
     console.log(todayMonth);
     console.log(todayYear);
 
+    if (dateToday.getFullYear()) {
+    }
+
+    console.log("[Slice Year]", generateYear);
+    console.log("[Slice Year]", generateYear[0]);
+
     var monthArr = [];
+    var yearArr = [];
 
     var monthList = [
       "Januari",
@@ -87,25 +108,71 @@ function WidgetBigOrder() {
       "November",
       "Desember",
     ];
+    var initialYear = 2017;
 
-    for (let i = 0; i < todayMonth; i++) {
-      monthArr.push(<option>{monthList[i]}</option>);
+    var selisihTahun = todayYear - initialYear;
+    console.log(selisihTahun);
+
+    for (let i = 0; i < 12; i++) {
+      monthArr.push(<option value={i + 1}>{monthList[i]}</option>);
+    }
+
+    for (let i = initialYear; i <= todayYear; i++) {
+      yearArr.push(<option value={i}>{i}</option>);
     }
 
     console.log(monthArr);
 
     setGenerateMonth(monthArr);
+    setGenerateYear(yearArr);
     console.log(generateMonth);
+    console.log(generateYear);
+    console.log(selectPeriod);
+  };
+
+  const checkState = () => {
+    console.log(selectPeriod);
   };
 
   return (
     <div className="widget-large">
-      <button onClick={generateSelectMonth}>Generate Select Month</button>
-      <select>
-        {/* <option>option 1</option> */}
-        {generateMonth}
-      </select>
       <h3 className="wid-large-title">Latest Transactions</h3>
+      <button onClick={checkState} />
+      <h1 className="wid-large-title-select">
+        Choose Month and Year of Transactions
+      </h1>
+      <div className="wid-large-select-container">
+        <select
+          onChange={(e) => {
+            console.log("click month");
+            console.log(e.target.value);
+            setSelectPeriod({
+              ...selectPeriod,
+              month: e.target.value,
+            });
+          }}
+          className="wid-select-1"
+        >
+          {/* <option>option 1</option> */}
+          {generateMonth}
+        </select>
+        <select
+          onChange={(e) => {
+            console.log("click year");
+            console.log(e.target.value);
+            setSelectPeriod({
+              ...selectPeriod,
+              year: e.target.value,
+            });
+          }}
+          className="wid-select-2"
+        >
+          {generateYear}
+        </select>
+        <button onClick={renderOrder} className="wid-select-btn">
+          Generate User Transactions
+        </button>
+      </div>
       <table className="wid-lg-table">
         <tr className="wid-lg-tr">
           <th className="wid-lg-th">Customer</th>
@@ -130,7 +197,7 @@ function WidgetBigOrder() {
         </tr> */}
         {returnOrder}
       </table>
-      <button
+      {/* <button
         type="button"
         onClick={() => {
           renderOrder();
@@ -138,7 +205,7 @@ function WidgetBigOrder() {
         className="wid-button"
       >
         render product
-      </button>
+      </button> */}
     </div>
   );
 }

@@ -43,7 +43,7 @@
   color: #d95087;
 }
 
-.wid-lg-buttonPending {
+.wid-lg-buttonpending {
   padding: 5px 7px;
   border: none;
   border-radius: 10px;
@@ -71,4 +71,51 @@
 .wid-lg-date,
 .wid-lg-amount {
   font-weight: 300;
+}
+
+/* select widget */
+.wid-large-select-container {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 20px 10px 20px;
+}
+
+.wid-select-1 {
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.wid-select-2 {
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.wid-select-btn {
+  flex: 2;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+.wid-select-btn:hover {
+  background-color: rgb(220, 220, 220);
+  transition: 0.1s ease-in-out;
+}
+
+.wid-large-title-select {
+  font-size: 18px;
+  opacity: 0.6;
+  margin-top: 20px;
+  margin-left: 20px;
 }
