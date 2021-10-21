@@ -5,6 +5,7 @@ import "./WidgetBigOrder.css";
 function WidgetBigOrder() {
   const [orderList, setOrderList] = useState();
   const [returnOrder, setReturnOrder] = useState("test");
+  const [generateMonth, setGenerateMonth] = useState([<option>None</option>]);
 
   const Button = ({ type }) => {
     return <button className={"wid-lg-button" + type}>{type}</button>;
@@ -41,7 +42,7 @@ function WidgetBigOrder() {
               src="https://images.unsplash.com/photo-1634430078581-1bec7774a622?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
               alt=""
             ></img>
-            <span className="wid-lg-name">{i.id}</span>
+            <span className="wid-lg-name">{i.full_name}</span>
           </td>
           <td className="wid-lg-date">
             {i.created_at.slice(0, 10) + " " + i.created_at.slice(11, 19)}
@@ -62,8 +63,48 @@ function WidgetBigOrder() {
     setReturnOrder(test);
   };
 
+  const generateSelectMonth = () => {
+    let dateToday = new Date();
+    let todayMonth = dateToday.getMonth() + 1;
+    let todayYear = dateToday.getFullYear();
+    console.log(dateToday);
+    console.log(todayMonth);
+    console.log(todayYear);
+
+    var monthArr = [];
+
+    var monthList = [
+      "Januari",
+      "Febuari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember",
+    ];
+
+    for (let i = 0; i < todayMonth; i++) {
+      monthArr.push(<option>{monthList[i]}</option>);
+    }
+
+    console.log(monthArr);
+
+    setGenerateMonth(monthArr);
+    console.log(generateMonth);
+  };
+
   return (
     <div className="widget-large">
+      <button onClick={generateSelectMonth}>Generate Select Month</button>
+      <select>
+        {/* <option>option 1</option> */}
+        {generateMonth}
+      </select>
       <h3 className="wid-large-title">Latest Transactions</h3>
       <table className="wid-lg-table">
         <tr className="wid-lg-tr">
