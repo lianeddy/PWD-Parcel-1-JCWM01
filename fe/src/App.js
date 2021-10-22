@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 import RegisterPage from "./pages/RegisterPage";
 import RegisterDonePage from "./pages/RegisterDonePage";
@@ -42,9 +42,9 @@ class App extends React.Component {
       <BrowserRouter>
         <MyNavbar />
         <Switch>
+          <RegisterPage path="/register" exact component={RegisterPage} />
           <Route component={Login} path="/login" />
           <Route component={Forgot} path="/forgot" />
-          <RegisterPage path="/register" exact component={RegisterPage} />
           <Route path="/profile" component={UserProfile} />
           <Route path="/edit" component={EditProfile} />
           <Route path="/UserTransaksi" component={UserTransaksi} />
@@ -63,11 +63,11 @@ class App extends React.Component {
             <AdminSalesReport />
           </Route>
 
-          <ProfilePictureNoEdit
+          {/* <ProfilePictureNoEdit
             path="/pictprofile"
             exact
             component={ProfilePictureNoEdit}
-          />
+          /> */}
 
           <Route component={Home} path="/" />
         </Switch>

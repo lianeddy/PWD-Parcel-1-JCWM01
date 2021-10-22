@@ -2,20 +2,19 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { loginUser } from "../redux/actions/user";
 import { connect } from "react-redux";
-// import styled from "styled-components";
-import "./Login.css";
+import styled from "styled-components";
 
-// const Container = styled.div`
-//   width: 100vw;
-//   height: 100vh;
-//   background: linear-gradient(
-//       rgba(255, 255, 255, 0.5),
-//       rgba(255, 255, 255, 0.5)
-//     ),
-//     url("https://umroh.com/blog/wp-content/uploads/2020/03/5-macam-parcel-lebaran-source-pixabay1.png")
-//       center;
-//   background-size: cover;
-// `;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://umroh.com/blog/wp-content/uploads/2020/03/5-macam-parcel-lebaran-source-pixabay1.png")
+      center;
+  background-size: cover;
+`;
 
 class Login extends React.Component {
   state = {
@@ -36,58 +35,55 @@ class Login extends React.Component {
     }
 
     return (
-      <div className="login">
-        <div className="log-1">
-          <div className="log1-text">
-            <h1 className="log1-text-upper">Login now !</h1>
-            <p className="log1-text-lower">
+      <Container>
+        <div className="row">
+          <div className="col-12 text-center">
+            <h1>Login now !</h1>
+            <p className="lead">
               Login now and start shopping in the most affordable ecommercer
             </p>
           </div>
         </div>
-        <div className="log-2">
-          <div className="log-2-container">
+        <div className="row mt-5">
+          <div className="col-4 offset-4">
             {this.props.userGlobal.errMsg ? (
               <div className="alert alert-danger">
                 {this.props.userGlobal.errMsg}
               </div>
             ) : null}
-            <div className="log2-con">
-              <div className="log2-con2">
-                {/* <h5 className="font-weight-bold mb-3"></h5> */}
+            <div className="card">
+              <div className="card-body">
+                <h5 className="font-weight-bold mb-3"></h5>
                 <input
                   onChange={this.inputHandler}
                   name="email"
                   placeholder="Email"
                   type="text"
-                  className="log2-email"
+                  className="form-control my-2"
                 />
                 <input
                   onChange={this.inputHandler}
                   name="password"
                   placeholder="Password"
                   type="password"
-                  className="log2-password"
+                  className="form-control my-2"
                 />
-                <div className="log2-button">
+                <div className="d-flex flex-row justify-content-between align-items-center">
                   <button
                     onClick={() => {
-                      console.log("login clicked");
                       this.props.loginUser(this.state);
                     }}
-                    className="log2-but"
+                    className="btn btn-primary mt-2"
                   >
                     Login
                   </button>
-                  <Link to={"/forgot"} className="log2-forget">
-                    Forgot Password?
-                  </Link>
+                  <Link to={"/forgot"}>Forgot Password?</Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     );
   }
 }

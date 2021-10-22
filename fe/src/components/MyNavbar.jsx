@@ -1,10 +1,10 @@
 import React from "react";
-import { Badge } from "@material-ui/core";
+import {} from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
 import {
   Navbar,
   NavItem,
-  NavLink,
+  //NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   NavbarBrand,
@@ -16,20 +16,17 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/user";
-import "./MyNavbar.css";
 
 class MyNavbar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light className="nav-container">
-          <NavbarBrand className="nav-logo">
-            <Link to="/" className="nav-logo-link">
-              Parcel Shop
-            </Link>
-            <i className="fas fa-shopping-cart nav-logo-item" />
+        <Navbar color="light" light>
+          <NavbarBrand>
+            <Link to="/">Parcel Shop</Link>
+            <ShoppingCartOutlined />
           </NavbarBrand>
-          <Nav className="nav-menu">
+          <Nav>
             {this.props.userGlobal.email ? (
               <>
                 <NavItem>
@@ -41,9 +38,7 @@ class MyNavbar extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <Link to="/cart">
-                        Cart ({this.props.cartGlobal.cartList.length})
-                      </Link>
+                      <Link to="/cart">Cart</Link>
                     </DropdownItem>
                     <DropdownItem>
                       <Link to="/history">History</Link>
@@ -63,13 +58,8 @@ class MyNavbar extends React.Component {
             ) : (
               <NavItem>
                 <NavbarText>
-                  <Link to="/login" className="nav-login">
-                    Login
-                  </Link>{" "}
-                  |{" "}
-                  <Link to="/register" className="nav-register">
-                    Register
-                  </Link>
+                  <Link to="/login">Login</Link> |{" "}
+                  <Link to="/register">Register</Link>
                 </NavbarText>
               </NavItem>
             )}
@@ -83,7 +73,7 @@ class MyNavbar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userGlobal: state.user,
-    cartGlobal: state.cart,
+    // cartGlobal: state.cart,
   };
 };
 
