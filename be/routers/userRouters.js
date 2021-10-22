@@ -8,7 +8,7 @@ routers.get("/keeplogin", auth, userControllers.keepLogin);
 routers.post("/login", userControllers.getData);
 
 routers.get("/password", userControllers.getPassword);
-routers.patch("/editPassword", userControllers.patchEditPassword);
+routers.patch("/editPassword/:id", userControllers.patchEditPassword);
 routers.post("/editPassword", userControllers.postEditPassword);
 
 module.exports = routers;

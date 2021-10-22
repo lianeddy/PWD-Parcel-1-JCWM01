@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { editPasswordUser } from "../redux/actions/user";
+import { URL_API } from "../helper";
 import { connect } from "react-redux";
+
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -19,7 +21,8 @@ const Container = styled.div`
 class Edit extends React.Component {
   state = {
     password: "",
-    password: "",
+    newpassword: "",
+    confirmnewpassword: "",
   };
 
   inputHandler = (event) => {
@@ -29,10 +32,21 @@ class Edit extends React.Component {
     this.setState({ [name]: value });
   };
 
-  render() {
-    if (this.props.userGlobal.email) {
-      return <Redirect to="/" />;
+  submitHandler = () => {
+    console.log(this.props.userGlobal)
+    if (this.state.confirmnewpassword !== this.state.newpassword) {
+      alert("Password Baru tidak match");
+  
+    } else {
+      axios.patch(`${URL_API}/users/editPassword/${this.props.userGlobal.id}`, this.state)
+      .then(res=> {
+        console.log(res)
+      })
     }
+  };
+
+  render() {
+  
 
     return (
       <Container>
@@ -45,38 +59,40 @@ class Edit extends React.Component {
         </div>
         <div className="row mt-5">
           <div className="col-4 offset-4">
-            {this.props.userGlobal.errMsg ? (
-              <div className="alert alert-danger">
-                {this.props.userGlobal.errMsg}
-              </div>
-            ) : null}
             <div className="card">
               <div className="card-body">
                 <h5 className="font-weight-bold mb-3"></h5>
                 <input
                   onChange={this.inputHandler}
-                  name="email"
-                  placeholder="Email"
-                  type="text"
+                  name="password"
+                  placeholder="password"
+                  type="password"
                   className="form-control my-2"
                 />
                 <input
                   onChange={this.inputHandler}
-                  name="password"
-                  placeholder="Password"
+                  name="newpassword"
+                  placeholder="New Password"
+                  type="password"
+                  className="form-control my-2"
+                />
+                <input
+                  onChange={this.inputHandler}
+                  name="confirmnewpassword"
+                  placeholder="Confirm New Password"
                   type="password"
                   className="form-control my-2"
                 />
                 <div className="d-flex flex-row justify-content-between align-items-center">
                   <button
                     onClick={() => {
-                      this.props.editPasswordUser(this.state);
+                      this.submitHandler(this.state);
                     }}
                     className="btn btn-primary mt-2"
                   >
                     Edit Password
                   </button>
-                  <Link to={"/forgot"}>Forgot Password?</Link>
+
                 </div>
               </div>
             </div>
@@ -90,11 +106,8 @@ class Edit extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userGlobal: state.user,
+    // cartGlobal: state.cart,
   };
 };
 
-const mapDispatchToProps = {
-  editPasswordUser ,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Edit);
+export default connect(mapStateToProps)(Edit);
