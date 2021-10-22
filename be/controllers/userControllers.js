@@ -69,11 +69,9 @@ module.exports = {
       if (err) res.status(500).send(err);
       res.status(200).send(results);
     });
-    // } else {
-    //     res.status(200).send({ message: "You not admin, can't access data" })
-    // }
+  
   },
-  getEditPassword: (req, res) => {
+  postEditPassword: (req, res) => {
     // if (req.user.role == "admin") {
     let updateQuery = `Select * from user;`;
     console.log(updateQuery);
@@ -81,8 +79,17 @@ module.exports = {
       if (err) res.status(500).send(err);
       res.status(200).send(results);
     });
-    // } else {
-    //     res.status(200).send({ message: "You not admin, can't access data" })
-    // }
+   
+  },
+
+  patchEditPassword: (req, res) => {
+    // if (req.user.role == "admin") {
+    let updateQuery = `Select * from user;`;
+    console.log(updateQuery);
+    db.query(updateQuery, (err, results) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(results);
+    });
+   
   },
 };

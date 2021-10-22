@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { loginUser } from "../redux/actions/user";
+import { editPasswordUser } from "../redux/actions/user";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
@@ -70,7 +70,7 @@ class Edit extends React.Component {
                 <div className="d-flex flex-row justify-content-between align-items-center">
                   <button
                     onClick={() => {
-                      this.props.loginUser(this.state);
+                      this.props.editPasswordUser(this.state);
                     }}
                     className="btn btn-primary mt-2"
                   >
@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  loginUser,
+  editPasswordUser ,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Edit);
