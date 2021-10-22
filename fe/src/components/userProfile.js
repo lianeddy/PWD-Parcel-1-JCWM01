@@ -5,8 +5,6 @@ import "./UserProfile.css";
 
 import { Button } from "react-bootstrap";
 
-import ProfilePictureNoEdit from "./ProfilePictureNoEdit";
-
 function UserProfile() {
   const [userData] = useState({});
   const [full_name, setFullname] = useState();
@@ -15,12 +13,12 @@ function UserProfile() {
   const [adress, setAdress] = useState();
   const [age, setAge] = useState();
 
-  let id = 12;
+  let id = 1;
   const user = () => {
     console.log(userData);
 
     // ngambil data dari database by id yang login
-    Axios.get(`http://localhost:3302/user/get?id=${id}`, userData)
+    Axios.get(`http://localhost:3302/user?id=${id}`, userData)
       .then((res) => {
         console.log(res.data);
         setFullname(res.data[0].full_name);
@@ -51,52 +49,46 @@ function UserProfile() {
   return (
     <>
       <div className="wrapper">
-        <div className="wrap-container">
-          <div className="userProfile-side">
-            {/* <div className="reg-icon"></div> */}
-            {/* <div className="wrap-picture">
-              <ProfilePicture />
-            </div> */}
-            <div className="wrap-1">
-              <h1 className="wrap-1-info">Your Profile</h1>
-              <p className="wrap-1-text">
+        <div className="reg-container">
+          <div className="UserProfile-side">
+            <div className="reg-icon"></div>
+            <div className="right">
+              <h1 className="info">Your Profile</h1>
+              <p className="reg-desc-text">
                 Give us your information to access further page.
               </p>
             </div>
-            <div className="wrap-2">
-              <form className="wrap-2-form">
-                <label className="wrap-2-form-container">
-                  <h2 className="wrap-2-text">Full Name</h2>
-                  <p className="wrap-2-data">{full_name}</p>
+            <div className="right">
+              <form className="right-form">
+                <label>
+                  <h2 className="data">Full Name</h2>
+                  <p>{full_name}</p>
                 </label>
-                <label className="wrap-2-form-container">
-                  <h2 className="wrap-2-text">Email</h2>
-                  <p className="wrap-2-data">{email}</p>
+                <label>
+                  <h2 className="data">Email</h2>
+                  <p>{email}</p>
                 </label>
-                <label className="wrap-2-form-container">
-                  <h2 className="wrap-2-text">Gender</h2>
-                  <p className="wrap-2-data">{gender}</p>
+                <label>
+                  <h2 className="data">Gender</h2>
+                  <p>{gender}</p>
                 </label>
-                <label className="wrap-2-form-container">
-                  <h2 className="wrap-2-text">Address</h2>
-                  <p className="wrap-2-data">{adress}</p>
+                <label>
+                  <h2 className="data">Address</h2>
+                  <p>{adress}</p>
                 </label>
-                <label className="wrap-2-form-container">
-                  <h2 className="wrap-2-text">Age</h2>
-                  <p className="wrap-2-data">{age}</p>
+                <label>
+                  <h2 className="data">Age</h2>
+                  <p>{age}</p>
                 </label>
-                <div className="wrap-picture">
-                  <ProfilePictureNoEdit />
-                </div>
                 <Link to={`/edit/${id}`}>
-                  <Button className="wrap-button" type="button">
+                  <Button className="reg-button" type="button">
                     Edit Profile
                   </Button>
                 </Link>
               </form>
             </div>
           </div>
-          {/* <div className="content-side"></div> */}
+          <div className="content-side"></div>
         </div>
       </div>
     </>
