@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 import RegisterPage from "./pages/RegisterPage";
 import RegisterDonePage from "./pages/RegisterDonePage";
