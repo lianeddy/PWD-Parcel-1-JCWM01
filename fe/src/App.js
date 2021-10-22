@@ -14,6 +14,7 @@ import MyNavbar from "./components/MyNavbar";
 import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/userProfile";
 import UserTransaksi from "./components/UserTransaksi";
+import AdminTransaksi from "./components/AdminTransaksi";
 
 import { connect } from "react-redux";
 import { userKeepLogin, checkStorage } from "./redux/actions/user";
@@ -47,6 +48,7 @@ class App extends React.Component {
           <Route path="/profile" component={UserProfile} />
           <Route path="/edit" component={EditProfile} />
           <Route path="/UserTransaksi" component={UserTransaksi} />
+          <Route path="/AdminTransaksi" component={AdminTransaksi} />
           <RegisterDonePage
             path="/registerdone"
             exact

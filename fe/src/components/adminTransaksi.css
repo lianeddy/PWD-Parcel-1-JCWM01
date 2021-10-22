@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+button + button {
+    margin-left: 10px;
+
+}
