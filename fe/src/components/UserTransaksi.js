@@ -123,7 +123,7 @@ function UserTransaksi() {
                 //   ...data.styles,
                 //   overflow: 'auto',
                 //   maxHeight: '100px',
-                // },
+                // }
               };
             },
           },

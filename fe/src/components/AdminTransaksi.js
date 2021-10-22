@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 
 
-function UserTransaksi() {
+function AdminTransaksi() {
   const [transactions, setUserTransaksi] = useState([]);
   const [userData] = useState({});
   
@@ -240,4 +240,4 @@ function UserTransaksi() {
   
 
 
-export default UserTransaksi;
+export default AdminTransaksi;
