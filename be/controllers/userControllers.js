@@ -71,11 +71,15 @@ module.exports = {
       res.status(200).send(results);
     });
   },
-  registerUser: async (req, res) => {
+  registerUser: (req, res) => {
     // const { nama, usia, email, berat, kota, tahun, idposisi } = req.body;
     const { full_name, email, password } = req.body;
-    const hash = await bcrypt.hash(password, 10);
-    // const hash = Crypto.createHmac("sha1", "hash123").digest("hex");
+    // const hash = await bcrypt.hash(password, 10);
+    const hashContoh = Crypto.createHmac("sha1", "hash123");
+    const hash = Crypto.createHmac("sha1", "hash123").digest("hex");
+    console.log("[Hash contoh]", hashContoh);
+    console.log(hash);
+
     console.log("hash : " + hash);
 
     const insertQuery = `INSERT into user values (null, ${db.escape(

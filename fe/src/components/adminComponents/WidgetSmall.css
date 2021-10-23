@@ -56,6 +56,12 @@
   cursor: pointer;
 }
 
+.wid-sm-button-text {
+  margin: 0;
+  opacity: 1;
+  font-size: 15px;
+}
+
 .fa-eye {
   font-size: 16px;
   margin-right: 5px;

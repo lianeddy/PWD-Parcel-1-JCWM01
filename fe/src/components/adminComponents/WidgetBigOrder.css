@@ -29,7 +29,8 @@
 
 .wid-lg-buttondone {
   padding: 5px 7px;
-  border: none;
+  width: 80px;
+  border: #3bb077 1px solid;
   border-radius: 10px;
   background: #e5faf2;
   color: #3bb077;
@@ -37,15 +38,16 @@
 
 .wid-lg-buttonDeclined {
   padding: 5px 7px;
-  border: none;
+  border: #d95087 1px solid;
   border-radius: 10px;
-  background: #fff0f1;
+  background: #9f9898;
   color: #d95087;
 }
 
-.wid-lg-buttonPending {
+.wid-lg-buttonpending {
   padding: 5px 7px;
-  border: none;
+  width: 80px;
+  border: #2a7ade 1px solid;
   border-radius: 10px;
   background: #ebf1fe;
   color: #2a7ade;
@@ -57,18 +59,106 @@
   /* display: flex; */
 }
 
+.wid-lg-tr-1 {
+  display: flex;
+  /* justify-content: center; */
+  margin-top: 10px;
+}
+
+.wid-lg-th-1 {
+  text-align: left;
+  font-weight: 800;
+  flex: 1;
+}
+
+.wid-lg-th-2 {
+  text-align: left;
+  font-weight: 800;
+  flex: 1.8;
+}
+
+.wid-lg-tr {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .wid-lg-th {
   text-align: left;
   font-weight: 800;
+  flex: 1;
 }
 
 .wid-lg-user {
+  flex: 1.8;
   display: flex;
   align-items: center;
   font-weight: 600;
 }
 
-.wid-lg-date,
-.wid-lg-amount {
+.wid-lg-date {
+  flex: 1.8;
+  display: flex;
+  align-items: center;
   font-weight: 300;
+}
+
+.wid-lg-amount {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+}
+
+.wid-lg-status {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* select widget */
+.wid-large-select-container {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 20px 10px 20px;
+}
+
+.wid-select-1 {
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.wid-select-2 {
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.wid-select-btn {
+  flex: 2;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+.wid-select-btn:hover {
+  background-color: rgb(220, 220, 220);
+  transition: 0.1s ease-in-out;
+}
+
+.wid-large-title-select {
+  font-size: 18px;
+  opacity: 0.6;
+  margin-top: 20px;
+  margin-left: 20px;
 }

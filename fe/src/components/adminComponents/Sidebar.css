@@ -10,7 +10,7 @@
   height: calc(100vh - 90px);
   background-color: rgb(251, 251, 255);
   position: sticky;
-  top: 50px;
+  top: 0;
   padding-top: 10px;
 }
 
@@ -71,4 +71,6 @@
 
 .side-link-text {
   flex: 6;
+  margin: 0;
+  font-size: 15px;
 }

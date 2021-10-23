@@ -11,7 +11,10 @@ function AdminSalesReport() {
   return (
     <>
       {/* <SalesReport /> */}
-      <div className="container" style={{ display: "flex" }}>
+      <div
+        className="container-admin"
+        style={{ display: "flex", backgroundColor: "white" }}
+      >
         <Sidebar />
         <Switch>
           <Route path={`${path}/users`}>
