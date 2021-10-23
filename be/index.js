@@ -23,9 +23,11 @@ const db = mysql.createConnection({
 
 
 // Middleware
-const { userTransaksiRouters} = require("./routers/index");
+const { userTransaksiRouters, cartRouters} = require("./routers/index");
+const { cartControllers } = require('./controllers')
 
 app.use("/order", userTransaksiRouters);
 app.use("/admin", userTransaksiRouters);
+app.use("/carts", cartRouters)
 
 app.listen(PORT, () => console.log('Api Running : ', PORT))
