@@ -1,6 +1,6 @@
 
 const { db } = require("../database");
-const { uploader } = require("../helper");
+// const { uploader } = require("../helper");
 const fs = require("fs");
 const path = "/images";
 
