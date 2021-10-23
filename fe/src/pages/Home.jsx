@@ -2,7 +2,8 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 import Axios from "axios";
 import { URL_API } from "../helper";
-import "./Home.css";
+import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 class Home extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class Home extends React.Component {
   };
 
   fetchProducts = () => {
-    Axios.get(`${URL_API}/products`)
+    Axios.get(`${URL_API}/product/get`)
       .then((result) => {
         alert("Berhasil");
         this.setState({
@@ -27,7 +28,7 @@ class Home extends React.Component {
         });
       })
       .catch(() => {
-        // alert("Terjadi kesalahan server!");
+        alert("Terjadi kesalahan server!");
       });
   };
 
@@ -41,7 +42,7 @@ class Home extends React.Component {
   searchBtnHandler = () => {
     const filterProductList = this.state.productList.filter((val) => {
       return (
-        val.productName
+        val.full_name
           .toLowerCase()
           .includes(this.state.searchProductName.toLocaleLowerCase()) &&
         val.category
@@ -63,11 +64,12 @@ class Home extends React.Component {
   renderProducts = () => {
     const beginningIndex = (this.state.page - 1) * this.state.itemPerPage;
     let rawData = [...this.state.filterProductList];
+    console.log("rawData", rawData);
     const compareString = (a, b) => {
-      if (a.productName < b.productName) {
+      if (a.full_name < b.full_name) {
         return -1;
       }
-      if (b.productName > a.productName) {
+      if (b.full_name > a.full_name) {
         return 1;
       }
       return 0;
@@ -115,50 +117,52 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="page">
-        {/* <div>test</div> */}
-        <div className="pg-container">
-          <div className="pg-box">
-            <div className="pg-box-1">
-              <div className="pg-box1-text">
+      <div className="container mt-5">
+        <Slider />
+
+        <div className="row">
+          <div className="col-3">
+            <div className="card">
+              <div className="card-header">
                 <strong>Filter Products</strong>
               </div>
-              <div className="pg-box1-table">
+              <div className="card-body">
                 <label htmlFor="searchProductName">Product Name</label>
                 <input
                   onChange={this.inputHandler}
                   name="searchProductName"
                   type="text"
-                  className="pg-box1-input"
+                  className="form-control mb-3"
                 />
-                <label htmlFor="searchCategory" className="pg-box1-search">
-                  Search Category
-                </label>
+                <label htmlFor="searchCategory">Search Category</label>
                 <select
                   onChange={this.inputHandler}
                   name="searchCategory"
-                  className="pg-box1-cat"
+                  className="form-control"
                 >
                   <option value="">All Item</option>
                   <option value="kaos">Choco</option>
                   <option value="celana">Snack</option>
                   <option value="aksesoris">Drink</option>
                 </select>
-                <button onClick={this.searchBtnHandler} className="pg-box1-but">
+                <button
+                  onClick={this.searchBtnHandler}
+                  className="btn btn-primary mt-3"
+                >
                   Search
                 </button>
               </div>
             </div>
-            <div className="pg-box-2">
-              <div className="pg-box2-text">
+            <div className="card mt-4">
+              <div className="card-header">
                 <strong>Sort Product</strong>
               </div>
-              <div className="pg-box2-choice">
+              <div className="card-body">
                 <label htmlFor="sortBy"></label>
                 <select
                   onChange={this.inputHandler}
                   name="sortBy"
-                  className="pg-box2-select"
+                  className="form-control"
                 >
                   <option value="">Default</option>
                   <option value="lowPrice">Lowest Price</option>
@@ -168,31 +172,34 @@ class Home extends React.Component {
                 </select>
               </div>
             </div>
-            <div className="pg-box-3">
-              <div className="pg-box-3-container">
+            <div className="mt-3">
+              <div className="d-flex flex-row justify-content-between align-item-center">
                 <button
                   disabled={this.state.page === 1}
                   onClick={this.prevPageHandler}
-                  className=""
+                  className="btn btn-dark"
                 >
                   {"<"}
                 </button>
-                <div className="">
+                <div className="text-center">
                   Page {this.state.page} of {this.state.maxPage}
                 </div>
                 <button
                   disabled={this.state.page === this.state.maxPage}
                   onClick={this.nextPageHandler}
-                  className=""
+                  className="btn btn-dark"
                 >
                   {">"}
                 </button>
               </div>
             </div>
           </div>
-          <div className="">
-            <div className="">{this.renderProducts()}</div>
+          <div className="col-9">
+            <div className="d-flex flex-wrap flex-row">
+              {this.renderProducts()}
+            </div>
           </div>
+          <Footer />
         </div>
       </div>
     );

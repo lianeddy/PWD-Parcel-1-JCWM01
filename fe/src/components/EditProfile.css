@@ -1,123 +1,29 @@
-@import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
-
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
-  list-style: none;
-  font-family: "Josefin Sans", sans-serif;
-}
-
-/* body {
-  background-color: rgb(234, 244, 248);
-} */
-
-.edit-wrapper {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  /* width: 450px; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-  background-color: rgb(234, 244, 248);
-}
-
-.edit-wrapper-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 800px;
-  background-color: white;
-  margin: 40px;
-  padding: 30px;
-  border-radius: 30px;
-  /* background-color: red; */
-}
-
-.editUserProfile-side {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
-
-.edit-wrap-1 {
-  /* background-color: red; */
-  width: 100%;
-  padding: 40px;
-}
-
-.edit-wrap-1-info {
-  color: #353c4e;
-  font-size: 60px;
-}
-
-.edit-wrap-1-text {
-  font-size: 25px;
-  opacity: 0.6;
-  margin-top: 10px;
-}
-
-.edit-wrap-picture {
-  display: flex;
-}
-
-.edit-wrap-2 {
-  display: flex;
-  flex-direction: column;
-  /* background-color: blue; */
-  width: 100%;
-  padding: 0px 40px 40px 40px;
-}
-
-.edit-wrap-2-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.edit-wrap-2-form-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.edit-wrap-2-text {
-  color: #353c4e;
-  font-size: 30px;
-  flex: 2;
-}
-
-.edit-wrap-2-data {
-  padding: 10px;
-  font-size: 25px;
   font-family: "Roboto", sans-serif;
-  flex: 3;
+  user-select: none;
 }
 
-.edit-wrap-button {
-  margin-top: 20px;
-  width: 300px;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  font-size: 20px;
-  font-weight: 500;
-  background-color: rgb(213, 212, 212);
-  cursor: pointer;
+h1,
+h2,
+p {
+  opacity: 0.8;
 }
 
-.edit-wrap-button:hover {
-  background-color: rgb(167, 166, 166);
+.EditProfile {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  background-color: rgb(234, 244, 248);
+  height: 1200px;
 }
 
-/* .reg-container {
+.reg-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  /* align-items: center; */
   justify-content: flex-end;
   width: 80vw;
   height: 1200px;
@@ -219,4 +125,4 @@
   width: 0%;
   height: 720px;
   background-color: rgb(255, 255, 255);
-} */
+}

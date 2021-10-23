@@ -4,7 +4,7 @@ import Axios from "axios";
 import "./EditProfile.css";
 import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import ProfilePicture from "./ProfilePicture";
+import ProfilePictureNoEdit from "./ProfilePictureNoEdit";
 
 function EditProfile() {
   // const [userData, setUserData] = useState({});
@@ -16,11 +16,11 @@ function EditProfile() {
   // back to profile
   let history = useHistory();
 
-  let id = 12;
+  let id = 1;
 
   const user = () => {
     // console.log(userData);
-    Axios.get(`http://localhost:3302/user/get?id=${id}`).then((res) => {
+    Axios.get(`http://localhost:3302/user?id=${id}`).then((res) => {
       console.log(res.data);
 
       setFullname(res.data[0].full_name);
@@ -70,32 +70,32 @@ function EditProfile() {
 
   return (
     <>
-      <div className="edit-wrapper">
-        <div className="edit-wrapper-container">
-          <div className="editUserProfile-side">
-            <div className="edit-wrap-1">
-              <h1 className="edit-wrap-1-info">Profile</h1>
-              <p className="edit-wrap-1-text">
-                Give us your information to access further PAGE.
+      <div className="EditProfile">
+        <div className="r-container">
+          <div className="UserProfile-side">
+            <div className="reg-desc">
+              <h1 className="reg-desc-h1">Profile</h1>
+              <p className="reg-desc-text">
+                Give us your information to access further page.
               </p>
             </div>
-            <div className="edit-wrap-2">
-              <Form className="edit-wrap-2-form" onSubmit={edituser}>
-                <label className="edit-wrap-2-form-container">
-                  <h2 className="edit-wrap-2-text">Full Name</h2>
+            <div className="reg-input">
+              <Form className="reg-input-form" onSubmit={edituser}>
+                <label>
+                  <h2 className="reg-input-text">Full Name</h2>
                   <input
                     type="text"
-                    className="edit-wrap-2-data"
+                    className="reg-input-bar"
                     placeholder="Name"
                     value={full_name}
                     onChange={(e) => setFullname(e.target.value)}
                   />
                 </label>
-                <label className="edit-wrap-2-form-container">
-                  <h2 className="edit-wrap-2-text">Email</h2>
+                <label>
+                  <h2 className="reg-input-text">Email</h2>
                   <input
                     type="text"
-                    className="edit-wrap-2-data"
+                    className="reg-input-bar"
                     placeholder="name@email.com"
                     value={email}
                     onChange={(e) => {
@@ -103,11 +103,11 @@ function EditProfile() {
                     }}
                   />
                 </label>
-                <label className="edit-wrap-2-form-container">
-                  <h2 className="edit-wrap-2-text">Gender</h2>
+                <label>
+                  <h2 className="reg-input-text">Gender</h2>
                   <input
                     type="text"
-                    className="edit-wrap-2-data"
+                    className="reg-input-bar"
                     placeholder="Gender"
                     value={gender}
                     onChange={(e) => {
@@ -115,11 +115,11 @@ function EditProfile() {
                     }}
                   />
                 </label>
-                <label className="edit-wrap-2-form-container">
-                  <h2 className="edit-wrap-2-text">Address</h2>
+                <label>
+                  <h2 className="reg-input-text">Address</h2>
                   <input
                     type="text"
-                    className="edit-wrap-2-data"
+                    className="reg-input-bar"
                     placeholder="Address"
                     value={addres}
                     onChange={(e) => {
@@ -127,11 +127,11 @@ function EditProfile() {
                     }}
                   />
                 </label>
-                <label className="edit-wrap-2-form-container">
-                  <h2 className="edit-wrap-2-text">Age</h2>
+                <label>
+                  <h2 className="reg-input-text">Age</h2>
                   <input
                     type="text"
-                    className="edit-wrap-2-data"
+                    className="reg-input-bar"
                     placeholder="Age"
                     value={age}
                     onChange={(e) => {
@@ -139,17 +139,15 @@ function EditProfile() {
                     }}
                   />
                 </label>
-                <div className="edit-wrap-picture">
-                  <ProfilePicture />
-                </div>
+                <ProfilePictureNoEdit />
 
-                <Button className="edit-wrap-button" type="submit">
+                <Button className="reg-button" type="submit">
                   Update Data
                 </Button>
               </Form>
             </div>
           </div>
-          {/* <div className="content-side"></div> */}
+          <div className="content-side"></div>
         </div>
       </div>
     </>

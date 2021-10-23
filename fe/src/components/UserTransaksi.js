@@ -110,49 +110,50 @@ function UserTransaksi() {
   }
   return (
     <>
-    <div className="container">
-    <Dropdown isOpen={isOpen} toggle={toggle}>
-      <DropdownToggle>
-        Transaction Check
-      </DropdownToggle>
-      <DropdownMenu
-        modifiers={{
-          setMaxHeight: {
-            enabled: true,
-            order: 890,
-            fn: (data) => {
-              return {
-                ...data,
-                // styles: {
-                //   ...data.styles,
-                //   overflow: 'auto',
-                //   maxHeight: '100px',
-                // },
-              };
-            },
-          },
-        }}
-      >
-      <DropdownItem onClick={() => user()}>All transaction</DropdownItem>
-      <DropdownItem onClick={() => user(0)}>Waiting Payment</DropdownItem>
-      <DropdownItem onClick={() => user(1)}>Waiting Confirm Payment</DropdownItem>
-      <DropdownItem onClick={() => user(2)}>Payment Approve</DropdownItem>
-      <DropdownItem onClick={() => user(3)}>Rejected</DropdownItem>
-      <DropdownItem onClick={() => user(4)}>Transaction Done</DropdownItem>
-      
-      </DropdownMenu>
-      </Dropdown>,
-    
-    {transactions.map(transaction => (
-    <Row>
-    
-    <div>
-    
-      <Card>
-        <CardBody>
-          <CardTitle tag="h5">{transaction.no_order}</CardTitle>
-          <Badge color="primary">{transaction.status}</Badge>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">{transaction.created_at}</CardSubtitle>
+      <div className="container">
+        <Dropdown isOpen={isOpen} toggle={toggle}>
+          <DropdownToggle>Transaction Check</DropdownToggle>
+          <DropdownMenu
+            modifiers={{
+              setMaxHeight: {
+                enabled: true,
+                order: 890,
+                fn: (data) => {
+                  return {
+                    ...data,
+                    // styles: {
+                    //   ...data.styles,
+                    //   overflow: 'auto',
+                    //   maxHeight: '100px',
+                    // },
+                  };
+                },
+              },
+            }}
+          >
+            <DropdownItem onClick={() => user()}>All transaction</DropdownItem>
+            <DropdownItem onClick={() => user(0)}>Waiting Payment</DropdownItem>
+            <DropdownItem onClick={() => user(1)}>
+              Waiting Confirm Payment
+            </DropdownItem>
+            <DropdownItem onClick={() => user(2)}>Payment Approve</DropdownItem>
+            <DropdownItem onClick={() => user(3)}>Rejected</DropdownItem>
+            <DropdownItem onClick={() => user(4)}>
+              Transaction Done
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        ,
+        {transactions.map((transaction) => (
+          // <Row>
+
+          // <div>
+
+          //   <Card>
+          //     <CardBody>
+          //       <CardTitle tag="h5">{transaction.no_order}</CardTitle>
+          //       <Badge color="primary">{transaction.status}</Badge>
+          //       <CardSubtitle tag="h6" className="mb-2 text-muted">{transaction.created_at}</CardSubtitle>
           <Row>
             <div>
               <Card>

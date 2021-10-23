@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import "./ProfilePicture.css";
+// import "./ProfilePicture.css";
 
 function ProfilePicture(req) {
   const [filePict, setFilePict] = useState({});
