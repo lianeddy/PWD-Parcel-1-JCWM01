@@ -9,7 +9,7 @@ import WidgetBig from "../../components/adminComponents/WidgetBig";
 function Home() {
   return (
     <div className="home">
-      <FeaturedInfo />
+      {/* <FeaturedInfo /> */}
       <Chart />
       {/* <div className="home-widgets">
         <WidgetSmall />

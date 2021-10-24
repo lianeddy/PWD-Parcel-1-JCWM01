@@ -43,10 +43,20 @@ function Sidebar() {
                 <p className="side-link-text">User Transcations</p>
               </Link>
             </li>
-            <li className="sidebar-list-item">
-              <Link to="/admin/salesreport/users" className="side-link">
+            <li
+              className={
+                currentPage == "restock"
+                  ? "sidebar-list-item active"
+                  : "sidebar-list-item"
+              }
+            >
+              <Link
+                to="/admin/salesreport/restock"
+                className="side-link"
+                onClick={() => setCurrentPage("restock")}
+              >
                 <i className="fas fa-chart-bar" />
-                <p className="side-link-text">Graph</p>
+                <p className="side-link-text">Product</p>
               </Link>
             </li>
           </ul>

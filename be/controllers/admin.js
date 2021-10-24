@@ -21,8 +21,11 @@ module.exports = {
     });
   },
   getYearlySales: (req, res) => {
-    const getYearlySales = `SELECT order_items.product_id, order_items.quantity, product.selling_price, product.admin_price, order_items.created_at from order_items
-    INNER JOIN product on product.id = order_items.product_id where YEAR(order_items.created_at) = ${req.query.year};`;
+    const getYearlySales = `SELECT order_items.order_id, order_items.product_id, order_items.quantity, product.selling_price, product.admin_price, order_items.created_at from order_items
+    INNER JOIN product on product.id = order_items.product_id 
+    INNER JOIN order_details on order_details.id = order_items.order_id
+    where YEAR(order_items.created_at) = ${req.query.year}  and order_details.status = "done"
+    ORDER BY order_items.created_at ASC`;
 
     db.query(getYearlySales, (err, results) => {
       if (err) {
