@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./WidgetBigOrder.css";
 
 function WidgetBigOrder() {
+  // WIDGET - LARGE START ////////////////////////////
   // get data from db
   const [orderList, setOrderList] = useState();
   // generate UI(tr, td) for data
@@ -57,6 +58,7 @@ function WidgetBigOrder() {
   // render to appear in UI
   const renderOrder = () => {
     console.log("renderOrder masuk");
+    console.log(orderList, "[orderList]");
     var test = orderList.map((i) => {
       console.log("[i]", i);
       console.log("map i");
@@ -65,7 +67,11 @@ function WidgetBigOrder() {
           <td className="wid-lg-user">
             <img
               className="wid-lg-img"
-              src="https://images.unsplash.com/photo-1634430078581-1bec7774a622?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+              src={
+                i.profile_pic
+                  ? "http://localhost:3302" + i.profile_pic
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              }
               alt=""
             ></img>
             <span className="wid-lg-name">{i.full_name}</span>
@@ -87,6 +93,7 @@ function WidgetBigOrder() {
       );
     });
     setReturnOrder(test);
+    sortTopBuyer();
   };
 
   // generate <option> month and year
@@ -146,61 +153,143 @@ function WidgetBigOrder() {
   const checkState = () => {
     console.log(selectPeriod);
   };
+  // WIDGET - LARGE END //////////////////////////////
+  // WIDGET - SMALL START ////////////////////////////
+  const [sortTopBuy, setSortTopBuy] = useState([["No Data Selected"]]);
 
-  return (
-    <div className="widget-large">
-      <h3 className="wid-large-title">Latest Transactions</h3>
-      {/* <button onClick={checkState} /> */}
-      <h1 className="wid-large-title-select">
-        Choose Month and Year of Transactions
-      </h1>
-      <div className="wid-large-select-container">
-        <select
-          onChange={(e) => {
-            console.log("click month");
-            console.log(e.target.value);
-            setSelectPeriod({
-              ...selectPeriod,
-              month: e.target.value,
-            });
-          }}
-          className="wid-select-1"
-        >
-          {/* <option>option 1</option> */}
-          {generateMonth}
-        </select>
-        <select
-          onChange={(e) => {
-            console.log("click year");
-            console.log(e.target.value);
-            setSelectPeriod({
-              ...selectPeriod,
-              year: e.target.value,
-            });
-          }}
-          className="wid-select-2"
-        >
-          {generateYear}
-        </select>
-        <button
-          onClick={() => {
-            renderOrder();
-          }}
-          className="wid-select-btn"
-        >
-          Generate User Transactions
-        </button>
-      </div>
-      <table className="wid-lg-table">
-        <tr className="wid-lg-tr-1">
-          <th className="wid-lg-th-2">Customer</th>
-          <th className="wid-lg-th-2">Date</th>
-          <th className="wid-lg-th-1">Amount</th>
-          <th className="wid-lg-th-1">Status</th>
-        </tr>
-        {/* <tr className="wid-lg-tr">
-          <td className="wid-lg-user">
+  const klikAdd = () => {
+    // setSortTopBuy(orderList[0]);
+    console.log(sortTopBuy);
+    // setSortTopBuy([...sortTopBuy, orderList[0]]);
+  };
+
+  const sortTopBuyer = () => {
+    console.log("masuk top buyer");
+    // console.log(orderList);
+    // console.log(orderList.length);
+    // console.log(orderList[0]);
+    var initialSort = [[0]];
+    for (let i = 0; i < orderList.length; i++) {
+      console.log("[i]", i);
+      // console.log(initialSort[0]);
+      // console.log(!initialSort[0]);
+      if (!initialSort[0].includes(orderList[i].id)) {
+        initialSort[0].push(orderList[i].id);
+        console.log(initialSort);
+        initialSort.push(orderList[i]);
+        console.log(initialSort);
+      } else {
+        var idDoubleIndex = initialSort[0].indexOf(orderList[i].id);
+        console.log(idDoubleIndex);
+        // initialSort[]
+        initialSort[idDoubleIndex].total =
+          initialSort[idDoubleIndex].total + orderList[i].total;
+      }
+    }
+    initialSort.splice(0, 1);
+    console.log(initialSort);
+    // sort by rank top buyer
+    var sortTopBuyer = initialSort.sort(function (a, b) {
+      if (a.total > b.total) return -1;
+      if (a.total < b.total) return 1;
+      return 0;
+    });
+    console.log("[top buyer]", sortTopBuyer);
+    // render top buyer
+    var renderTopBuyer = sortTopBuyer.map((i) => {
+      return (
+        <li className="wid-sm-list-item">
+          <div className="wid-sm-img-container">
             <img
+              src={
+                i.profile_pic
+                  ? "http://localhost:3302" + i.profile_pic
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              }
+              alt=""
+              className="wid-sm-img"
+            />
+            <span className="wid-sm-user-name">{i.full_name}</span>
+          </div>
+          <div className="wid-sm-user-container">
+            <div className="wid-sm-user">
+              <span className="wid-sm-user-title">Rp.{i.total}</span>
+            </div>
+          </div>
+        </li>
+      );
+    });
+    setSortTopBuy(renderTopBuyer);
+  };
+  // WIDGET - SMALL END ////////////////////////////
+  return (
+    <div className="widget-sm-lg-container">
+      <div className="widget-small">
+        <span className="wid-sm-title">Top Buyers</span>
+        {/* <button onClick={() => klikAdd()}>klik buyer</button>
+        <button onClick={() => sortTopBuyer()}>top buyer</button> */}
+        {/* Render Top Buyer */}
+        <ul className="wid-sm-list">
+          <li className="wid-sm-list-header">
+            <div className="wid-sm-list-header-1">Customer</div>
+            <div className="wid-sm-list-header-2">Total Payment</div>
+          </li>
+          {sortTopBuy}
+        </ul>
+      </div>
+      <div className="widget-large">
+        <h3 className="wid-large-title">Latest Transactions</h3>
+        {/* <button onClick={checkState} /> */}
+        <h1 className="wid-large-title-select">
+          Choose Month and Year of Transactions
+        </h1>
+        <div className="wid-large-select-container">
+          <select
+            onChange={(e) => {
+              console.log("click month");
+              console.log(e.target.value);
+              setSelectPeriod({
+                ...selectPeriod,
+                month: e.target.value,
+              });
+            }}
+            className="wid-select-1"
+          >
+            {/* <option>option 1</option> */}
+            {generateMonth}
+          </select>
+          <select
+            onChange={(e) => {
+              console.log("click year");
+              console.log(e.target.value);
+              setSelectPeriod({
+                ...selectPeriod,
+                year: e.target.value,
+              });
+            }}
+            className="wid-select-2"
+          >
+            {generateYear}
+          </select>
+          <button
+            onClick={() => {
+              renderOrder();
+            }}
+            className="wid-select-btn"
+          >
+            Generate User Transactions
+          </button>
+        </div>
+        <table className="wid-lg-table">
+          <tr className="wid-lg-tr-1">
+            <th className="wid-lg-th-2">Customer</th>
+            <th className="wid-lg-th-2">Date</th>
+            <th className="wid-lg-th-1">Amount</th>
+            <th className="wid-lg-th-1">Status</th>
+          </tr>
+          {/* <tr className="wid-lg-tr">
+          <td className="wid-lg-user">
+          <img
               className="wid-lg-img"
               src="https://images.unsplash.com/photo-1634430078581-1bec7774a622?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
               alt=""
@@ -211,19 +300,20 @@ function WidgetBigOrder() {
           <td className="wid-lg-amount">Rp. 100.000,00</td>
           <td className="wid-lg-status">
             <Button type="Pending" />
-          </td>
+            </td>
         </tr> */}
-        {returnOrder}
-      </table>
-      {/* <button
+          {returnOrder}
+        </table>
+        {/* <button
         type="button"
         onClick={() => {
           renderOrder();
         }}
         className="wid-button"
-      >
+        >
         render product
       </button> */}
+      </div>
     </div>
   );
 }

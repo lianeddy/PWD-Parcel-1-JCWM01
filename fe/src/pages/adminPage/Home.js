@@ -10,11 +10,11 @@ function Home() {
   return (
     <div className="home">
       <FeaturedInfo />
-      <Chart data={userData} title="User Analytic" dataKey="Active User" grid />
-      <div className="home-widgets">
+      <Chart />
+      {/* <div className="home-widgets">
         <WidgetSmall />
         <WidgetBig />
-      </div>
+      </div> */}
     </div>
   );
 }

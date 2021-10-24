@@ -9,7 +9,7 @@ function UserList() {
     <div className="user-list">
       {/* <TestMysql /> */}
       <div className="user-widget">
-        <WidgetSmall />
+        {/* <WidgetSmall /> */}
         <WidgetBigOrder />
       </div>
     </div>

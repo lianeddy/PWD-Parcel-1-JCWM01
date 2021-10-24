@@ -5,7 +5,7 @@ module.exports = {
     // console.log("[req]", req);
     // console.log("[req.query]", req.query);
     // const getOrderQuery = `SELECT * from order_details;`;
-    const getOrderQuery = `SELECT user.full_name, order_details.total, order_details.status, order_details.created_at from user 
+    const getOrderQuery = `SELECT user.id,user.full_name, user.profile_pic, order_details.total, order_details.status, order_details.created_at from user 
     INNER JOIN order_details on user.id = order_details.user_id
     WHERE MONTH(order_details.created_at) = ${req.query.month} AND YEAR(order_details.created_at) = ${req.query.year}
     ORDER BY order_details.created_at DESC;`;
@@ -17,6 +17,17 @@ module.exports = {
         res.status(500).send(err);
       }
       // console.log("getOrderQuery berhasil");
+      res.status(200).send(results);
+    });
+  },
+  getYearlySales: (req, res) => {
+    const getYearlySales = `SELECT order_items.product_id, order_items.quantity, product.selling_price, product.admin_price, order_items.created_at from order_items
+    INNER JOIN product on product.id = order_items.product_id where YEAR(order_items.created_at) = ${req.query.year};`;
+
+    db.query(getYearlySales, (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      }
       res.status(200).send(results);
     });
   },

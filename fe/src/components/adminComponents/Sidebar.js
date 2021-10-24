@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 function Sidebar() {
+  const [currentPage, setCurrentPage] = useState("home");
+
   return (
     <div className="sidebar">
       <div className="sidebar-wrapper">
         <div className="sidebar-menu">
           <h3 className="sidebar-title">Dashboard</h3>
           <ul className="sidebar-list">
-            <li className="sidebar-list-item active">
-              <Link to="/admin/salesreport" className="side-link">
+            <li
+              className={
+                currentPage == "home"
+                  ? "sidebar-list-item active"
+                  : "sidebar-list-item"
+              }
+            >
+              <Link
+                to="/admin/salesreport"
+                className="side-link"
+                onClick={() => setCurrentPage("home")}
+              >
                 <i className="fas fa-home" />
-                <p className="side-link-text">Home</p>
+                <p className="side-link-text">Home - Sales Report</p>
               </Link>
             </li>
-            <li className="sidebar-list-item">
-              <Link to="/admin/salesreport/users" className="side-link">
+            <li
+              className={
+                currentPage == "transaction"
+                  ? "sidebar-list-item active"
+                  : "sidebar-list-item"
+              }
+            >
+              <Link
+                to="/admin/salesreport/users"
+                className="side-link"
+                onClick={() => setCurrentPage("transaction")}
+              >
                 <i className="fas fa-chart-line" />
-                <p className="side-link-text">Graph</p>
+                <p className="side-link-text">User Transcations</p>
               </Link>
             </li>
             <li className="sidebar-list-item">
