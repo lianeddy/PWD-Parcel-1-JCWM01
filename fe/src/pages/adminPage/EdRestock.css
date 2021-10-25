@@ -1,0 +1,7 @@
+.restock-list {
+  flex: 4;
+}
+
+.restock-widget {
+  display: flex;
+}

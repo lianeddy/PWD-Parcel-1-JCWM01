@@ -1,8 +1,8 @@
 import Axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import "./WidgetBigOrder.css";
+import "./EdWidgetBigOrder.css";
 
-function WidgetBigOrder() {
+function EdWidgetBigOrder() {
   // WIDGET - LARGE START ////////////////////////////
   // get data from db
   const [orderList, setOrderList] = useState();
@@ -318,4 +318,4 @@ function WidgetBigOrder() {
   );
 }
 
-export default WidgetBigOrder;
+export default EdWidgetBigOrder;

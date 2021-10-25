@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./Chart.css";
+import "./EdChart.css";
 import {
   LineChart,
   Line,
@@ -15,7 +15,7 @@ import Axios from "axios";
 // import { ResponsiveContainer, LineChart } from "recharts";
 // { title, data, dataKey, grid }
 
-function Chart() {
+function EdChart() {
   // selected year option (year : 2017)
   const [selectYear, setSelectYear] = useState({ year: 2017 });
   // data from db
@@ -244,4 +244,4 @@ function Chart() {
   );
 }
 
-export default Chart;
+export default EdChart;

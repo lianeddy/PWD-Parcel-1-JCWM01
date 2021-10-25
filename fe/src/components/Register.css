@@ -6,11 +6,24 @@
   user-select: none;
 } */
 
-h1,
+/* h1,
 h2,
 p {
   opacity: 0.8;
+} */
+
+/* FIX for other css conflict */
+.register-desc-text {
+  font-size: 15px;
 }
+
+.register-input-text,
+.register-privacy-right,
+.register-button-text,
+.register-login-left {
+  margin: 0;
+}
+/* FIX for other css conflict */
 
 .register {
   display: flex;
@@ -20,7 +33,7 @@ p {
   height: 720px;
 }
 
-.reg-container {
+.register-container {
   display: flex;
   flex-direction: row;
   /* align-items: center; */
@@ -29,7 +42,7 @@ p {
   height: 620px;
   border-radius: 20px;
   margin-top: 50px;
-  background-color: white;
+  background-color: rgb(210, 231, 240);
   overflow: hidden;
 }
 
@@ -38,16 +51,18 @@ p {
   flex-direction: column;
   width: 45%;
   padding: 50px 80px;
+
+  background-color: white;
 }
 
-.reg-icon {
+.register-icon {
   display: flex;
   align-items: center;
   height: 30px;
   cursor: pointer;
 }
 
-.reg-icon-text {
+.register-icon-text {
   text-decoration: none;
   color: black;
   font-size: 1.5rem;
@@ -55,11 +70,11 @@ p {
   opacity: 0.8;
 }
 
-.reg-desc {
+.register-desc {
   margin-top: 40px;
 }
 
-.reg-desc-h1 {
+.register-desc-h1 {
   font-size: 1.8rem;
 }
 
@@ -68,21 +83,21 @@ p {
   font-size: 0.9rem;
 }
 
-.reg-input {
+.register-input {
   display: flex;
   margin-top: 10px;
 }
 
-.reg-input-form {
+.register-input-form {
   display: flex;
   flex-direction: column;
 }
 
-.reg-input-text {
+.register-input-text {
   font-size: 0.9rem;
 }
 
-.reg-input-bar {
+.register-input-bar {
   margin: 5px 0 20px 0;
   height: 30px;
   width: 90%;
@@ -91,7 +106,7 @@ p {
   padding-left: 13px;
 }
 
-.reg-privacy {
+.register-privacy {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -101,16 +116,16 @@ p {
   margin-top: 5px;
 }
 
-.reg-privacy-right {
+.register-privacy-right {
   width: 90%;
   font-size: 0.8rem;
 }
 
-.reg-privacy-left {
+.register-privacy-left {
   cursor: pointer;
 }
 
-.reg-button {
+.register-button {
   margin: 25px 0 20px 0;
   background-color: rgb(163, 218, 240);
   width: 90%;
@@ -120,17 +135,17 @@ p {
   cursor: pointer;
 }
 
-.reg-button:hover {
+.register-button:hover {
   background-color: rgb(99, 200, 240);
 }
 
-.reg-button-text {
+.register-button-text {
   font-size: 1rem;
   color: white;
   opacity: 1;
 }
 
-.reg-login {
+.register-login {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -138,19 +153,19 @@ p {
   width: 90%;
 }
 
-.reg-login-left {
+.register-login-left {
   margin-right: 5px;
   font-size: 0.8rem;
 }
 
-.reg-login-right {
+.register-login-right {
   font-size: 0.8rem;
   text-decoration: none;
   font-weight: 500;
   opacity: 0.9;
 }
 
-.reg-login-right:hover {
+.register-login-right:hover {
   opacity: 1;
 }
 

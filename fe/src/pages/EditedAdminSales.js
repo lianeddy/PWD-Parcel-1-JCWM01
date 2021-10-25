@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
 import SalesReport from "../components/adminComponents/SalesReport";
-import Sidebar from "../components/adminComponents/Sidebar";
-import Home from "./adminPage/Home";
-import Restock from "./adminPage/Restock";
-import UserList from "./adminPage/UserList";
+import EdSidebar from "../components/adminComponents/EdSidebar";
+import EdHome from "./adminPage/EdHome";
+import EdRestock from "./adminPage/EdRestock";
+import EdUserList from "./adminPage/EdUserList";
 
-function AdminSalesReport() {
+function EditedAdminSales() {
   let { path, url } = useRouteMatch();
 
   return (
@@ -16,16 +16,16 @@ function AdminSalesReport() {
         className="container-admin"
         style={{ display: "flex", backgroundColor: "white" }}
       >
-        <Sidebar />
+        <EdSidebar />
         <Switch>
           <Route path={`${path}/users`}>
-            <UserList />
+            <EdUserList />
           </Route>
           <Route path={`${path}/restock`}>
-            <Restock />
+            <EdRestock />
           </Route>
           <Route exact path={path}>
-            <Home />
+            <EdHome />
           </Route>
         </Switch>
       </div>
@@ -33,4 +33,4 @@ function AdminSalesReport() {
   );
 }
 
-export default AdminSalesReport;
+export default EditedAdminSales;
