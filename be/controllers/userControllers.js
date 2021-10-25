@@ -10,17 +10,14 @@ module.exports = {
     req.body.password = Crypto.createHmac("sha1", "hash123")
       .update(req.body.password)
       .digest("hex");
-    console.log("req.body", req.body);
     let scriptQuery = `Select * from user where email=${db.escape(
       req.body.email
     )} and password=${db.escape(req.body.password)};`;
-    console.log(req.body, scriptQuery);
     db.query(scriptQuery, (err, results) => {
       if (err) return res.status(500).send(err);
       console.log(results);
       if (results.length > 0) {
         let { id, full_name, email, password, role, verified } = results[0];
-        console.log("results[0]", results[0]);
         let token = createToken({
           id,
           full_name,
@@ -36,6 +33,8 @@ module.exports = {
             .status(200)
             .send({ dataLogin: results[0], token, message: "Login Success" });
         }
+      }else{
+        return res.status(404).send({message: "user not found"})
       }
     });
   },
@@ -77,7 +76,7 @@ module.exports = {
     const { full_name, email, password } = req.body;
     // const hash = await bcrypt.hash(password, 10);
     const hashContoh = Crypto.createHmac("sha1", "hash123");
-    const hash = Crypto.createHmac("sha1", "hash123").digest("hex");
+    const hash = Crypto.createHmac("sha1", "hash123").update(password).digest("hex");
     console.log("[Hash contoh]", hashContoh);
     console.log(hash);
 
@@ -87,7 +86,7 @@ module.exports = {
       full_name
     )}, ${db.escape(email)}, ${db.escape(
       hash
-    )}, "user", null, null, null, null, null, null, "no", null, null)`;
+    )}, "user", null, null, null, null, null, null, null, "no", null, null)`;
 
     console.log("insertQuery : " + insertQuery);
 

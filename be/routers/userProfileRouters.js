@@ -1,9 +1,9 @@
 const express = require("express");
 const routers = express.Router();
-const { userProfileControllers } = require("../controllers");
+const { userProfileController } = require("../controllers");
 
-routers.post("/store", userProfileControllers.getPost);
-routers.get("/get", userProfileControllers.getUser);
-routers.patch("/edit/:id", userProfileControllers.getPatch);
+routers.post("/store", userProfileController.getPost);
+routers.get("/get", userProfileController.getUser);
+routers.patch("/edit/:id", userProfileController.getPatch);
 
 module.exports = routers;
