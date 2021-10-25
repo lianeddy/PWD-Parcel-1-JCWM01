@@ -1,0 +1,8 @@
+.ed-home {
+  flex: 4;
+}
+
+.ed-home-widgets {
+  display: flex;
+  margin: 20px;
+}

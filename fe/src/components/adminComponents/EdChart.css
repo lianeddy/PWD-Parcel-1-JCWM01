@@ -1,0 +1,28 @@
+.chart {
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+}
+
+.chart-title {
+  margin-bottom: 20px;
+}
+
+.chart-selection-container {
+  display: flex;
+  flex-direction: row;
+  width: 450px;
+  padding: 0 10px 15px 5px;
+}
+
+.chart-button-getchart {
+  border-radius: 10px;
+  padding: 10px 10px;
+  background: #eeeef7;
+  color: #555;
+  cursor: pointer;
+  width: 150px;
+  font-weight: 600;
+}

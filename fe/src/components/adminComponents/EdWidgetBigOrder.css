@@ -1,0 +1,268 @@
+/* WIDGET SMALL */
+.widget-small {
+  flex: 1;
+  box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  padding: 20px;
+  margin-right: 20px;
+}
+
+.wid-sm-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.wid-sm-img-container {
+  flex: 1;
+}
+
+.wid-sm-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.wid-sm-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wid-sm-list-header {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.wid-sm-list-header-1,
+.wid-sm-list-header-2 {
+  flex: 1;
+  font-weight: 800;
+}
+
+.wid-sm-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.wid-sm-user-container {
+  flex: 1;
+}
+
+.wid-sm-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.wid-sm-user-name {
+  font-weight: 600;
+  margin-left: 15px;
+}
+
+.wid-sm-user-title {
+  font-weight: 300;
+}
+
+.wid-sm-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  background: #eeeef7;
+  color: #555;
+  cursor: pointer;
+  background-color: #5be24f;
+}
+
+.wid-sm-button-text {
+  margin: 0;
+  opacity: 1;
+  font-size: 15px;
+}
+
+.fa-eye {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+/* WIDGET LARGE */
+.widget-sm-lg-container {
+  display: flex;
+  flex-direction: row;
+  width: 99%;
+  padding: 20px;
+}
+
+.widget-small {
+  flex: 1;
+}
+
+.widget-large {
+  flex: 2;
+  box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
+  padding: 20px;
+}
+
+.wid-button {
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #fff;
+}
+
+.wid-large-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.wid-lg-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.wid-lg-buttondone {
+  padding: 5px 7px;
+  width: 80px;
+  border: #3bb077 1px solid;
+  border-radius: 10px;
+  background: #e5faf2;
+  color: #3bb077;
+}
+
+.wid-lg-buttonDeclined {
+  padding: 5px 7px;
+  border: #d95087 1px solid;
+  border-radius: 10px;
+  background: #9f9898;
+  color: #d95087;
+}
+
+.wid-lg-buttonpending {
+  padding: 5px 7px;
+  width: 80px;
+  border: #2a7ade 1px solid;
+  border-radius: 10px;
+  background: #ebf1fe;
+  color: #2a7ade;
+}
+
+.wid-lg-table {
+  width: 100%;
+  border-spacing: 20px;
+  /* display: flex; */
+}
+
+.wid-lg-tr-1 {
+  display: flex;
+  /* justify-content: center; */
+  margin-top: 10px;
+}
+
+.wid-lg-th-1 {
+  text-align: left;
+  font-weight: 800;
+  flex: 1;
+}
+
+.wid-lg-th-2 {
+  text-align: left;
+  font-weight: 800;
+  flex: 1.8;
+}
+
+.wid-lg-tr {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.wid-lg-th {
+  text-align: left;
+  font-weight: 800;
+  flex: 1;
+}
+
+.wid-lg-user {
+  flex: 1.8;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.wid-lg-date {
+  flex: 1.8;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+}
+
+.wid-lg-amount {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+}
+
+.wid-lg-status {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* select widget */
+.wid-large-select-container {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 20px 10px 20px;
+}
+
+.wid-select-1 {
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.wid-select-2 {
+  flex: 1;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.wid-select-btn {
+  flex: 2;
+  padding: 10px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+.wid-select-btn:hover {
+  background-color: rgb(220, 220, 220);
+  transition: 0.1s ease-in-out;
+}
+
+.wid-large-title-select {
+  font-size: 18px;
+  opacity: 0.6;
+  margin-top: 20px;
+  margin-left: 20px;
+}

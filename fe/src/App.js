@@ -23,6 +23,7 @@ import AdminSalesReport from "./pages/AdminSalesReport";
 
 // import ProfilePicture from "./components/ProfilePicture";
 import ProfilePictureNoEdit from "./components/ProfilePictureNoEdit";
+import EditedAdminSales from "./pages/EditedAdminSales";
 
 class App extends React.Component {
   componentDidMount() {
@@ -61,6 +62,9 @@ class App extends React.Component {
           />
           <Route path="/admin/salesreport">
             <AdminSalesReport />
+          </Route>
+          <Route path="/admin/edsalesreport">
+            <EditedAdminSales />
           </Route>
 
           {/* <ProfilePictureNoEdit
