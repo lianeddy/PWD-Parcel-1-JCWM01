@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Sidebar.css";
+import "./EdSidebar.css";
 
-function Sidebar() {
+function EdSidebar() {
   const [currentPage, setCurrentPage] = useState("home");
 
   return (
@@ -19,7 +19,7 @@ function Sidebar() {
               }
             >
               <Link
-                to="/admin/salesreport"
+                to="/admin/edsalesreport"
                 className="side-link"
                 onClick={() => setCurrentPage("home")}
               >
@@ -35,7 +35,7 @@ function Sidebar() {
               }
             >
               <Link
-                to="/admin/salesreport/users"
+                to="/admin/edsalesreport/users"
                 className="side-link"
                 onClick={() => setCurrentPage("transaction")}
               >
@@ -51,7 +51,7 @@ function Sidebar() {
               }
             >
               <Link
-                to="/admin/salesreport/restock"
+                to="/admin/edsalesreport/restock"
                 className="side-link"
                 onClick={() => setCurrentPage("restock")}
               >
@@ -83,4 +83,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default EdSidebar;

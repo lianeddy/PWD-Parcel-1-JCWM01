@@ -1,4 +1,4 @@
-.widget-small {
+/* .widget-small {
   flex: 1;
   box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
   -webkit-box-shadow: 0px 0px 16px -11px rgba(0, 0, 0, 0.73);
@@ -56,7 +56,13 @@
   cursor: pointer;
 }
 
+.wid-sm-button-text {
+  margin: 0;
+  opacity: 1;
+  font-size: 15px;
+}
+
 .fa-eye {
   font-size: 16px;
   margin-right: 5px;
-}
+} */

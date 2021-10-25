@@ -104,26 +104,26 @@ function Register() {
   return (
     <>
       <div className="register">
-        <div className="reg-container">
+        <div className="register-container">
           <div className="register-side">
-            <div className="reg-icon">
-              <Link className="reg-icon-text" tabIndex="-1">
+            <div className="register-icon">
+              <Link className="register-icon-text" tabIndex="-1">
                 icon <i className="fas fa-box-open" />
               </Link>
             </div>
-            <div className="reg-desc">
-              <h1 className="reg-desc-h1">Sign up.</h1>
-              <p className="reg-desc-text">
+            <div className="register-desc">
+              <h1 className="register-desc-h1">Sign up.</h1>
+              <p className="register-desc-text">
                 Give us your information to access further page.
               </p>
             </div>
-            <div className="reg-input">
-              <form className="reg-input-form">
+            <div className="register-input">
+              <form className="register-input-form">
                 <label>
-                  <h2 className="reg-input-text">Full Name</h2>
+                  <h2 className="register-input-text">Full Name</h2>
                   <input
                     type="text"
-                    className="reg-input-bar"
+                    className="register-input-bar"
                     placeholder="Name"
                     onChange={(e) => {
                       setUserData({ ...userData, full_name: e.target.value });
@@ -131,10 +131,10 @@ function Register() {
                   />
                 </label>
                 <label>
-                  <h2 className="reg-input-text">Email</h2>
+                  <h2 className="register-input-text">Email</h2>
                   <input
                     type="text"
-                    className="reg-input-bar"
+                    className="register-input-bar"
                     placeholder="name@email.com"
                     onChange={(e) => {
                       setUserData({ ...userData, email: e.target.value });
@@ -147,10 +147,10 @@ function Register() {
                   </p>
                 </label>
                 <label>
-                  <h2 className="reg-input-text">Password</h2>
+                  <h2 className="register-input-text">Password</h2>
                   <input
                     type="password"
-                    className="reg-input-bar"
+                    className="register-input-bar"
                     placeholder="at least 8 character"
                     onChange={(e) => {
                       setUserData({ ...userData, password: e.target.value });
@@ -162,23 +162,23 @@ function Register() {
                     {isMessagePass ? isMessagePass : null}
                   </p>
                 </label>
-                <label className="reg-privacy">
+                <label className="register-privacy">
                   <input
                     type="checkbox"
-                    className="reg-privacy-left"
+                    className="register-privacy-left"
                     tabIndex="-1"
                     id="myCheck"
                     onClick={() => {
                       checkboxPrivacy();
                     }}
                   />
-                  <p className="reg-privacy-right">
+                  <p className="register-privacy-right">
                     By creating an account you agree to the term of use and our
                     privary policy.
                   </p>
                 </label>
                 <button
-                  className="reg-button"
+                  className="register-button"
                   type="button"
                   // disabled={
                   //   !userData.email &&
@@ -205,13 +205,15 @@ function Register() {
                     register();
                   }}
                 >
-                  <p className="reg-button-text">
+                  <p className="register-button-text">
                     {isLoading ? "Loading..." : "Create account"}
                   </p>
                 </button>
-                <div className="reg-login">
-                  <p className="reg-login-left">Already have an account?</p>
-                  <Link className="reg-login-right">Login</Link>
+                <div className="register-login">
+                  <p className="register-login-left">
+                    Already have an account?
+                  </p>
+                  <Link className="register-login-right">Login</Link>
                 </div>
               </form>
             </div>

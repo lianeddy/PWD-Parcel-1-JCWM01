@@ -43,6 +43,9 @@ class MyNavbar extends React.Component {
                     <DropdownItem>
                       <Link to="/history">History</Link>
                     </DropdownItem>
+                    <DropdownItem>
+                      <Link to="/editPassword">ChangePassword</Link>
+                    </DropdownItem>
                     {this.props.userGlobal.role === "admin" ? (
                       <DropdownItem>
                         <Link to="/admin">Admin</Link>

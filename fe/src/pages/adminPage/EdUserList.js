@@ -1,19 +1,20 @@
 import React from "react";
 import TestMysql from "../../components/adminComponents/TestMysql";
-import WidgetBigOrder from "../../components/adminComponents/WidgetBigOrder";
+import EdWidgetBigOrder from "../../components/adminComponents/EdWidgetBigOrder";
 import WidgetSmall from "../../components/adminComponents/WidgetSmall";
-import "./UserList.css";
+import "./EdUserList.css";
 
-function UserList() {
+function EdUserList() {
   return (
     <div className="user-list">
+      <p>Edited</p>
       {/* <TestMysql /> */}
       <div className="user-widget">
         {/* <WidgetSmall /> */}
-        <WidgetBigOrder />
+        <EdWidgetBigOrder />
       </div>
     </div>
   );
 }
 
-export default UserList;
+export default EdUserList;
