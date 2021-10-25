@@ -19,6 +19,7 @@ const {
   userRouters,
   uploadRouters,
   adminRouters,
+  productRouters,
 } = require("./routers/index");
 const { db } = require("./database");
 
@@ -32,5 +33,6 @@ app.use("/users", userRouters);
 app.use("/album", uploadRouters);
 // sales report - revenue - transaction report admin
 app.use("/adminreport", adminRouters);
+app.use("/product", productRouters);
 
 app.listen(PORT, () => console.log("Api Running : ", PORT));

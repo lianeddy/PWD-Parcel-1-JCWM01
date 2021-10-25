@@ -3,6 +3,7 @@ const userProfileRouters = require("./userProfileRouters");
 const userRouters = require("./userRouters");
 const uploadRouters = require("./uploadRouter");
 const adminRouters = require("./admin");
+const productRouters = require("./productRouters");
 
 module.exports = {
   userTransaksiRouters,
@@ -10,4 +11,5 @@ module.exports = {
   userRouters,
   uploadRouters,
   adminRouters,
+  productRouters,
 };
