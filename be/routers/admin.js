@@ -7,4 +7,6 @@ routers.get("/getyearsales", adminControllers.getYearlySales);
 routers.get("/productdata", adminControllers.getProductData);
 routers.patch("/restock", adminControllers.patchStock);
 
+routers.get("/edgetyearly", adminControllers.edGetYearlySales);
+
 module.exports = routers;

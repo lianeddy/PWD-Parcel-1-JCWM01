@@ -12,6 +12,7 @@ import {
   Legend,
 } from "recharts";
 import Axios from "axios";
+import { URL_API } from "../../helper";
 // import { ResponsiveContainer, LineChart } from "recharts";
 // { title, data, dataKey, grid }
 
@@ -70,9 +71,7 @@ function EdChart() {
   };
 
   const getYearlyData = () => {
-    Axios.get(
-      `http://localhost:3302/adminreport/getyearsales?year=${selectYear.year}`
-    )
+    Axios.get(`${URL_API}/adminreport/edgetyearly?year=${selectYear.year}`)
       .then((res) => {
         setYearData(res.data);
       })

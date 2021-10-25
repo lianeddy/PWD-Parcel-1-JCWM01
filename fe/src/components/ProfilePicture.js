@@ -1,11 +1,12 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import { URL_API } from "../helper";
 // import "./ProfilePicture.css";
 
 function ProfilePicture(req) {
   const [filePict, setFilePict] = useState({});
 
-  const id = 12;
+  const id = 1;
   console.log("test");
   // console.log(req);
   // console.log(req.computedMatch.params);
@@ -16,7 +17,7 @@ function ProfilePicture(req) {
 
   const getAlbum = () => {
     console.log("getAlbum");
-    Axios.get(`http://localhost:3302/album/getuserphoto?id=${id}`)
+    Axios.get(`${URL_API}/album/getuserphoto?id=${id}`)
       .then((res) => {
         console.log("axios get berhasil");
         console.log(res);
@@ -27,7 +28,7 @@ function ProfilePicture(req) {
 
         // change preview data
         let preview = document.getElementById("img-preview");
-        preview.src = "http://localhost:3302" + res.data[0].profile_pic;
+        preview.src = URL_API + res.data[0].profile_pic;
         console.log(preview);
       })
       .catch((err) => {
@@ -84,7 +85,7 @@ function ProfilePicture(req) {
       // console.log(formData);
       console.log("otw masuk axios");
       console.log(formData);
-      Axios.post("http://localhost:3302/album/uploadprofile", formData)
+      Axios.post(`${URL_API}/album/uploadprofile`, formData)
         .then((res) => {
           console.log("axios res");
           alert(res.data.message);
@@ -106,7 +107,7 @@ function ProfilePicture(req) {
 
       formData.append("file", filePict.addFile);
 
-      Axios.patch("http://localhost:3302/album/editprofilepicture", formData)
+      Axios.patch(`${URL_API}/album/editprofilepicture`, formData)
         .then((res) => {
           console.log("axios patch berhasil");
           alert(res.data.message);

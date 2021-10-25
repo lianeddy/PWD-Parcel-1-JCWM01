@@ -178,7 +178,7 @@ p {
 
 .message-email {
   position: absolute;
-  top: 468px;
+  top: 433px;
   /* background-color: rgba(150, 146, 146, 0.326); */
   z-index: 12;
   color: rgb(251, 67, 67);
@@ -188,10 +188,11 @@ p {
 
 .message-pass {
   position: absolute;
-  top: 538px;
+  top: 525px;
   /* background-color: rgba(150, 146, 146, 0.326); */
   z-index: 12;
   color: rgb(251, 67, 67);
   font-size: 0.7rem;
   padding-left: 201px;
+  margin: 0;
 }
