@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import "./EdWidgetBigOrder.css";
+import { URL_API } from "../../helper";
 
 function EdWidgetBigOrder() {
   // WIDGET - LARGE START ////////////////////////////
@@ -42,7 +43,7 @@ function EdWidgetBigOrder() {
   // set state product with data selected
   const getProduct = () => {
     Axios.get(
-      `http://localhost:3302/adminreport/getorderlist?month=${selectPeriod.month}&year=${selectPeriod.year}`
+      `${URL_API}/adminreport/getorderlist?month=${selectPeriod.month}&year=${selectPeriod.year}`
     )
       .then((res) => {
         // console.log(res);
@@ -69,7 +70,7 @@ function EdWidgetBigOrder() {
               className="wid-lg-img"
               src={
                 i.profile_pic
-                  ? "http://localhost:3302" + i.profile_pic
+                  ? URL_API + i.profile_pic
                   : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
               }
               alt=""
@@ -203,7 +204,7 @@ function EdWidgetBigOrder() {
             <img
               src={
                 i.profile_pic
-                  ? "http://localhost:3302" + i.profile_pic
+                  ? URL_API + i.profile_pic
                   : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
               }
               alt=""

@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { URL_API } from "../helper";
 
 // Verification Page if without Components
 
@@ -17,7 +18,7 @@ class VerificationPage extends React.Component {
     console.log(this.props.computedMatch.params.token);
     console.log(this.state);
     Axios.patch(
-      "http://localhost:3302/user/verified",
+      `${URL_API}/user/verified`,
       {},
       {
         headers: {

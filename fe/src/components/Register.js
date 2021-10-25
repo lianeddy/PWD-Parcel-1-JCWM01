@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "./Register.css";
+import { URL_API } from "../helper";
 
 function Register() {
   const [userData, setUserData] = useState({});
@@ -14,7 +15,7 @@ function Register() {
   let history = useHistory();
 
   const checkEmail = () => {
-    Axios.get(`http://localhost:3302/users/checkemail?email=${userData.email}`)
+    Axios.get(`${URL_API}/users/checkemail?email=${userData.email}`)
       .then((res) => {
         if (Boolean(res.data[0])) {
         }
@@ -36,7 +37,7 @@ function Register() {
     setIsLoading(true);
 
     console.log(userData, "userData");
-    Axios.get(`http://localhost:3302/users/checkemail?email=${userData.email}`)
+    Axios.get(`${URL_API}/users/checkemail?email=${userData.email}`)
       .then((res) => {
         console.log(userData.email);
         console.log(Boolean(res.data[0]) + "a  truuue");
@@ -44,7 +45,7 @@ function Register() {
         if (!Boolean(res.data[0]) && userData.password.length >= 8) {
           console.log(res.data);
           console.log("check email berhasil");
-          Axios.post(`http://localhost:3302/users/registeruser`, userData)
+          Axios.post(`${URL_API}/users/registeruser`, userData)
             .then((res) => {
               console.log(res.data);
               console.log("register done");
@@ -59,7 +60,7 @@ function Register() {
         ) {
           setIsLoading(false);
           setIsMessage("");
-          setIsMessagePass("Password minimal 8 variable.");
+          setIsMessagePass("Password minimal 8 character.");
         } else if (
           !Boolean(res.data[0]) == false &&
           userData.password.length >= 8
@@ -70,7 +71,7 @@ function Register() {
         } else {
           setIsLoading(false);
           setIsMessage("Email already used.");
-          setIsMessagePass("Password minimal 8 variable.");
+          setIsMessagePass("Password minimal 8 character.");
         }
       })
       .catch((err) => {

@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
+import { URL_API } from "../../helper";
 import "./RestockProduct.css";
 
 class RestockProduct extends React.Component {
@@ -12,7 +13,7 @@ class RestockProduct extends React.Component {
   };
 
   fetchProducts = () => {
-    Axios.get("http://localhost:3302/adminreport/productdata")
+    Axios.get(`${URL_API}/adminreport/productdata`)
       .then((res) => {
         this.setState({ productList: res.data });
       })
@@ -40,7 +41,7 @@ class RestockProduct extends React.Component {
   };
 
   saveButtonHandler = () => {
-    Axios.patch("http://localhost:3302/adminreport/restock", {
+    Axios.patch(`${URL_API}/adminreport/restock`, {
       stock: this.state.editStock,
       id: this.state.editId,
     })

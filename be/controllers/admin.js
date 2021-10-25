@@ -61,4 +61,39 @@ module.exports = {
       res.status(200).send(results);
     });
   },
+  edGetYearlySales: (req, res) => {
+    const getEdYearly = `SELECT order_items.parcel_id, s.admin_price, s.selling_price, s.quantity, order_items.quantity as parcel_qty, order_items.created_at from parcel
+    INNER JOIN order_items on parcel.parcel_id = order_items.parcel_id
+    INNER JOIN (SELECT * from parcel_content INNER JOIN product on parcel_content.product_id = product.id) s on parcel.parcel_id = s.parcel_id
+    where YEAR(order_items.created_at) = ${db.escape(req.query.year)} 
+    ORDER BY order_items.created_at ASC;`;
+
+    db.query(getEdYearly, (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.status(200).send(results);
+    });
+  },
+  // edGetOrderList: (req, res) => {
+  //   // console.log("[req]", req);
+  //   // console.log("[req.query]", req.query);
+  //   // const getOrderQuery = `SELECT * from order_details;`;
+  //   const getOrderQuery = `SELECT user.id,user.full_name, user.profile_pic, order_details.total, order_details.status, order_details.created_at from user
+  //   INNER JOIN order_details on user.id = order_details.user_id
+  //   WHERE MONTH(order_details.created_at) = ${db.escape(
+  //     req.query.month
+  //   )} AND YEAR(order_details.created_at) = ${db.escape(req.query.year)}
+  //   ORDER BY order_details.created_at DESC;`;
+
+  //   db.query(getOrderQuery, (err, results) => {
+  //     // console.log("getOrderQuery masuk");
+  //     if (err) {
+  //       // console.log("getOrderQuery gagal");
+  //       res.status(500).send(err);
+  //     }
+  //     // console.log("getOrderQuery berhasil");
+  //     res.status(200).send(results);
+  //   });
+  // },
 };
