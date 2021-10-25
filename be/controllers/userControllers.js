@@ -165,9 +165,7 @@ module.exports = {
   },
   keepLogin: (req, res) => {
     console.log(req.user, "hasil decode");
-    let scriptQuery = `select * from user where id = ${db.escape(
-      req.user.id
-    )}`;
+    let scriptQuery = `select * from user where id = ${db.escape(req.user.id)}`;
     db.query(scriptQuery, (err, results) => {
       if (err) return res.status(500).send(err);
 
@@ -175,7 +173,6 @@ module.exports = {
     });
   },
 
-  
   getPassword: (req, res) => {
     // if (req.user.role == "admin") {
     let updateQuery = `Select * from user;`;
@@ -184,7 +181,6 @@ module.exports = {
       if (err) res.status(500).send(err);
       res.status(200).send(results);
     });
-  
   },
   postEditPassword: (req, res) => {
     // if (req.user.role == "admin") {
@@ -194,39 +190,37 @@ module.exports = {
       if (err) res.status(500).send(err);
       res.status(200).send(results);
     });
-   
   },
 
-  patchEditPassword: (req,res)=> {
-    let cekQuery = `select password from user where id = ${req.params.id}`
+  patchEditPassword: (req, res) => {
+    let cekQuery = `select password from user where id = ${req.params.id}`;
     req.body.password = Crypto.createHmac("sha1", "hash123")
       .update(req.body.password)
       .digest("hex");
     req.body.newpassword = Crypto.createHmac("sha1", "hash123")
       .update(req.body.newpassword)
       .digest("hex");
-    let getPassword = ''
-      
-   db.query(cekQuery, (err,results) => {
-    // console.log(results[0].password)
-        getPassword = results[0].password
+    let getPassword = "";
 
-        console.log(req.body.password,'-',getPassword)
-        if (req.body.password !== getPassword) {
-          res.status(401).send({message:'Password Lama Tidak Sesuai'})
-        } else {
-          // console.log(req.body)
-          let updateQuery = `UPDATE user set password = ${db.escape(req.body.newpassword)} where id = ${req.params.id}`
-          // console.log(updateQuery)
-          db.query(updateQuery, (err,result) => {
-            if(err) res.status(500).send(err)
-            res.status(200).send(result)
-          })
-        }
-    })
-    
+    db.query(cekQuery, (err, results) => {
+      // console.log(results[0].password)
+      getPassword = results[0].password;
 
-  
+      console.log(req.body.password, "-", getPassword);
+      if (req.body.password !== getPassword) {
+        res.status(401).send({ message: "Password Lama Tidak Sesuai" });
+      } else {
+        // console.log(req.body)
+        let updateQuery = `UPDATE user set password = ${db.escape(
+          req.body.newpassword
+        )} where id = ${req.params.id}`;
+        // console.log(updateQuery)
+        db.query(updateQuery, (err, result) => {
+          if (err) res.status(500).send(err);
+          res.status(200).send(result);
+        });
+      }
+    });
 
     // console.log(req.body)
     // let updateQuery = `UPDATE user set password = ${db.escape(req.body.newpassword)} where id = ${req.params.id}`
@@ -235,6 +229,5 @@ module.exports = {
     //     if(err) res.status(500).send(err)
     //     res.status(200).send(result)
     // })
-  }
-
+  },
 };
