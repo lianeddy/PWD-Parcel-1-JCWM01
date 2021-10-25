@@ -10,6 +10,10 @@ import VerificationPage from "./pages/VerificationPage";
 import Home from "./pages/Home";
 import Forgot from "./pages/Forgot";
 import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+import EditPassword from "./pages/EditPassword";
+
+import ProductDetail from "./pages/ProductDetail";
 import MyNavbar from "./components/MyNavbar";
 import EditProfile from "./components/EditProfile";
 import UserProfile from "./components/userProfile";
@@ -17,7 +21,7 @@ import UserTransaksi from "./components/UserTransaksi";
 import AdminTransaksi from "./components/AdminTransaksi";
 
 import { connect } from "react-redux";
-import { userKeepLogin, checkStorage } from "./redux/actions/user";
+import { keepLogin, checkStorage } from "./redux/actions/user";
 import { getCartData } from "./redux/actions/cart";
 import AdminSalesReport from "./pages/AdminSalesReport";
 
@@ -26,10 +30,11 @@ import ProfilePictureNoEdit from "./components/ProfilePictureNoEdit";
 
 class App extends React.Component {
   componentDidMount() {
-    const userLocalStorage = localStorage.getItem("userDataEmmerce");
+    const userLocalStorage = localStorage.getItem("token");
+    console.log("userLocalStorage", userLocalStorage);
     if (userLocalStorage) {
       const userData = userLocalStorage;
-      //this.props.userKeepLogin(userData);
+      this.props.keepLogin(userData);
       //this.props.getCartData(userData.id);
     } else {
       this.props.checkStorage();
@@ -49,6 +54,7 @@ class App extends React.Component {
           <Route path="/edit" component={EditProfile} />
           <Route path="/UserTransaksi" component={UserTransaksi} />
           <Route path="/AdminTransaksi" component={AdminTransaksi} />
+          <Route component={ProductDetail} path="/product-detail/:id" />
           <RegisterDonePage
             path="/registerdone"
             exact
@@ -62,7 +68,8 @@ class App extends React.Component {
           <Route path="/admin/salesreport">
             <AdminSalesReport />
           </Route>
-
+          <Route component={Admin} path="/admin" />
+          <Route component={EditPassword} path="/EditPassword" />
           {/* <ProfilePictureNoEdit
             path="/pictprofile"
             exact
@@ -86,7 +93,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  userKeepLogin,
+  keepLogin,
   checkStorage,
   getCartData,
 };
