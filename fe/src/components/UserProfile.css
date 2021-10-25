@@ -31,18 +31,26 @@ p {
 .user-profile {
   font-size : 40px ;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 }
 .profile {
-  font-size : 40px ;
-  margin-bottom: 20px;
-  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 2;
+  font-variant: inherit;
+  margin-top: 30px;
   
 }
 .email {
-  font-size : 40px ;
-  margin-bottom: 20px;
-  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 2;
+  font-variant: inherit;
+  margin-top: 30px;
 }
 
 .reg-container {
@@ -60,23 +68,33 @@ p {
 
 
 .gender {
-  font-size : 40px ;
-  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 2;
+  font-variant: inherit;
+  margin-top: 30px;
 }
 
 .Address {
-  font-size : 40px ;
-  margin-bottom: 20px;
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 2;
+  font-variant: inherit;
+  margin-top: 30px;
 }
 
 .age {
   text-decoration: none;
   color: black;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
   opacity: 2;
   font-variant: inherit;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .right-profile {

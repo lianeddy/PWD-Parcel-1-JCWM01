@@ -60,27 +60,33 @@ function UserProfile() {
             </div>
             <div className="user-profile">
               <form className="right-profile">
+                
                 <label>
                   <h2 className="profile">Full Name</h2>
                   <p>{full_name}</p>
                 </label>
+                <br></br>
                 <label>
                   <h2 className="email">Email</h2>
                   <p>{email}</p>
                 </label>
-                <label>
+                <br></br>
 
+                <label>
                   <h2 className="gender">Gender</h2>
                   <p>{gender}</p>
                 </label>
+                <br></br>
                 <label>
                   <h2 className="Address">Address</h2>
                   <p>{adress}</p>
                 </label>
+                <br></br>
                 <label>
                   <h2 className="age">Age</h2>
                   <p>{age}</p>
                 </label>
+                <br></br>
                 <Link to={`/edit/${id}`}>
                   <Button className="reg-button" type="button">
                     Edit Profile
