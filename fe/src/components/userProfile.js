@@ -18,7 +18,7 @@ function UserProfile() {
     console.log(userData);
 
     // ngambil data dari database by id yang login
-    Axios.get(`http://localhost:3302/user?id=${id}`, userData)
+    Axios.get(`http://localhost:3302/user/user?id=${id}`, userData)
       .then((res) => {
         console.log(res.data);
         setFullname(res.data[0].full_name);
@@ -48,7 +48,7 @@ function UserProfile() {
 
   return (
     <>
-      <div className="wrapper">
+      <div className="UserProfile">
         <div className="reg-container">
           <div className="UserProfile-side">
             <div className="reg-icon"></div>
@@ -58,28 +58,35 @@ function UserProfile() {
                 Give us your information to access further page.
               </p>
             </div>
-            <div className="right">
-              <form className="right-form">
+            <div className="user-profile">
+              <form className="right-profile">
+                
                 <label>
-                  <h2 className="data">Full Name</h2>
+                  <h2 className="profile">Full Name</h2>
                   <p>{full_name}</p>
                 </label>
+                <br></br>
                 <label>
-                  <h2 className="data">Email</h2>
+                  <h2 className="email">Email</h2>
                   <p>{email}</p>
                 </label>
+                <br></br>
+
                 <label>
-                  <h2 className="data">Gender</h2>
+                  <h2 className="gender">Gender</h2>
                   <p>{gender}</p>
                 </label>
+                <br></br>
                 <label>
-                  <h2 className="data">Address</h2>
+                  <h2 className="Address">Address</h2>
                   <p>{adress}</p>
                 </label>
+                <br></br>
                 <label>
-                  <h2 className="data">Age</h2>
+                  <h2 className="age">Age</h2>
                   <p>{age}</p>
                 </label>
+                <br></br>
                 <Link to={`/edit/${id}`}>
                   <Button className="reg-button" type="button">
                     Edit Profile

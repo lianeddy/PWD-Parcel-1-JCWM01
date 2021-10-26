@@ -20,7 +20,7 @@ function EditProfile() {
 
   const user = () => {
     // console.log(userData);
-    Axios.get(`http://localhost:3302/user?id=${id}`).then((res) => {
+    Axios.get(`http://localhost:3302/user/user?id=${id}`).then((res) => {
       console.log(res.data);
 
       setFullname(res.data[0].full_name);

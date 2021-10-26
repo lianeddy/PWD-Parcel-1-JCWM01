@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router";
 import "./Verification.css";
+import { URL_API } from "../helper";
 
 function Verification(props) {
   const [verifyState, setVerifyState] = useState({
@@ -18,7 +19,7 @@ function Verification(props) {
     console.log(props.req.computedMatch.params.token);
     // console.log(verifyState);
     Axios.patch(
-      "http://localhost:3302/users/verified",
+      `${URL_API}/users/verified`,
       {},
       {
         headers: {

@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 // import { useHistory } from "react-router";
 import "./Verification.css";
+import { URL_API } from "../helper";
 
 class Verification2 extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Verification2 extends React.Component {
     console.log(this.props.req.computedMatch.params.token);
     console.log(this.state);
     Axios.patch(
-      "http://localhost:3302/user/verified",
+      `${URL_API}/user/verified`,
       {},
       {
         headers: {
